@@ -2,6 +2,11 @@
 // Requires a KV namespace bound to this Pages project as "HISTORY"
 // (Settings → Bindings → Add → KV namespace → Variable name: HISTORY)
 
+const JSON_HEADERS = {
+  'Content-Type': 'application/json',
+  'Cache-Control': 'no-store'
+};
+
 async function readGames(env) {
   const raw = await env.HISTORY.get('games');
   return raw ? JSON.parse(raw) : [];
@@ -9,9 +14,7 @@ async function readGames(env) {
 
 export async function onRequestGet({ env }) {
   const games = await readGames(env);
-  return new Response(JSON.stringify(games), {
-    headers: { 'Content-Type': 'application/json' }
-  });
+  return new Response(JSON.stringify(games), { headers: JSON_HEADERS });
 }
 
 export async function onRequestPost({ request, env }) {
@@ -19,9 +22,7 @@ export async function onRequestPost({ request, env }) {
   const games = await readGames(env);
   games.push(body);
   await env.HISTORY.put('games', JSON.stringify(games));
-  return new Response(JSON.stringify(games), {
-    headers: { 'Content-Type': 'application/json' }
-  });
+  return new Response(JSON.stringify(games), { headers: JSON_HEADERS });
 }
 
 // DELETE /api/history?index=<arrayIndex>  -> removes just that one game
@@ -33,12 +34,10 @@ export async function onRequestDelete({ request, env }) {
   if (isNaN(index) || index < 0 || index >= games.length) {
     return new Response(JSON.stringify({ error: 'invalid index' }), {
       status: 400,
-      headers: { 'Content-Type': 'application/json' }
+      headers: JSON_HEADERS
     });
   }
   games.splice(index, 1);
   await env.HISTORY.put('games', JSON.stringify(games));
-  return new Response(JSON.stringify(games), {
-    headers: { 'Content-Type': 'application/json' }
-  });
+  return new Response(JSON.stringify(games), { headers: JSON_HEADERS });
 }
