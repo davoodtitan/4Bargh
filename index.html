@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ffffff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="چهار برگ">
+<title>🃏 چهار برگ</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Tahoma,Arial,sans-serif;background:#f5f5f5;color:#1a1a1a;min-height:100vh}
+  .app{max-width:480px;margin:0 auto;padding:1rem;padding-bottom:2rem}
+  h1{font-size:22px;font-weight:600;text-align:center;padding:1rem 0 0.25rem}
+  .subtitle{text-align:center;font-size:13px;color:#666;margin-bottom:1.25rem}
+  .tab-bar{display:flex;border:1px solid #ddd;border-radius:10px;overflow:hidden;margin-bottom:1.25rem;background:#eee}
+  .tab{flex:1;padding:10px;text-align:center;font-size:13px;cursor:pointer;background:transparent;color:#666;border:none;font-family:Tahoma,Arial,sans-serif}
+  .tab.active{background:#fff;color:#1a1a1a;font-weight:600;border-radius:9px;margin:3px}
+  .teams{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.25rem}
+  .team-card{background:#fff;border:1px solid #e0e0e0;border-radius:14px;padding:1rem;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,0.06)}
+  .team-card.winner{border:2px solid #1D9E75;background:#f0faf6}
+  .team-name-input{background:transparent;border:none;border-bottom:1px solid #ccc;text-align:center;font-size:15px;font-weight:600;color:#1a1a1a;width:100%;padding:2px 4px;outline:none;font-family:Tahoma,Arial,sans-serif;margin-bottom:10px}
+  .total{font-size:52px;font-weight:700;color:#1a1a1a;line-height:1}
+  .total-label{font-size:11px;color:#888;margin-top:4px;margin-bottom:14px}
+  .inp-row{display:flex;align-items:center;justify-content:center;gap:6px}
+  .inp-row button{width:34px;height:34px;border:1px solid #ddd;border-radius:8px;background:#f5f5f5;color:#1a1a1a;font-size:20px;cursor:pointer;font-family:Tahoma,Arial,sans-serif;line-height:1}
+  .inp-row button:active{background:#e0e0e0;transform:scale(0.95)}
+  .set-inp{width:60px;text-align:center;font-size:16px;border:1px solid #ddd;border-radius:8px;padding:5px 2px;background:#fff;color:#1a1a1a;font-family:Tahoma,Arial,sans-serif}
+  .winner-badge{display:inline-block;background:#E1F5EE;color:#0F6E56;font-size:11px;padding:3px 10px;border-radius:20px;margin-top:10px;font-weight:600}
+  .winner-msg{text-align:center;padding:12px 16px;background:#E1F5EE;border-radius:12px;color:#0F6E56;font-size:15px;font-weight:600;margin-bottom:1rem;border:1px solid #9FE1CB}
+  .save-btn{width:100%;padding:12px;border:1px solid #1D9E75;border-radius:10px;background:#E1F5EE;color:#0F6E56;font-size:14px;cursor:pointer;margin-bottom:8px;font-family:Tahoma,Arial,sans-serif;font-weight:600}
+  .save-btn:active{transform:scale(0.98)}
+  .add-btn{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;background:#f5f5f5;color:#1a1a1a;font-size:14px;cursor:pointer;margin-bottom:8px;font-family:Tahoma,Arial,sans-serif;font-weight:500}
+  .add-btn:active{transform:scale(0.98)}
+  .add-btn:disabled{opacity:0.35;cursor:not-allowed}
+  .controls{display:flex;gap:8px;margin-bottom:1.25rem}
+  .ctrl-btn{flex:1;padding:9px;border:1px solid #ddd;border-radius:10px;background:#f5f5f5;color:#1a1a1a;font-size:13px;cursor:pointer;font-family:Tahoma,Arial,sans-serif}
+  .ctrl-btn.danger{color:#A32D2D;border-color:#f09595;background:#fff5f5}
+  .ctrl-btn:active{transform:scale(0.97)}
+  .confirm-box{background:#fff;border:1px solid #ddd;border-radius:12px;padding:1rem;text-align:center;margin-bottom:1rem;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
+  .confirm-box p{font-size:13px;color:#1a1a1a;margin-bottom:12px}
+  .confirm-btns{display:flex;gap:8px;justify-content:center}
+  .confirm-btns button{padding:7px 20px;border:1px solid #ddd;border-radius:8px;font-size:13px;cursor:pointer;font-family:Tahoma,Arial,sans-serif;background:#fff;color:#1a1a1a}
+  .confirm-btns .yes{color:#A32D2D;border-color:#f09595;background:#fff5f5}
+  .sec-title{font-size:13px;color:#888;margin-bottom:6px}
+  .round-row{display:grid;grid-template-columns:44px 1fr 1fr;gap:6px;padding:7px 4px;border-bottom:1px solid #f0f0f0;font-size:13px;text-align:center;color:#1a1a1a}
+  .rn{font-size:11px;color:#888;text-align:right;padding-top:1px}
+  .rounds-header{font-size:11px;font-weight:600;color:#888;background:#fafafa}
+  .running{font-size:11px;color:#888}
+  .game-card{background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:1rem;margin-bottom:10px;box-shadow:0 1px 4px rgba(0,0,0,0.05)}
+  .game-card-title{font-size:12px;color:#888;margin-bottom:8px}
+  .game-card-title-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+  .game-card-title-row .game-card-title{margin-bottom:0}
+  .del-btn{display:flex;align-items:center;justify-content:center;width:26px;height:26px;flex-shrink:0;background:#f5f5f5;border:1px solid #e5e5e5;color:#999;cursor:pointer;padding:0;border-radius:8px;transition:background .15s,color .15s}
+  .del-btn:hover{background:#fff0f0;color:#c0392b;border-color:#f3c6c6}
+  .del-btn:active{transform:scale(0.93)}
+  .game-score-row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .team-block{text-align:center;flex:1}
+  .team-block .tname{font-size:12px;color:#888}
+  .team-block .tscore{font-size:28px;font-weight:700;color:#1a1a1a}
+  .team-block.gwinner .tscore{color:#0F6E56}
+  .vs{font-size:13px;color:#aaa}
+  .overall-card{background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:1rem;margin-bottom:1rem;box-shadow:0 1px 4px rgba(0,0,0,0.05)}
+  .overall-title{font-size:14px;font-weight:600;color:#1a1a1a;margin-bottom:10px}
+  .overall-row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid #f0f0f0}
+  .overall-row:last-of-type{border-bottom:none}
+  .overall-row .wins{font-size:12px;color:#888;margin-top:2px}
+  .overall-champ{background:#E1F5EE;border-radius:8px;padding:10px;text-align:center;color:#0F6E56;font-size:13px;font-weight:600;margin-top:10px;border:1px solid #9FE1CB}
+  .empty{font-size:13px;color:#aaa;padding:8px 0}
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+</style>
+</head>
+<body>
+<div class="app">
+  <h1>🃏 چهار برگ</h1>
+  <p class="subtitle" id="game-subtitle">بازی ۱</p>
+
+  <div class="tab-bar">
+    <button class="tab active" id="tab-current" onclick="showTab('current')">بازی جاری</button>
+    <button class="tab" id="tab-history" onclick="showTab('history')">تاریخچه بازی‌ها</button>
+  </div>
+
+  <div id="confirm-box" style="display:none" class="confirm-box">
+    <p id="confirm-text"></p>
+    <div class="confirm-btns">
+      <button class="yes" id="confirm-yes">بله</button>
+      <button onclick="cancelConfirm()">انصراف</button>
+    </div>
+  </div>
+
+  <div id="view-current">
+    <div id="winner-msg" style="display:none" class="winner-msg"></div>
+
+    <div class="teams">
+      <div class="team-card" id="card-0">
+        <input class="team-name-input" id="name-0" value="تیم ما" oninput="renderGame()">
+        <div class="total" id="total-0">0</div>
+        <div class="total-label">امتیاز کل</div>
+        <div class="inp-row">
+          <button onclick="adj(0,-5)">−</button>
+          <input class="set-inp" id="inp-0" type="number" value="0" step="5">
+          <button onclick="adj(0,5)">+</button>
+        </div>
+        <div id="badge-0" style="display:none" class="winner-badge">🏆 برنده</div>
+      </div>
+      <div class="team-card" id="card-1">
+        <input class="team-name-input" id="name-1" value="تیم حریف" oninput="renderGame()">
+        <div class="total" id="total-1">0</div>
+        <div class="total-label">امتیاز کل</div>
+        <div class="inp-row">
+          <button onclick="adj(1,-5)">−</button>
+          <input class="set-inp" id="inp-1" type="number" value="0" step="5">
+          <button onclick="adj(1,5)">+</button>
+        </div>
+        <div id="badge-1" style="display:none" class="winner-badge">🏆 برنده</div>
+      </div>
+    </div>
+
+    <button class="add-btn" id="add-btn" onclick="addSet()">ثبت ست</button>
+    <button class="save-btn" id="save-btn" style="display:none" onclick="askSaveGame()">💾 ذخیره نتیجه و شروع بازی جدید</button>
+
+    <div class="controls">
+      <button class="ctrl-btn" onclick="undoSet()">↩ برگشت</button>
+      <button class="ctrl-btn danger" onclick="askReset()">↺ بازی جدید</button>
+    </div>
+
+    <div class="sec-title">تاریخچه ست‌ها</div>
+    <div id="sets-list"></div>
+  </div>
+
+  <div id="view-history" style="display:none">
+    <div id="overall-section"></div>
+    <div class="sec-title" style="margin-bottom:8px">نتایج بازی‌ها</div>
+    <div id="games-list"></div>
+    <div style="text-align:left;margin-top:10px">
+      <button id="admin-btn" onclick="toggleAdmin()" style="font-size:11px;color:#aaa;background:none;border:none;cursor:pointer;padding:4px;font-family:Tahoma,Arial,sans-serif">🔑 ورود ادمین</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ⚠️⚠️⚠️ خیلی مهم: آدرس Worker خودت رو دقیقاً اینجا جایگزین کن ⚠️⚠️⚠️
+// آدرس Worker تو شبیه اینه: https://chahar-barg-api.your-subdomain.workers.dev
+// (بدون اسلش / در انتها)
+const WORKER_URL = "https://4bargh.zulair.workers.dev/";
+
+const WIN=104;
+const STORAGE_KEY='chaarBargState';
+const state={scores:[0,0],sets:[],gameOver:false,gameNum:1,savedGames:[]};
+
+function toFa(n){return String(n).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);}
+
+function div(a,b){return ~~(a/b);}
+function gregorianToJalali(gy,gm,gd){
+  const g_d_m=[0,31,59,90,120,151,181,212,243,273,304,334];
+  const gy2=(gm>2)?(gy+1):gy;
+  let days=355666+(365*gy)+div(gy2+3,4)-div(gy2+99,100)+div(gy2+399,400)+gd+g_d_m[gm-1];
+  let jy=-1595+(33*div(days,12053));
+  days%=12053;
+  jy+=4*div(days,1461);
+  days%=1461;
+  let jm,jd;
+  if(days>365){jy+=div(days-1,365);days=(days-1)%365;}
+  if(days<186){jm=1+div(days,31);jd=1+(days%31);}
+  else{jm=7+div(days-186,30);jd=1+((days-186)%30);}
+  return [jy,jm,jd];
+}
+const FA_MONTHS=['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
+function nowJalaliStr(){
+  const d=new Date();
+  const [jy,jm,jd]=gregorianToJalali(d.getFullYear(),d.getMonth()+1,d.getDate());
+  return `${toFa(jd)} ${FA_MONTHS[jm-1]} ${toFa(jy)}`;
+}
+
+function saveState(){
+  try{
+    localStorage.setItem(STORAGE_KEY,JSON.stringify({
+      scores:state.scores,sets:state.sets,gameOver:state.gameOver,
+      gameNum:state.gameNum,
+      names:[name(0),name(1)]
+    }));
+  }catch(e){console.error('saveState failed',e);}
+}
+function loadState(){
+  try{
+    const raw=localStorage.getItem(STORAGE_KEY);
+    if(!raw)return;
+    const d=JSON.parse(raw);
+    state.scores=d.scores||[0,0];
+    state.sets=d.sets||[];
+    state.gameOver=!!d.gameOver;
+    state.gameNum=d.gameNum||1;
+    if(d.names){
+      document.getElementById('name-0').value=d.names[0]||'تیم ما';
+      document.getElementById('name-1').value=d.names[1]||'تیم حریف';
+    }
+  }catch(e){console.error('loadState failed',e);}
+}
+
+async function fetchHistory(){
+  try{
+    const res=await fetch(WORKER_URL+'/history',{cache:'no-store'});
+    if(!res.ok)throw new Error('bad response');
+    const games=await res.json();
+    state.savedGames=games;
+    state.gameNum=games.length+1;
+  }catch(e){
+    console.error('fetchHistory failed',e);
+  }
+}
+
+const ADMIN_KEY_STORAGE='chaarBarghAdminKey';
+function isAdmin(){return !!localStorage.getItem(ADMIN_KEY_STORAGE);}
+function toggleAdmin(){
+  if(isAdmin()){
+    if(confirm('از حالت ادمین خارج بشی؟')){
+      localStorage.removeItem(ADMIN_KEY_STORAGE);
+      renderHistory();
+    }
+    return;
+  }
+  const key=prompt('رمز ادمین رو
