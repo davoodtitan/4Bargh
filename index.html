@@ -28,7 +28,7 @@
     background: radial-gradient(circle at top right, var(--bg-sec), var(--bg-main));
     color: var(--text-main);
     min-height: 100vh;
-    padding-bottom: 90px; /* Space for FAB */
+    padding-bottom: 90px;
   }
 
   .glass {
@@ -42,20 +42,20 @@
 
   .app-container { max-width: 500px; margin: 0 auto; padding: 1.5rem 1rem; }
 
-  /* Header */
-  header { display: flex; align-items: center; justify-content: center; flex-direction: column; margin-bottom: 1.5rem; }
-  h1 { font-size: 24px; font-weight: 800; display: flex; align-items: center; gap: 8px; text-shadow: 0 2px 10px rgba(255,255,255,0.1); }
+  header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
+  .header-right { display: flex; flex-direction: column; align-items: flex-end; }
+  h1 { font-size: 24px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
   .subtitle { font-size: 14px; color: var(--primary); margin-top: 4px; font-weight: 600; letter-spacing: 1px; }
+  
+  .admin-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: var(--text-muted); padding: 8px 14px; border-radius: 10px; font-family: inherit; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: 0.2s; }
+  .admin-btn:active { background: rgba(255,255,255,0.1); }
+  .admin-btn.active { color: #fbbf24; border-color: rgba(251,191,36,0.3); background: rgba(251,191,36,0.1); }
 
-  /* Tabs */
   .tab-bar { display: flex; background: rgba(0,0,0,0.2); border-radius: 14px; padding: 5px; margin-bottom: 1.5rem; position: relative; }
-  .tab { flex: 1; padding: 12px; text-align: center; font-size: 14px; font-weight: 600; cursor: pointer; color: var(--text-muted); border: none; background: transparent; font-family: inherit; transition: 0.3s ease; z-index: 1; display: flex; justify-content: center; align-items: center; gap: 6px; }
+  .tab { flex: 1; padding: 10px; text-align: center; font-size: 13px; font-weight: 600; cursor: pointer; color: var(--text-muted); border: none; background: transparent; font-family: inherit; transition: 0.3s ease; z-index: 1; display: flex; justify-content: center; align-items: center; gap: 5px; }
   .tab.active { color: var(--text-main); }
-  .tab-indicator { position: absolute; top: 5px; bottom: 5px; width: calc(50% - 5px); background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 10px; transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
-  #tab-current.active ~ .tab-indicator { right: 5px; }
-  #tab-history.active ~ .tab-indicator { right: calc(50% + 0px); }
+  .tab-indicator { position: absolute; top: 5px; bottom: 5px; width: calc(33.33% - 4px); background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 10px; transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
 
-  /* Teams Grid */
   .teams { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
   .team-card { padding: 1.25rem 1rem; text-align: center; position: relative; overflow: hidden; transition: 0.3s ease; }
   .team-card.winner { border-color: var(--primary); box-shadow: 0 0 20px var(--primary-glow); }
@@ -67,31 +67,38 @@
   .total { font-size: 56px; font-weight: 800; line-height: 1; text-shadow: 0 4px 12px rgba(0,0,0,0.3); transition: color 0.3s; }
   .winner .total { color: var(--primary); }
   
-  /* Progress Bar */
   .progress-bg { width: 100%; height: 6px; background: rgba(0,0,0,0.3); border-radius: 10px; margin: 15px 0; overflow: hidden; }
   .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--primary)); width: 0%; transition: width 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); }
   
-  /* Input Controls */
   .inp-row { display: flex; align-items: center; justify-content: center; gap: 8px; background: rgba(0,0,0,0.2); padding: 6px; border-radius: 12px; }
   .inp-row button { width: 36px; height: 36px; border: none; border-radius: 8px; background: var(--glass-bg); color: var(--text-main); font-size: 22px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
-  .inp-row button:active { transform: scale(0.9); background: rgba(255,255,255,0.1); }
+  .inp-row button:active { transform: scale(0.9); }
   .set-inp { width: 45px; text-align: center; font-size: 18px; font-weight: 700; border: none; background: transparent; color: var(--text-main); font-family: inherit; outline: none; }
-  
-  /* FAB (Floating Action Button) */
+
+  /* Player selector */
+  .player-select-section { margin-bottom: 1.5rem; }
+  .player-select-section .sec-title { margin-bottom: 10px; }
+  .teams-setup { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .team-setup-card { padding: 12px; border-radius: 14px; background: rgba(0,0,0,0.2); border: 1px solid var(--glass-border); }
+  .team-setup-title { font-size: 13px; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; text-align: center; }
+  .player-chip { display: flex; align-items: center; justify-content: space-between; padding: 7px 10px; border-radius: 8px; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); margin-bottom: 6px; font-size: 13px; }
+  .player-chip button { background: none; border: none; color: var(--danger); cursor: pointer; font-size: 16px; line-height: 1; padding: 0 2px; }
+  .add-player-row { display: flex; gap: 6px; margin-top: 6px; }
+  .player-select-dd { flex: 1; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); color: var(--text-main); border-radius: 8px; padding: 7px; font-family: inherit; font-size: 13px; outline: none; }
+  .add-player-row button { background: var(--primary); border: none; color: white; border-radius: 8px; padding: 7px 12px; font-family: inherit; font-size: 13px; cursor: pointer; white-space: nowrap; }
+
   .fab-container { position: fixed; bottom: 25px; left: 0; width: 100%; display: flex; justify-content: center; pointer-events: none; z-index: 100; }
   .fab { pointer-events: auto; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: 30px; padding: 14px 32px; font-size: 16px; font-weight: 700; font-family: inherit; display: flex; align-items: center; gap: 10px; cursor: pointer; box-shadow: 0 8px 25px var(--primary-glow); transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
   .fab:active { transform: scale(0.95) translateY(2px); }
-  .fab:disabled { filter: grayscale(1); opacity: 0.5; cursor: not-allowed; box-shadow: none; }
+  .fab:disabled { filter: grayscale(1); opacity: 0.5; cursor: not-allowed; }
   .fab svg { width: 20px; height: 20px; fill: currentColor; }
 
-  /* Controls (Undo / Reset) */
   .controls { display: flex; gap: 10px; margin-bottom: 2rem; }
   .ctrl-btn { flex: 1; padding: 12px; border: 1px solid var(--glass-border); border-radius: 14px; background: rgba(0,0,0,0.2); color: var(--text-muted); font-size: 14px; font-family: inherit; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; }
   .ctrl-btn:active { transform: scale(0.97); }
   .ctrl-btn.danger { color: #fca5a5; }
   .ctrl-btn svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 
-  /* History Sets */
   .sec-title { font-size: 15px; font-weight: 700; color: var(--text-main); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
   .sec-title::before { content: ''; display: block; width: 4px; height: 16px; background: var(--primary); border-radius: 4px; }
   .sets-list { background: rgba(0,0,0,0.1); border-radius: 16px; overflow: hidden; border: 1px solid var(--glass-border); }
@@ -102,10 +109,66 @@
   .score-val { font-weight: 700; }
   .running { display: block; font-size: 11px; color: var(--text-muted); margin-top: 2px; }
 
-  /* Winner Message */
   .winner-msg { text-align: center; padding: 16px; background: rgba(16, 185, 129, 0.1); border: 1px solid var(--primary); border-radius: 16px; color: var(--primary); font-size: 16px; font-weight: 700; margin-bottom: 1.5rem; animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
   
-  /* Modal Confirm */
+  /* Stats tab */
+  .stats-player-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 1.5rem; }
+  .stats-player-card { padding: 14px 16px; border-radius: 16px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: space-between; }
+  .stats-player-card:active { transform: scale(0.98); }
+  .sp-name { font-size: 16px; font-weight: 700; }
+  .sp-meta { font-size: 12px; color: var(--text-muted); margin-top: 3px; }
+  .sp-wins { font-size: 22px; font-weight: 800; color: var(--primary); }
+  
+  .stat-detail { padding: 1rem; margin-bottom: 1rem; }
+  .stat-detail h3 { font-size: 18px; font-weight: 800; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .stat-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--glass-border); font-size: 14px; }
+  .stat-row:last-child { border-bottom: none; }
+  .stat-label { color: var(--text-muted); }
+  .stat-value { font-weight: 700; }
+  .partner-list { margin-top: 12px; }
+  .partner-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: rgba(0,0,0,0.2); border-radius: 10px; margin-bottom: 6px; font-size: 13px; }
+  .partner-wins { color: var(--primary); font-weight: 700; }
+  .back-btn { background: none; border: none; color: var(--accent); font-family: inherit; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 6px; margin-bottom: 12px; padding: 0; }
+
+  /* History tab */
+  .chart-container { padding: 1.5rem; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 12px; }
+  .chart-bar-wrap { display: flex; align-items: center; gap: 10px; }
+  .chart-label { width: 80px; font-size: 13px; font-weight: 600; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .chart-track { flex: 1; height: 24px; background: rgba(0,0,0,0.3); border-radius: 12px; overflow: hidden; }
+  .chart-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--primary)); border-radius: 12px; transition: width 1s ease; }
+  
+  .game-card { padding: 1rem; margin-bottom: 1rem; border-left: 4px solid transparent; position: relative; }
+  .game-card.win-1 { border-left-color: var(--primary); }
+  .game-card.win-2 { border-left-color: var(--accent); }
+  .game-card-header { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px dashed var(--glass-border); padding-left: 24px; }
+  .game-score-row { display: flex; align-items: center; justify-content: space-between; }
+  .team-block { text-align: center; flex: 1; }
+  .tname { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
+  .tscore { font-size: 22px; font-weight: 800; }
+  .gwinner .tscore { color: var(--primary); }
+  .vs-badge { background: rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 20px; font-size: 11px; color: var(--text-muted); }
+  .empty { text-align: center; color: var(--text-muted); padding: 2rem; font-size: 14px; opacity: 0.7; }
+  
+  .delete-btn { position: absolute; left: 12px; top: 10px; background: transparent; border: none; color: var(--danger); opacity: 0.6; cursor: pointer; padding: 4px; transition: 0.2s; }
+  .delete-btn:active { opacity: 1; }
+
+  /* Admin panel */
+  .admin-panel { padding: 1rem; margin-bottom: 1.5rem; border: 1px solid rgba(251,191,36,0.3); }
+  .admin-panel .sec-title::before { background: #fbbf24; }
+  .admin-section { margin-bottom: 16px; }
+  .admin-section-title { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; font-weight: 600; }
+  .admin-input-row { display: flex; gap: 8px; }
+  .admin-input { flex: 1; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); color: var(--text-main); border-radius: 10px; padding: 10px 12px; font-family: inherit; font-size: 14px; outline: none; }
+  .admin-input:focus { border-color: #fbbf24; }
+  .admin-action-btn { background: #fbbf24; border: none; color: #0f172a; border-radius: 10px; padding: 10px 16px; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; white-space: nowrap; transition: 0.2s; }
+  .admin-action-btn.danger { background: var(--danger); color: white; }
+  .admin-action-btn:active { transform: scale(0.97); }
+  .players-admin-list { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+  .player-admin-row { display: flex; align-items: center; justify-content: space-between; padding: 9px 12px; background: rgba(0,0,0,0.2); border-radius: 10px; font-size: 14px; }
+  .player-admin-del { background: none; border: none; color: var(--danger); cursor: pointer; font-size: 16px; padding: 2px 6px; opacity: 0.7; transition: 0.2s; }
+  .player-admin-del:active { opacity: 1; }
+
+  /* Modal */
   .overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 999; display: none; align-items: center; justify-content: center; padding: 1rem; }
   .confirm-box { width: 100%; max-width: 320px; padding: 1.5rem; text-align: center; animation: slideUp 0.3s ease; }
   .confirm-box p { font-size: 15px; margin-bottom: 1.5rem; line-height: 1.6; }
@@ -114,66 +177,91 @@
   .confirm-btns .yes { background: var(--danger); color: white; }
   .confirm-btns .no { background: rgba(255,255,255,0.1); color: var(--text-main); }
 
-  /* History Tab Styles */
-  .chart-container { padding: 1.5rem; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 12px; }
-  .chart-bar-wrap { display: flex; align-items: center; gap: 10px; }
-  .chart-label { width: 80px; font-size: 13px; font-weight: 600; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .chart-track { flex: 1; height: 24px; background: rgba(0,0,0,0.3); border-radius: 12px; overflow: hidden; position: relative; }
-  .chart-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--primary)); border-radius: 12px; display: flex; align-items: center; padding-right: 8px; font-size: 12px; font-weight: 700; transition: width 1s ease; }
-  
-  .game-card { padding: 1rem; margin-bottom: 1rem; border-left: 4px solid transparent; position: relative; }
-  .game-card.win-0 { border-left-color: var(--primary); }
-  .game-card.win-1 { border-left-color: var(--accent); }
-  .game-card-header { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px dashed var(--glass-border); padding-left: 24px; }
-  .game-score-row { display: flex; align-items: center; justify-content: space-between; }
-  .team-block { text-align: center; flex: 1; }
-  .tname { font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
-  .tscore { font-size: 24px; font-weight: 800; }
-  .gwinner .tscore { color: var(--primary); }
-  .vs-badge { background: rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 20px; font-size: 11px; color: var(--text-muted); }
-  .empty { text-align: center; color: var(--text-muted); padding: 2rem; font-size: 14px; opacity: 0.7; }
-  
-  /* Delete Button for History Cards */
-  .delete-btn { position: absolute; left: 12px; top: 10px; background: transparent; border: none; color: var(--danger); opacity: 0.6; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 4px; transition: 0.2s; }
-  .delete-btn:active { transform: scale(0.9); opacity: 1; }
+  /* Login modal */
+  .login-box { width: 100%; max-width: 320px; padding: 1.5rem; text-align: center; animation: slideUp 0.3s ease; }
+  .login-box h3 { margin-bottom: 16px; font-size: 18px; }
+  .login-box input { width: 100%; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); color: var(--text-main); border-radius: 10px; padding: 12px; font-family: inherit; font-size: 15px; outline: none; margin-bottom: 12px; text-align: center; }
+  .login-box button { width: 100%; padding: 12px; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; border: none; font-family: inherit; background: #fbbf24; color: #0f172a; margin-bottom: 8px; }
+  .login-box .cancel-btn { background: rgba(255,255,255,0.1); color: var(--text-main); }
+  .login-error { color: var(--danger); font-size: 13px; margin-bottom: 8px; display: none; }
 
-  /* Animations */
+  /* Loading */
+  .loading { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 14px; }
+  .spinner { width: 30px; height: 30px; border: 3px solid rgba(255,255,255,0.1); border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 10px; }
+  .toast { position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%); background: #1e293b; border: 1px solid var(--glass-border); color: var(--text-main); padding: 10px 20px; border-radius: 20px; font-size: 14px; z-index: 9999; opacity: 0; transition: opacity 0.3s; pointer-events: none; white-space: nowrap; }
+  .toast.show { opacity: 1; }
+
   @keyframes popIn { 0% { transform: scale(0.9); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
   @keyframes slideUp { 0% { transform: translateY(20px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+  @keyframes spin { to { transform: rotate(360deg); } }
   
-  /* Remove Number Input Arrows */
-  input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+  input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 </style>
 </head>
 <body>
 
 <div class="app-container">
   <header>
-    <h1>
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><path d="M12 8v8"></path><path d="M8 12h8"></path></svg>
-      چهار برگ 🃏
-    </h1>
-    <div class="subtitle" id="game-subtitle">بازی اول</div>
+    <div>
+      <h1>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>
+        چهار برگ 🃏
+      </h1>
+      <div class="subtitle" id="game-subtitle">بازی اول</div>
+    </div>
+    <button class="admin-btn" id="admin-toggle-btn" onclick="toggleAdmin()">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      ادمین
+    </button>
   </header>
 
-  <div class="tab-bar">
+  <div class="tab-bar" id="main-tab-bar">
     <button class="tab active" id="tab-current" onclick="showTab('current')">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
       جاری
     </button>
     <button class="tab" id="tab-history" onclick="showTab('history')">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M18 17V9"></path><path d="M13 17V5"></path><path d="M8 17v-3"></path></svg>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
       تاریخچه
     </button>
-    <div class="tab-indicator"></div>
+    <button class="tab" id="tab-stats" onclick="showTab('stats')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      آمار
+    </button>
+    <div class="tab-indicator" id="tab-indicator"></div>
   </div>
 
+  <!-- CURRENT GAME TAB -->
   <div id="view-current">
+
+    <!-- Player Selection -->
+    <div class="player-select-section">
+      <div class="sec-title">انتخاب بازیکنان</div>
+      <div class="teams-setup">
+        <div class="team-setup-card">
+          <div class="team-setup-title">تیم ۱</div>
+          <div id="team1-chips"></div>
+          <div class="add-player-row">
+            <select class="player-select-dd" id="dd-team1"></select>
+            <button onclick="addPlayerToTeam(1)">+افزودن</button>
+          </div>
+        </div>
+        <div class="team-setup-card">
+          <div class="team-setup-title">تیم ۲</div>
+          <div id="team2-chips"></div>
+          <div class="add-player-row">
+            <select class="player-select-dd" id="dd-team2"></select>
+            <button onclick="addPlayerToTeam(2)">+افزودن</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div id="winner-msg" style="display:none" class="winner-msg glass"></div>
 
     <div class="teams">
       <div class="team-card glass" id="card-0">
-        <input class="team-name-input" id="name-0" value="تیم ما" oninput="renderGame()">
+        <div class="team-name-input" id="label-0" style="font-size:15px;font-weight:700;margin-bottom:15px;min-height:24px;">تیم ۱</div>
         <div class="score-wrap">
           <div class="total" id="total-0" data-val="0">0</div>
         </div>
@@ -186,7 +274,7 @@
       </div>
       
       <div class="team-card glass" id="card-1">
-        <input class="team-name-input" id="name-1" value="تیم حریف" oninput="renderGame()">
+        <div class="team-name-input" id="label-1" style="font-size:15px;font-weight:700;margin-bottom:15px;min-height:24px;">تیم ۲</div>
         <div class="score-wrap">
           <div class="total" id="total-1" data-val="0">0</div>
         </div>
@@ -201,11 +289,11 @@
 
     <div class="controls">
       <button class="ctrl-btn" onclick="undoSet()">
-        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         برگشت ست
       </button>
       <button class="ctrl-btn danger" onclick="askReset()">
-        <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+        <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
         ریست بازی
       </button>
     </div>
@@ -214,20 +302,29 @@
     <div class="sets-list" id="sets-list"></div>
   </div>
 
+  <!-- HISTORY TAB -->
   <div id="view-history" style="display:none">
     <div id="overall-section"></div>
-    <div class="sec-title" style="margin-top: 1.5rem;">ریز نتایج بازی‌ها</div>
+    <div class="sec-title" style="margin-top: 1rem;">ریز نتایج بازی‌ها</div>
     <div id="games-list"></div>
   </div>
+
+  <!-- STATS TAB -->
+  <div id="view-stats" style="display:none">
+    <div id="stats-content"></div>
+  </div>
+
 </div>
 
-<div class="fab-container">
+<!-- FAB -->
+<div class="fab-container" id="fab-wrap">
   <button class="fab" id="fab-action" onclick="handleFabClick()">
-    <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+    <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
     <span id="fab-text">ثبت امتیاز ست</span>
   </button>
 </div>
 
+<!-- Confirm Modal -->
 <div class="overlay" id="modal-overlay">
   <div class="confirm-box glass">
     <p id="confirm-text"></p>
@@ -238,38 +335,252 @@
   </div>
 </div>
 
+<!-- Admin Login Modal -->
+<div class="overlay" id="login-overlay">
+  <div class="login-box glass">
+    <h3>🔐 ورود ادمین</h3>
+    <div class="login-error" id="login-error">پسورد اشتباه است</div>
+    <input type="password" id="admin-pass-input" placeholder="پسورد ادمین" onkeydown="if(event.key==='Enter')doAdminLogin()">
+    <button onclick="doAdminLogin()">ورود</button>
+    <button class="cancel-btn" onclick="cancelAdminLogin()">انصراف</button>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
 <script>
+const API = 'https://4bargh-api.zulair.workers.dev';
 const WIN = 104;
-const state = { scores: [0, 0], sets: [], gameOver: false, gameNum: 1, savedGames: [] };
+
+const state = {
+  scores: [0, 0],
+  sets: [],
+  gameOver: false,
+  gameNum: 1,
+  team: [[], []],      // player IDs per team
+  teamNames: [[], []], // player names per team
+};
+
+let allPlayers = [];
+let adminPassword = null;
+let isAdmin = false;
+let currentTab = 'current';
+
+// ── Utilities ─────────────────────────────────────────────────────────────────
 
 function toFa(n) { return String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]); }
-function name(i) { return document.getElementById('name-'+i).value.trim() || 'تیم '+(i+1); }
 
-function animateValue(obj, start, end, duration) {
-  let startTimestamp = null;
-  const step = (timestamp) => {
-    if (!startTimestamp) startTimestamp = timestamp;
-    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-    const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-    obj.innerHTML = Math.floor(progress * (end - start) + start);
-    if (progress < 1) { window.requestAnimationFrame(step); }
-    else { obj.innerHTML = end; obj.dataset.val = end; }
-  };
-  window.requestAnimationFrame(step);
+function showToast(msg, duration = 2500) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), duration);
 }
 
+function apiHeaders(admin = false) {
+  const h = { 'Content-Type': 'application/json' };
+  if (admin && adminPassword) h['X-Admin-Password'] = adminPassword;
+  return h;
+}
+
+async function apiFetch(path, opts = {}) {
+  const res = await fetch(API + path, opts);
+  return res.json();
+}
+
+// ── Players ───────────────────────────────────────────────────────────────────
+
+async function loadPlayers() {
+  try {
+    allPlayers = await apiFetch('/players');
+    renderPlayerDropdowns();
+    renderAdminPlayerList();
+  } catch(e) { showToast('خطا در بارگذاری بازیکنان'); }
+}
+
+function renderPlayerDropdowns() {
+  [1, 2].forEach(t => {
+    const dd = document.getElementById('dd-team' + t);
+    const usedIds = [...state.team[0], ...state.team[1]];
+    dd.innerHTML = '<option value="">انتخاب بازیکن...</option>' +
+      allPlayers.filter(p => !usedIds.includes(p.id))
+        .map(p => `<option value="${p.id}" data-name="${p.name}">${p.name}</option>`).join('');
+  });
+}
+
+function renderTeamChips() {
+  [1, 2].forEach(t => {
+    const idx = t - 1;
+    const el = document.getElementById('team' + t + '-chips');
+    el.innerHTML = state.teamNames[idx].map((name, i) =>
+      `<div class="player-chip">
+        <span>${name}</span>
+        <button onclick="removePlayerFromTeam(${t}, ${i})">×</button>
+      </div>`
+    ).join('');
+    const label = state.teamNames[idx].join(' & ') || 'تیم ' + t;
+    document.getElementById('label-' + idx).textContent = label;
+  });
+  renderPlayerDropdowns();
+}
+
+function addPlayerToTeam(t) {
+  const dd = document.getElementById('dd-team' + t);
+  const opt = dd.options[dd.selectedIndex];
+  if (!opt || !opt.value) return;
+  const idx = t - 1;
+  if (state.team[idx].length >= 2) { showToast('هر تیم حداکثر ۲ نفر'); return; }
+  state.team[idx].push(parseInt(opt.value));
+  state.teamNames[idx].push(opt.dataset.name);
+  renderTeamChips();
+}
+
+function removePlayerFromTeam(t, i) {
+  const idx = t - 1;
+  state.team[idx].splice(i, 1);
+  state.teamNames[idx].splice(i, 1);
+  renderTeamChips();
+}
+
+// ── Admin ─────────────────────────────────────────────────────────────────────
+
+function toggleAdmin() {
+  if (isAdmin) {
+    isAdmin = false;
+    adminPassword = null;
+    document.getElementById('admin-toggle-btn').classList.remove('active');
+    showToast('از پنل ادمین خارج شدید');
+    renderAdminPanel();
+    return;
+  }
+  document.getElementById('login-overlay').style.display = 'flex';
+  document.getElementById('admin-pass-input').value = '';
+  document.getElementById('login-error').style.display = 'none';
+  setTimeout(() => document.getElementById('admin-pass-input').focus(), 100);
+}
+
+async function doAdminLogin() {
+  const pass = document.getElementById('admin-pass-input').value;
+  if (!pass) return;
+  // Test password by trying to add a player (dry run via players list)
+  try {
+    const res = await fetch(API + '/players', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Admin-Password': pass },
+      body: JSON.stringify({ name: '__test_auth__' })
+    });
+    if (res.status === 401) {
+      document.getElementById('login-error').style.display = 'block';
+      return;
+    }
+    // delete the test player
+    const data = await apiFetch('/players');
+    const test = data.find(p => p.name === '__test_auth__');
+    if (test) await fetch(API + '/players/' + test.id, { method: 'DELETE', headers: apiHeaders(false), });
+    // Actually set admin
+    adminPassword = pass;
+    isAdmin = true;
+    document.getElementById('login-overlay').style.display = 'none';
+    document.getElementById('admin-toggle-btn').classList.add('active');
+    showToast('✅ وارد پنل ادمین شدید');
+    await loadPlayers();
+    renderAdminPanel();
+  } catch(e) {
+    document.getElementById('login-error').style.display = 'block';
+  }
+}
+
+function cancelAdminLogin() {
+  document.getElementById('login-overlay').style.display = 'none';
+}
+
+function renderAdminPanel() {
+  const existing = document.getElementById('admin-panel-section');
+  if (existing) existing.remove();
+  if (!isAdmin) return;
+
+  const panel = document.createElement('div');
+  panel.id = 'admin-panel-section';
+  panel.className = 'admin-panel glass';
+  panel.innerHTML = `
+    <div class="sec-title" style="color:#fbbf24">🛡️ پنل ادمین</div>
+    
+    <div class="admin-section">
+      <div class="admin-section-title">افزودن بازیکن جدید</div>
+      <div class="admin-input-row">
+        <input class="admin-input" id="new-player-name" placeholder="نام بازیکن" onkeydown="if(event.key==='Enter')adminAddPlayer()">
+        <button class="admin-action-btn" onclick="adminAddPlayer()">افزودن</button>
+      </div>
+    </div>
+
+    <div class="admin-section">
+      <div class="admin-section-title">مدیریت بازیکنان</div>
+      <div class="players-admin-list" id="admin-player-list"></div>
+    </div>
+  `;
+
+  const container = document.querySelector('.app-container');
+  const header = document.querySelector('header');
+  header.after(panel);
+  renderAdminPlayerList();
+}
+
+function renderAdminPlayerList() {
+  const el = document.getElementById('admin-player-list');
+  if (!el) return;
+  if (!allPlayers.length) { el.innerHTML = '<div style="color:var(--text-muted);font-size:13px;padding:8px">هنوز بازیکنی ثبت نشده</div>'; return; }
+  el.innerHTML = allPlayers.map(p =>
+    `<div class="player-admin-row">
+      <span>${p.name}</span>
+      <button class="player-admin-del" onclick="adminDeletePlayer(${p.id}, '${p.name}')">🗑</button>
+    </div>`
+  ).join('');
+}
+
+async function adminAddPlayer() {
+  const input = document.getElementById('new-player-name');
+  const name = input.value.trim();
+  if (!name) return;
+  try {
+    const res = await fetch(API + '/players', {
+      method: 'POST',
+      headers: apiHeaders(true),
+      body: JSON.stringify({ name })
+    });
+    const data = await res.json();
+    if (data.error) { showToast('خطا: ' + data.error); return; }
+    input.value = '';
+    showToast('✅ بازیکن اضافه شد');
+    await loadPlayers();
+  } catch(e) { showToast('خطا در ارتباط با سرور'); }
+}
+
+function adminDeletePlayer(id, name) {
+  showConfirm(`آیا از حذف بازیکن «${name}» مطمئن هستید؟`, async () => {
+    cancelConfirm();
+    try {
+      await fetch(API + '/players/' + id, { method: 'DELETE', headers: apiHeaders(true) });
+      showToast('✅ بازیکن حذف شد');
+      await loadPlayers();
+    } catch(e) { showToast('خطا'); }
+  });
+}
+
+// ── Game Logic ────────────────────────────────────────────────────────────────
+
 function adj(i, d) {
-  const inp = document.getElementById('inp-'+i);
+  const inp = document.getElementById('inp-' + i);
   inp.value = Math.max(0, (parseInt(inp.value) || 0) + d);
 }
 
 function handleFabClick() {
-  if(state.gameOver) {
+  if (state.gameOver) {
     askSaveGame();
   } else {
-    const v = [0, 1].map(i => Math.max(0, parseInt(document.getElementById('inp-'+i).value) || 0));
-    if(v[0] === 0 && v[1] === 0) return; // Prevent empty sets
-    showConfirm(`آیا از ثبت امتیاز این ست مطمئن هستید؟ (${v[0]} برای ${name(0)} و ${v[1]} برای ${name(1)})`, () => {
+    const v = [0, 1].map(i => Math.max(0, parseInt(document.getElementById('inp-' + i).value) || 0));
+    if (v[0] === 0 && v[1] === 0) return;
+    showConfirm(`ثبت امتیاز: ${v[0]} برای تیم ۱ و ${v[1]} برای تیم ۲؟`, () => {
       cancelConfirm();
       addSet();
     });
@@ -277,29 +588,297 @@ function handleFabClick() {
 }
 
 function addSet() {
-  if(state.gameOver) return;
-  const v = [0, 1].map(i => Math.max(0, parseInt(document.getElementById('inp-'+i).value) || 0));
-  if(v[0] === 0 && v[1] === 0) return;
-  
+  if (state.gameOver) return;
+  const v = [0, 1].map(i => Math.max(0, parseInt(document.getElementById('inp-' + i).value) || 0));
+  if (v[0] === 0 && v[1] === 0) return;
   state.sets.push([...v]);
-  state.scores[0] += v[0]; 
+  state.scores[0] += v[0];
   state.scores[1] += v[1];
-  
   document.getElementById('inp-0').value = 0;
   document.getElementById('inp-1').value = 0;
-  
-  if(state.scores[0] >= WIN || state.scores[1] >= WIN) state.gameOver = true;
+  if (state.scores[0] >= WIN || state.scores[1] >= WIN) state.gameOver = true;
   renderGame(true);
 }
 
 function undoSet() {
-  if(!state.sets.length) return;
+  if (!state.sets.length) return;
   const last = state.sets.pop();
-  state.scores[0] -= last[0]; 
+  state.scores[0] -= last[0];
   state.scores[1] -= last[1];
   state.gameOver = false;
   renderGame(true);
 }
+
+function getWinIdx() {
+  if (!state.gameOver) return -1;
+  if (state.scores[0] >= WIN && state.scores[1] >= WIN)
+    return state.scores[0] > state.scores[1] ? 0 : 1;
+  return state.scores[0] >= WIN ? 0 : 1;
+}
+
+function askReset() { showConfirm('آیا می‌خواهید بازی جاری را ریست کنید؟', doReset); }
+function doReset() {
+  state.scores = [0, 0]; state.sets = []; state.gameOver = false;
+  document.getElementById('inp-0').value = 0;
+  document.getElementById('inp-1').value = 0;
+  cancelConfirm(); renderGame(true);
+}
+
+function askSaveGame() { showConfirm('نتیجه ذخیره شود و بازی جدید آغاز شود؟', doSaveGame); }
+
+async function doSaveGame() {
+  cancelConfirm();
+  const wi = getWinIdx();
+  const winner = wi + 1; // 1 or 2
+
+  if (state.team[0].length && state.team[1].length) {
+    try {
+      await fetch(API + '/games', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          team1: state.team[0],
+          team2: state.team[1],
+          team1_score: state.scores[0],
+          team2_score: state.scores[1],
+          winner
+        })
+      });
+      showToast('✅ بازی ذخیره شد');
+    } catch(e) { showToast('خطا در ذخیره بازی'); }
+  } else {
+    showToast('⚠️ بازیکنی انتخاب نشده بود — ذخیره نشد');
+  }
+
+  state.gameNum++;
+  state.scores = [0, 0]; state.sets = []; state.gameOver = false;
+  state.team = [[], []]; state.teamNames = [[], []];
+  document.getElementById('inp-0').value = 0;
+  document.getElementById('inp-1').value = 0;
+  renderTeamChips();
+  renderGame(true);
+}
+
+// ── Render ────────────────────────────────────────────────────────────────────
+
+function animateValue(obj, start, end, duration) {
+  let startTs = null;
+  const step = ts => {
+    if (!startTs) startTs = ts;
+    const p = Math.min((ts - startTs) / duration, 1);
+    const ease = 1 - Math.pow(1 - p, 4);
+    obj.innerHTML = Math.floor(ease * (end - start) + start);
+    if (p < 1) requestAnimationFrame(step);
+    else { obj.innerHTML = end; obj.dataset.val = end; }
+  };
+  requestAnimationFrame(step);
+}
+
+function renderGame(animate = false) {
+  const wi = getWinIdx();
+
+  [0, 1].forEach(i => {
+    const el = document.getElementById('total-' + i);
+    const old = parseInt(el.dataset.val) || 0;
+    if (animate && old !== state.scores[i]) animateValue(el, old, state.scores[i], 600);
+    else { el.textContent = state.scores[i]; el.dataset.val = state.scores[i]; }
+    document.getElementById('card-' + i).className = 'team-card glass' + (wi === i ? ' winner' : '');
+    document.getElementById('prog-' + i).style.width = Math.min(100, (state.scores[i] / WIN) * 100) + '%';
+  });
+
+  const wm = document.getElementById('winner-msg');
+  const fab = document.getElementById('fab-action');
+  const fabText = document.getElementById('fab-text');
+  const t1 = state.teamNames[0].join(' & ') || 'تیم ۱';
+  const t2 = state.teamNames[1].join(' & ') || 'تیم ۲';
+  const winnerName = wi === 0 ? t1 : t2;
+
+  if (wi >= 0) {
+    wm.style.display = 'block';
+    wm.innerHTML = `🎉 تبریک! <strong>${winnerName}</strong> برنده بازی ${toFa(state.gameNum)} شد.`;
+    fab.style.background = 'linear-gradient(135deg, #3b82f6, #2563eb)';
+    fabText.textContent = 'ذخیره و بازی جدید';
+    fab.querySelector('svg').innerHTML = '<path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/>';
+  } else {
+    wm.style.display = 'none';
+    fab.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+    fabText.textContent = 'ثبت امتیاز ست';
+    fab.querySelector('svg').innerHTML = '<line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>';
+  }
+
+  document.getElementById('game-subtitle').textContent = 'بازی ' + toFa(state.gameNum);
+
+  const list = document.getElementById('sets-list');
+  if (!state.sets.length) { list.innerHTML = '<div class="empty">هنوز ستی ثبت نشده</div>'; return; }
+  let cum = [0, 0];
+  list.innerHTML = `<div class="round-row rounds-header"><span></span><span>${t1}</span><span>${t2}</span></div>`
+    + state.sets.map((s, i) => {
+      cum[0] += s[0]; cum[1] += s[1];
+      return `<div class="round-row">
+        <span class="rn">ست ${toFa(i + 1)}</span>
+        <span><span class="score-val">${s[0]}</span><span class="running">${cum[0]}</span></span>
+        <span><span class="score-val">${s[1]}</span><span class="running">${cum[1]}</span></span>
+      </div>`;
+    }).reverse().join('');
+}
+
+// ── History ───────────────────────────────────────────────────────────────────
+
+async function renderHistory() {
+  const glist = document.getElementById('games-list');
+  const osec = document.getElementById('overall-section');
+  glist.innerHTML = '<div class="loading"><div class="spinner"></div>در حال بارگذاری...</div>';
+
+  let games;
+  try {
+    games = await apiFetch('/games');
+  } catch(e) {
+    glist.innerHTML = '<div class="empty">خطا در بارگذاری</div>';
+    return;
+  }
+
+  if (!games.length) {
+    glist.innerHTML = '<div class="empty glass">تاریخچه‌ای موجود نیست</div>';
+    osec.innerHTML = '';
+    return;
+  }
+
+  // Chart
+  const wins = {};
+  games.forEach(g => {
+    g.players.forEach(p => {
+      if (!wins[p.name]) wins[p.name] = 0;
+      if (p.team === g.winner) wins[p.name]++;
+    });
+  });
+  const sorted = Object.entries(wins).sort((a, b) => b[1] - a[1]);
+  const maxW = sorted[0]?.[1] || 1;
+
+  osec.innerHTML = `<div class="chart-container glass">
+    <div class="sec-title" style="margin-bottom:5px">نمودار بردها</div>
+    ${sorted.map(([n, w]) => `<div class="chart-bar-wrap">
+      <div class="chart-label">${n}</div>
+      <div class="chart-track"><div class="chart-fill" style="width:0%" data-w="${(w/maxW)*100}"></div></div>
+      <div style="font-size:12px;font-weight:700;width:40px;text-align:center">${toFa(w)} برد</div>
+    </div>`).join('')}
+  </div>`;
+
+  setTimeout(() => {
+    document.querySelectorAll('.chart-fill').forEach(el => {
+      el.style.width = el.dataset.w + '%';
+    });
+  }, 50);
+
+  // Game cards
+  glist.innerHTML = [...games].map((g, idx) => {
+    const t1 = g.players.filter(p => p.team === 1).map(p => p.name).join(' & ') || 'تیم ۱';
+    const t2 = g.players.filter(p => p.team === 2).map(p => p.name).join(' & ') || 'تیم ۲';
+    const w1 = g.winner === 1; const w2 = g.winner === 2;
+    const date = new Date(g.played_at).toLocaleDateString('fa-IR');
+    return `<div class="game-card glass win-${g.winner}">
+      ${isAdmin ? `<button class="delete-btn" onclick="adminDeleteGame(${g.id})">🗑</button>` : ''}
+      <div class="game-card-header">
+        <span>${date}</span>
+        <span style="color:var(--primary)">${w1 ? t1 : t2} برد</span>
+      </div>
+      <div class="game-score-row">
+        <div class="team-block ${w1 ? 'gwinner' : ''}">
+          <div class="tname">${t1} ${w1 ? '👑' : ''}</div>
+          <div class="tscore">${g.team1_score}</div>
+        </div>
+        <div class="vs-badge">VS</div>
+        <div class="team-block ${w2 ? 'gwinner' : ''}">
+          <div class="tname">${t2} ${w2 ? '👑' : ''}</div>
+          <div class="tscore">${g.team2_score}</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function adminDeleteGame(id) {
+  showConfirm('آیا از حذف این بازی مطمئن هستید؟', async () => {
+    cancelConfirm();
+    try {
+      await fetch(API + '/games/' + id, { method: 'DELETE', headers: apiHeaders(true) });
+      showToast('✅ بازی حذف شد');
+      renderHistory();
+    } catch(e) { showToast('خطا'); }
+  });
+}
+
+// ── Stats ─────────────────────────────────────────────────────────────────────
+
+async function renderStats() {
+  const el = document.getElementById('stats-content');
+  el.innerHTML = '<div class="loading"><div class="spinner"></div>در حال بارگذاری...</div>';
+
+  try {
+    const players = await apiFetch('/players');
+    if (!players.length) { el.innerHTML = '<div class="empty">هنوز بازیکنی ثبت نشده</div>'; return; }
+    el.innerHTML = `<div class="sec-title">آمار بازیکنان</div>
+      <div class="stats-player-list">
+        ${players.map(p => `<div class="stats-player-card glass" onclick="showPlayerStats(${p.id}, '${p.name}')">
+          <div>
+            <div class="sp-name">${p.name}</div>
+            <div class="sp-meta">برای مشاهده آمار کلیک کنید ←</div>
+          </div>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </div>`).join('')}
+      </div>`;
+  } catch(e) { el.innerHTML = '<div class="empty">خطا در بارگذاری</div>'; }
+}
+
+async function showPlayerStats(id, name) {
+  const el = document.getElementById('stats-content');
+  el.innerHTML = '<div class="loading"><div class="spinner"></div>در حال محاسبه...</div>';
+
+  try {
+    const s = await apiFetch('/stats/' + id);
+    const winRate = s.total_games > 0 ? Math.round((s.wins / s.total_games) * 100) : 0;
+    el.innerHTML = `
+      <button class="back-btn" onclick="renderStats()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        بازگشت
+      </button>
+      <div class="stat-detail glass">
+        <h3>📊 ${name}</h3>
+        <div class="stat-row"><span class="stat-label">کل بازی‌ها</span><span class="stat-value">${toFa(s.total_games)}</span></div>
+        <div class="stat-row"><span class="stat-label">برد</span><span class="stat-value" style="color:var(--primary)">${toFa(s.wins)}</span></div>
+        <div class="stat-row"><span class="stat-label">باخت</span><span class="stat-value" style="color:var(--danger)">${toFa(s.losses)}</span></div>
+        <div class="stat-row"><span class="stat-label">درصد برد</span><span class="stat-value">${toFa(winRate)}٪</span></div>
+      </div>
+      ${s.partners?.length ? `
+      <div class="sec-title" style="margin-top:1.2rem">آمار با شریک تیمی</div>
+      <div class="partner-list">
+        ${s.partners.map(p => `<div class="partner-item glass">
+          <span>${p.partner_name}</span>
+          <span>با هم <strong>${toFa(p.together)}</strong> بازی — <span class="partner-wins">${toFa(p.wins_together)} برد</span></span>
+        </div>`).join('')}
+      </div>` : ''}
+    `;
+  } catch(e) { el.innerHTML = '<div class="empty">خطا در بارگذاری</div>'; }
+}
+
+// ── Tabs ──────────────────────────────────────────────────────────────────────
+
+function showTab(t) {
+  currentTab = t;
+  ['current', 'history', 'stats'].forEach((name, i) => {
+    document.getElementById('view-' + name).style.display = t === name ? 'block' : 'none';
+    document.getElementById('tab-' + name).className = 'tab' + (t === name ? ' active' : '');
+  });
+  document.getElementById('fab-wrap').style.display = t === 'current' ? 'flex' : 'none';
+
+  const ind = document.getElementById('tab-indicator');
+  const positions = { current: 'right:calc(66.66% + 2px)', history: 'right:calc(33.33% + 1px)', stats: 'right:5px' };
+  ind.style.cssText = `position:absolute;top:5px;bottom:5px;width:calc(33.33% - 4px);background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:10px;transition:0.3s cubic-bezier(0.25,0.8,0.25,1);box-shadow:0 2px 8px rgba(0,0,0,0.2);${positions[t]}`;
+
+  if (t === 'history') renderHistory();
+  if (t === 'stats') renderStats();
+}
+
+// ── Confirm Modal ─────────────────────────────────────────────────────────────
 
 function showConfirm(text, action) {
   document.getElementById('confirm-text').textContent = text;
@@ -308,188 +887,11 @@ function showConfirm(text, action) {
 }
 function cancelConfirm() { document.getElementById('modal-overlay').style.display = 'none'; }
 
-function askReset() { showConfirm('آیا مطمئن هستید که می‌خواهید بازی جاری را ریست کنید؟', doReset); }
-function doReset() {
-  state.scores = [0, 0]; state.sets = []; state.gameOver = false;
-  document.getElementById('inp-0').value = 0; document.getElementById('inp-1').value = 0;
-  cancelConfirm(); renderGame(true);
-}
+// ── Init ──────────────────────────────────────────────────────────────────────
 
-function askSaveGame() { showConfirm('نتیجه ذخیره شده و یک بازی جدید آغاز شود؟', doSaveGame); }
-function doSaveGame() {
-  const wi = getWinIdx();
-  state.savedGames.push({ num: state.gameNum, teams: [name(0), name(1)], scores: [...state.scores], winIdx: wi });
-  state.gameNum++;
-  state.scores = [0, 0]; state.sets = []; state.gameOver = false;
-  document.getElementById('inp-0').value = 0; document.getElementById('inp-1').value = 0;
-  cancelConfirm(); 
-  renderGame(true);
-  renderHistory();
-}
-
-function askDeleteGame(idx) {
-  showConfirm('آیا از حذف این بازی از تاریخچه مطمئن هستید؟', () => {
-    state.savedGames.splice(idx, 1);
-    cancelConfirm();
-    renderHistory();
-  });
-}
-
-function getWinIdx() {
-  if(!state.gameOver) return -1;
-  if(state.scores[0] >= WIN && state.scores[1] >= WIN) return state.scores[0] > state.scores[1] ? 0 : 1;
-  return state.scores[0] >= WIN ? 0 : 1;
-}
-
-function showTab(t) {
-  document.getElementById('view-current').style.display = t === 'current' ? 'block' : 'none';
-  document.getElementById('view-history').style.display = t === 'history' ? 'block' : 'none';
-  document.getElementById('tab-current').className = 'tab' + (t === 'current' ? ' active' : '');
-  document.getElementById('tab-history').className = 'tab' + (t === 'history' ? ' active' : '');
-  
-  const fab = document.querySelector('.fab-container');
-  fab.style.display = t === 'current' ? 'flex' : 'none';
-  
-  if(t === 'history') renderHistory();
-}
-
-function renderGame(animate = false) {
-  const wi = getWinIdx();
-  
-  [0, 1].forEach(i => {
-    const el = document.getElementById('total-'+i);
-    const oldVal = parseInt(el.dataset.val) || 0;
-    if(animate && oldVal !== state.scores[i]) {
-      animateValue(el, oldVal, state.scores[i], 600);
-    } else {
-      el.textContent = state.scores[i];
-      el.dataset.val = state.scores[i];
-    }
-    
-    document.getElementById('card-'+i).className = 'team-card glass' + (wi === i ? ' winner' : '');
-    
-    // Progress Bar Update
-    const progVal = Math.min(100, (state.scores[i] / WIN) * 100);
-    document.getElementById('prog-'+i).style.width = progVal + '%';
-  });
-
-  const wm = document.getElementById('winner-msg');
-  const fab = document.getElementById('fab-action');
-  const fabText = document.getElementById('fab-text');
-
-  if(wi >= 0) {
-    wm.style.display = 'block';
-    wm.innerHTML = `🎉 تبریک! <strong>${name(wi)}</strong> برنده بازی ${toFa(state.gameNum)} شد.`;
-    
-    // Change FAB to Save Mode
-    fab.style.background = 'linear-gradient(135deg, #3b82f6, #2563eb)';
-    fabText.textContent = 'ذخیره و بازی جدید';
-    fab.querySelector('svg').innerHTML = '<path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline>';
-  } else {
-    wm.style.display = 'none';
-    
-    // Restore FAB to Add Mode
-    fab.style.background = 'linear-gradient(135deg, #10b981, #059669)';
-    fabText.textContent = 'ثبت امتیاز ست';
-    fab.querySelector('svg').innerHTML = '<line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line>';
-  }
-  
-  document.getElementById('game-subtitle').textContent = 'بازی ' + toFa(state.gameNum);
-  
-  // Render Sets
-  const list = document.getElementById('sets-list');
-  if(!state.sets.length) {
-    list.innerHTML = '<div class="empty">هنوز ستی ثبت نشده است</div>';
-    return;
-  }
-  
-  let cum = [0, 0];
-  list.innerHTML = `<div class="round-row rounds-header"><span></span><span>${name(0)}</span><span>${name(1)}</span></div>`
-    + state.sets.map((s, i) => {
-      cum[0] += s[0]; cum[1] += s[1];
-      return `<div class="round-row">
-        <span class="rn">ست ${toFa(i+1)}</span>
-        <span><span class="score-val">${s[0]}</span><span class="running">${cum[0]}</span></span>
-        <span><span class="score-val">${s[1]}</span><span class="running">${cum[1]}</span></span>
-      </div>`;
-    }).reverse().join('');
-}
-
-function renderHistory() {
-  const games = state.savedGames;
-  const glist = document.getElementById('games-list');
-  const osec = document.getElementById('overall-section');
-  
-  if(!games.length) {
-    glist.innerHTML = '<div class="empty glass">تاریخچه‌ای موجود نیست</div>';
-    osec.innerHTML = '';
-    return;
-  }
-  
-  // Calculate Totals for Chart
-  const totals = {};
-  let maxWins = 0;
-  games.forEach(g => {
-    [0, 1].forEach(i => {
-      const n = g.teams[i];
-      if(!totals[n]) totals[n] = { wins: 0 };
-      if(g.winIdx === i) {
-        totals[n].wins++;
-        if(totals[n].wins > maxWins) maxWins = totals[n].wins;
-      }
-    });
-  });
-  
-  const sorted = Object.entries(totals).sort((a, b) => b[1].wins - a[1].wins);
-  
-  osec.innerHTML = `<div class="chart-container glass">
-    <div class="sec-title" style="margin-bottom:5px">نمودار بردها</div>
-    ${sorted.map(([n, d]) => {
-      const pct = maxWins === 0 ? 0 : (d.wins / maxWins) * 100;
-      return `<div class="chart-bar-wrap">
-        <div class="chart-label">${n}</div>
-        <div class="chart-track">
-          <div class="chart-fill" style="width: ${pct}%"></div>
-        </div>
-        <div style="font-size:12px; font-weight:700; width:30px">${toFa(d.wins)} برد</div>
-      </div>`;
-    }).join('')}
-  </div>`;
-  
-  // Map games along with original index for proper deletion functionality
-  glist.innerHTML = games.map((g, idx) => ({ g, idx })).reverse().map(({ g, idx }) => `<div class="game-card glass win-${g.winIdx}">
-    <button class="delete-btn" onclick="askDeleteGame(${idx})" title="حذف بازی">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-    </button>
-    <div class="game-card-header">
-      <span>بازی ${toFa(g.num)}</span>
-      <span style="color:var(--primary)">${g.teams[g.winIdx]} برد</span>
-    </div>
-    <div class="game-score-row">
-      <div class="team-block ${g.winIdx === 0 ? 'gwinner' : ''}">
-        <div class="tname">${g.teams[0]} ${g.winIdx === 0 ? '👑' : ''}</div>
-        <div class="tscore">${g.scores[0]}</div>
-      </div>
-      <div class="vs-badge">VS</div>
-      <div class="team-block ${g.winIdx === 1 ? 'gwinner' : ''}">
-        <div class="tname">${g.teams[1]} ${g.winIdx === 1 ? '👑' : ''}</div>
-        <div class="tscore">${g.scores[1]}</div>
-      </div>
-    </div>
-  </div>`).join('');
-  
-  // Trigger animation for charts
-  setTimeout(() => {
-    document.querySelectorAll('.chart-fill').forEach(el => {
-      const w = el.style.width;
-      el.style.width = '0%';
-      setTimeout(() => el.style.width = w, 50);
-    });
-  }, 10);
-}
-
-// Init
+showTab('current');
 renderGame();
+loadPlayers();
 </script>
 </body>
 </html>
