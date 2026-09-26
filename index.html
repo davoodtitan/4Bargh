@@ -104,7 +104,7 @@
   .game-card { padding: 1rem; margin-bottom: 1rem; border-right: 4px solid transparent; position: relative; }
   .game-card.win-0 { border-right-color: var(--primary); }
   .game-card.win-1 { border-right-color: var(--accent); }
-  .game-card-header { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px dashed var(--glass-border); }
+  .game-card-header { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px dashed var(--glass-border); flex-wrap: wrap; gap: 6px; }
   .game-score-row { display: flex; align-items: center; justify-content: space-between; }
   .team-block { text-align: center; flex: 1; }
   .tname { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
@@ -114,7 +114,7 @@
   .empty { text-align: center; color: var(--text-muted); padding: 2rem; font-size: 14px; opacity: 0.7; }
 
   /* Delete btn — فقط ادمین */
-  .delete-game-btn { display: none; position: absolute; left: 10px; top: 10px; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: var(--danger); border-radius: 8px; padding: 4px 10px; font-size: 12px; cursor: pointer; font-family: inherit; }
+  .delete-game-btn { display: none; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: var(--danger); border-radius: 8px; padding: 4px 10px; font-size: 12px; cursor: pointer; font-family: inherit; }
   .admin-mode .delete-game-btn { display: block; }
 
   /* Stats */
