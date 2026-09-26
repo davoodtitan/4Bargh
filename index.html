@@ -548,7 +548,7 @@ async function renderHistory(){
     const t2=(g.players||[]).filter(p=>p.team===2).map(p=>p.name).join('، ')||'—';
     const winTeam=g.winner===1?t1:t2;
     let d='';
-    try{d=new Date(g.played_at).toLocaleDateString('fa-IR');}catch(e){}
+    try{d=new Date(g.played_at).toLocaleString('fa-IR');}catch(e){}
     return `<div class="game-card glass win-${g.winner-1} ${adminClass}">
       <button class="delete-game-btn" onclick="askDeleteGame(${g.id})">🗑 حذف</button>
       <div class="game-card-header"><span>${d}</span><span style="color:var(--primary)">${winTeam} برد</span></div>
