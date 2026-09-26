@@ -397,6 +397,7 @@ function removePlayer(team,id){
 }
 
 function openPicker(team){
+  if(state.teamPlayers[team].length >= 2) return;
   pickerTeam=team;
   document.getElementById('picker-title').textContent=`انتخاب بازیکن برای ${name(team)}`;
   const already=[...state.teamPlayers[0],...state.teamPlayers[1]].map(p=>p.id);
