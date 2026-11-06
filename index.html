@@ -5,12 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#0b2a21">
 <title>چهار برگ 🃏</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.0.0/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
 <style>
 :root{--felt-0:#0b2a21;--felt-1:#113a2d;--felt-2:#18493a;--line:#2b5f4d;--ivory:#f1ece0;--dim:#9fb8aa;--heart:#f0605d;--brass:#d9b45c;--brass-ink:#2a2108;--danger:#ff8a80;--primary:var(--brass);--text-main:var(--ivory);--text-muted:var(--dim)}
 html{color-scheme:dark}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{font-family:'Vazirmatn',sans-serif;background:var(--felt-0);color:var(--ivory);min-height:100vh;line-height:1.6;padding-bottom:104px}
+body{font-family:'Vazirmatn',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;letter-spacing:-0.015em;font-feature-settings:"ss01" 1,"ss02" 1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;background:var(--felt-0);color:var(--ivory);min-height:100vh;line-height:1.6;padding-bottom:104px}
 :focus-visible{outline:2px solid var(--brass);outline-offset:2px}
 .app-container{max-width:520px;margin:0 auto;padding:20px 16px}
 .glass{background:var(--felt-1);border:1px solid var(--line);border-radius:14px}
@@ -360,7 +361,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
         <div style="font-weight:800;color:var(--brass);margin-bottom:3px">✨ امتیاز سور: ۱۰ امتیاز</div>
         <div style="color:var(--dim)">
           در این بازی هر سور دارای <strong style="color:var(--brass)">۱۰ امتیاز</strong> کامل است.<br>
-          <small style="color:var(--dim)">* با کارت سرباز نمی‌توان سور زد و در دست آخر (برگ‌های پایانی) سور شمرده نمی‌شود.</small>
+          <small style="color:var(--dim)">* در دست آخر (برگ‌های پایانی بازی) سور شمرده نمی‌شود.</small>
         </div>
       </div>
 
@@ -374,24 +375,25 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
       <div style="background:var(--felt-0);border:1px solid var(--line);border-radius:10px;padding:10px 12px">
         <div style="font-weight:800;color:var(--brass);margin-bottom:6px">🎴 ارزش کارت‌ها در هر دست (مجموع ۲۰ امتیاز)</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:12px">
-          <div style="background:var(--felt-2);padding:6px 8px;border-radius:6px;display:flex;justify-content:space-between">
-            <span>♣ هفت خاج (بزرگ):</span><b style="color:var(--brass)">۷</b>
-          </div>
-          <div style="background:var(--felt-2);padding:6px 8px;border-radius:6px;display:flex;justify-content:space-between">
-            <span>♦ ۱۰ خشت:</span><b style="color:var(--brass)">۳</b>
-          </div>
-          <div style="background:var(--felt-2);padding:6px 8px;border-radius:6px;display:flex;justify-content:space-between">
-            <span>♣ ۲ خاج:</span><b style="color:var(--brass)">۲</b>
-          </div>
-          <div style="background:var(--felt-2);padding:6px 8px;border-radius:6px;display:flex;justify-content:space-between">
-            <span>♥ ۴ آس (تک):</span><b style="color:var(--brass)">۴</b>
-          </div>
           <div style="background:var(--felt-2);padding:6px 8px;border-radius:6px;display:flex;justify-content:space-between;grid-column:span 2">
-            <span>♠ ۴ سرباز:</span><b style="color:var(--brass)">۴</b>
+            <span>♣ هفت خاج (۱۳ برگ گشنیز):</span><b style="color:var(--brass)">۷ امتیاز</b>
+          </div>
+          <div style="background:var(--felt-2);padding:6px 8px;border-radius:6px;display:flex;justify-content:space-between">
+            <span>♦ ۱۰ خشت:</span><b style="color:var(--brass)">۳ امتیاز</b>
+          </div>
+          <div style="background:var(--felt-2);padding:6px 8px;border-radius:6px;display:flex;justify-content:space-between">
+            <span>♣ ۲ خاج:</span><b style="color:var(--brass)">۲ امتیاز</b>
+          </div>
+          <div style="background:var(--felt-2);padding:6px 8px;border-radius:6px;display:flex;justify-content:space-between">
+            <span>♠ هر سرباز:</span><b style="color:var(--brass)">۱ امتیاز</b>
+          </div>
+          <div style="background:var(--felt-2);padding:6px 8px;border-radius:6px;display:flex;justify-content:space-between">
+            <span>♥ هر آس (تک):</span><b style="color:var(--brass)">۱ امتیاز</b>
           </div>
         </div>
-        <div style="font-size:11px;color:var(--dim);margin-top:6px">
-          * تیمی که حداقل ۷ برگ گشنیز جمع کند، ۷ امتیاز هفت خاج را می‌برد.
+        <div style="font-size:11px;color:var(--dim);margin-top:6px;line-height:1.6">
+          * کل برگ‌های گشنیز در بازی ۱۳ عدد است؛ هر تیمی که حداقل ۷ برگ گشنیز جمع کند، ۷ امتیاز هفت خاج را می‌برد.<br>
+          * هر سرباز ۱ امتیاز و هر آس ۱ امتیاز دارد (۴ سرباز = ۴ امتیاز، ۴ آس = ۴ امتیاز).
         </div>
       </div>
     </div>
