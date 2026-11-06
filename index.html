@@ -3,650 +3,302 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#071d16">
-<title>چهار برگ پرو 🃏</title>
+<meta name="theme-color" content="#0b2a21">
+<title>چهار برگ 🃏</title>
 <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.0.0/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
 <style>
-:root{
-  --felt-0:#071d16;
-  --felt-1:#0f3227;
-  --felt-2:#17493b;
-  --felt-3:#1f5c4b;
-  --line:#2b5f4d;
-  --ivory:#f1ece0;
-  --dim:#9fb8aa;
-  --heart:#ea4d4a;
-  --brass:#d9b45c;
-  --brass-glow:#ecc97a;
-  --brass-ink:#1a1505;
-  --danger:#ff6b6b;
-  --primary:var(--brass);
-}
+:root{--felt-0:#0b2a21;--felt-1:#113a2d;--felt-2:#18493a;--line:#2b5f4d;--ivory:#f1ece0;--dim:#9fb8aa;--heart:#f0605d;--brass:#d9b45c;--brass-ink:#2a2108;--danger:#ff8a80;--primary:var(--brass);--text-main:var(--ivory);--text-muted:var(--dim)}
 html{color-scheme:dark}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{
-  font-family:'Vazirmatn',system-ui,-apple-system,sans-serif;
-  background:radial-gradient(130% 65% at 50% 0%,#1c5e46 0%,#0e3226 45%,#051812 100%) fixed,var(--felt-0);
-  color:var(--ivory);
-  min-height:100vh;
-  line-height:1.6;
-  padding-bottom:120px;
-  user-select:none;
-}
+body{font-family:'Vazirmatn',sans-serif;background:var(--felt-0);color:var(--ivory);min-height:100vh;line-height:1.6;padding-bottom:104px}
 :focus-visible{outline:2px solid var(--brass);outline-offset:2px}
-.app-container{max-width:520px;margin:0 auto;padding:16px 14px}
-.glass{
-  background:linear-gradient(180deg,rgba(23,73,59,0.9),rgba(15,50,39,0.95));
-  border:1px solid var(--line);
-  border-radius:18px;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,0.08),0 12px 30px rgba(0,0,0,0.4);
-}
+.app-container{max-width:520px;margin:0 auto;padding:20px 16px}
+.glass{background:var(--felt-1);border:1px solid var(--line);border-radius:14px}
+header{position:relative;display:flex;flex-direction:row;justify-content:space-between;align-items:center;margin-bottom:18px}
+h1{font-size:30px;font-weight:800;display:flex;align-items:center;gap:12px;letter-spacing:-.3px}
+.suits{display:flex;gap:0;font-size:15px;direction:ltr;line-height:1}
+.suits i{width:22px;height:30px;margin-inline-end:-6px;border-radius:5px;background:var(--ivory);color:#16221c;display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:0 3px 8px rgba(0,0,0,.45);border:1px solid rgba(0,0,0,.15);font-style:normal}
+.suits i.r{color:#d93a3a}
+.suits i:nth-child(1){transform:rotate(-14deg)}.suits i:nth-child(2){transform:rotate(-5deg) translateY(-2px)}.suits i:nth-child(3){transform:rotate(5deg) translateY(-2px)}.suits i:nth-child(4){transform:rotate(14deg)}
+.header-left{display:flex;align-items:center;gap:8px}
+.rules-btn{background:var(--felt-2);border:1px solid var(--line);color:var(--ivory);border-radius:999px;padding:4px 12px;font:inherit;font-size:12px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:4px;transition:all .15s}
+.rules-btn:active{background:var(--line);transform:scale(.96)}
+.subtitle{background:linear-gradient(180deg,#d9b45c,#b8923d);color:var(--brass-ink);border:none;font-weight:800;padding:4px 14px;border-radius:999px;font-size:12px}
 
-/* Header */
-header{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:16px}
-h1{font-size:22px;font-weight:900;display:flex;align-items:center;gap:10px;letter-spacing:-0.5px}
-.suits{display:flex;gap:2px;font-size:13px;direction:ltr;line-height:1}
-.suits i{
-  font-style:normal;
-  width:20px;
-  height:28px;
-  border-radius:4px;
-  background:var(--ivory);
-  color:#112218;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  box-shadow:0 3px 6px rgba(0,0,0,0.4);
-}
-.suits i.r{color:var(--heart)}
-.suits i:nth-child(1){transform:rotate(-10deg)}
-.suits i:nth-child(2){transform:rotate(-3deg) translateY(-2px)}
-.suits i:nth-child(3){transform:rotate(3deg) translateY(-2px)}
-.suits i:nth-child(4){transform:rotate(10deg)}
-.header-actions{display:flex;align-items:center;gap:6px}
-.game-counter-badge{
-  font-size:12px;
-  font-weight:800;
-  color:var(--brass);
-  background:rgba(0,0,0,0.35);
-  border:1px solid rgba(217,180,92,0.35);
-  border-radius:999px;
-  padding:3px 12px;
-}
-.icon-btn{
-  width:36px;
-  height:36px;
-  border-radius:10px;
-  background:var(--felt-2);
-  border:1px solid var(--line);
-  color:var(--ivory);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  transition:all 0.15s;
-}
-.icon-btn:active{transform:scale(0.95)}
-.icon-btn svg{width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none}
+body{background:radial-gradient(130% 60% at 50% 0%,#1d6048 0%,#0e3326 45%,#071d16 100%) fixed,var(--felt-0);padding-bottom:150px}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:-1;background:repeating-linear-gradient(45deg,rgba(255,255,255,.012) 0 2px,transparent 2px 6px),repeating-linear-gradient(-45deg,rgba(0,0,0,.05) 0 2px,transparent 2px 6px)}
+.glass,.metric,.teams,.player-team-col,.sets-list{background:linear-gradient(180deg,#17493b,#103729);box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 10px 28px rgba(0,0,0,.32)}
 
-/* Dealer Banner */
-.dealer-bar{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  background:rgba(0,0,0,0.3);
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:8px 12px;
-  margin-bottom:14px;
-  font-size:12px;
-}
-.dealer-bar b{color:var(--brass)}
-.rotate-btn{
-  background:none;
-  border:none;
-  color:var(--brass);
-  font:inherit;
-  font-size:11px;
-  font-weight:700;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  gap:4px;
-}
-
-/* Player section */
-.player-teams-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
-.player-team-col{padding:10px;border:1px solid var(--line);border-radius:14px;background:rgba(0,0,0,0.2)}
-.player-team-label{font-size:11px;color:var(--dim);font-weight:700;margin-bottom:6px;display:flex;justify-content:space-between}
-.player-chip{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  background:var(--felt-2);
-  border:1px solid var(--line);
-  border-radius:8px;
-  padding:4px 8px;
-  margin-bottom:5px;
-  font-size:13px;
-  font-weight:700;
-}
-.player-chip button{background:none;border:none;color:var(--danger);font-size:16px;cursor:pointer;padding:0 4px}
-.add-player-btn{
-  width:100%;
-  min-height:32px;
-  background:none;
-  border:1px dashed var(--line);
-  border-radius:8px;
-  color:var(--dim);
-  font:inherit;
-  font-size:11px;
-  font-weight:700;
-  cursor:pointer;
-  transition:all 0.15s;
-}
-.add-player-btn:hover{color:var(--brass);border-color:var(--brass)}
-
-/* Teams scoreboard */
-.teams{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-bottom:12px}
-.team-card{
-  position:relative;
-  overflow:hidden;
-  padding:16px 12px 14px;
-  text-align:center;
-  border-top:4px solid var(--suit);
-  background:linear-gradient(180deg,#154436,#0e2e24);
-}
-#card-0{--suit:var(--heart)}
-#card-1{--suit:var(--ivory);border-inline-start:1px solid var(--line)}
-.team-card::before{
-  content:'♥';
-  position:absolute;
-  left:-10px;
-  bottom:-30px;
-  font-size:120px;
-  line-height:1;
-  color:var(--suit);
-  opacity:0.06;
-  pointer-events:none;
-}
-#card-1::before{content:'♠'}
-.team-card.winner{background:linear-gradient(180deg,#244d3d,#133b2e);border-top-color:var(--brass)}
-.team-name-input{
-  width:100%;
-  background:rgba(0,0,0,0.35);
-  border:1px solid var(--line);
-  border-radius:999px;
-  color:var(--ivory);
-  font:inherit;
-  font-size:14px;
-  font-weight:800;
-  text-align:center;
-  padding:4px 10px;
-  margin-bottom:6px;
-}
-.team-name-input:focus{outline:none;border-color:var(--brass)}
-.total{
-  font-size:68px;
-  font-weight:900;
-  line-height:1;
-  color:var(--suit);
-  letter-spacing:-2px;
-  font-variant-numeric:tabular-nums;
-  margin:4px 0;
-}
-#card-0 .total{filter:drop-shadow(0 0 16px rgba(234,77,74,0.4))}
-#card-1 .total{filter:drop-shadow(0 0 16px rgba(241,236,224,0.3))}
-.winner .total{color:var(--brass);filter:drop-shadow(0 0 20px rgba(217,180,92,0.6))}
-.progress-bg{position:relative;height:8px;margin:18px 4px 12px;background:rgba(0,0,0,0.45);border-radius:999px}
-.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--suit),#fff);border-radius:999px;transition:width .5s ease}
-.progress-bg::before{content:'۸۰';position:absolute;top:-17px;right:calc(76.92% - 1em);width:2em;text-align:center;font-size:10px;color:var(--brass);font-weight:800}
-.progress-bg::after{content:'';position:absolute;top:-4px;bottom:-4px;right:76.92%;width:2px;margin-right:-1px;background:var(--brass);border-radius:1px}
-
-/* Set Input Inside Card */
-.card-set-input{margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06)}
-.card-set-label{font-size:10px;color:var(--dim);margin-bottom:4px;font-weight:700}
-.inp-row{display:flex;align-items:center;justify-content:center;gap:4px;background:rgba(0,0,0,0.35);border:1px solid var(--line);border-radius:12px;padding:3px}
-.inp-row button{
-  width:36px;
-  height:36px;
-  border:none;
-  border-radius:8px;
-  background:linear-gradient(180deg,#1f5c4b,#17493a);
-  color:var(--ivory);
-  font-size:16px;
-  font-weight:800;
-  cursor:pointer;
-}
-.inp-row button:active{transform:translateY(1px)}
-.set-inp{width:50px;text-align:center;font:inherit;font-size:20px;font-weight:900;border:none;background:none;color:var(--ivory);outline:none}
-.quick-buttons{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin-top:5px}
-.quick-btn{
-  background:rgba(0,0,0,0.25);
-  border:1px solid var(--line);
-  color:var(--ivory);
-  border-radius:6px;
-  padding:4px 0;
-  font:inherit;
-  font-size:10px;
-  font-weight:700;
-  cursor:pointer;
-}
-.quick-btn.sur{
-  background:rgba(217,180,92,0.15);
-  border-color:rgba(217,180,92,0.4);
-  color:var(--brass);
-  font-weight:900;
-}
-.quick-btn:disabled{opacity:0.3;cursor:not-allowed}
-.lock80-tag{font-size:9px;color:#ffb74d;font-weight:800;margin-top:4px}
-
-.rule-note{
-  font-size:11px;
-  color:var(--dim);
-  text-align:center;
-  margin-bottom:14px;
-  background:rgba(0,0,0,0.25);
-  padding:6px 10px;
-  border-radius:10px;
-  border:1px solid rgba(255,255,255,0.04);
-}
-.controls{display:flex;gap:8px;margin-bottom:18px}
-.ctrl-btn{
-  flex:1;
-  min-height:40px;
-  border:1px solid var(--line);
-  border-radius:10px;
-  background:var(--felt-1);
-  color:var(--ivory);
-  font:inherit;
-  font-size:12px;
-  font-weight:700;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:6px;
-}
-.ctrl-btn:active{background:var(--felt-2)}
-.ctrl-btn.danger{color:var(--danger);border-color:rgba(255,107,107,0.3)}
-.ctrl-btn svg{width:15px;height:15px;stroke:currentColor;stroke-width:2;fill:none}
-
-/* Sets table */
-.sec-title{font-size:14px;font-weight:800;margin-bottom:8px;display:flex;align-items:center;gap:6px}
-.sec-title::before{content:'♦';color:var(--heart);font-size:10px}
-.sets-list{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:linear-gradient(180deg,#17493b,#103729)}
-.round-row{display:grid;grid-template-columns:64px 1fr 1fr;padding:8px;border-bottom:1px solid var(--line);text-align:center;font-size:13px}
-.round-row:last-child{border-bottom:none}
-.rounds-header{background:rgba(0,0,0,0.35);color:var(--dim);font-size:11px;font-weight:700}
-.rn{font-size:11px;color:var(--dim);display:flex;align-items:center;justify-content:center;font-weight:700}
-.score-val{font-weight:800;font-size:15px}
-.running{display:block;font-size:10px;color:var(--dim)}
-
-/* Winner message */
-.winner-msg{
-  text-align:center;
-  padding:14px;
-  border:2px solid var(--brass);
-  color:var(--brass);
-  font-weight:900;
-  margin-bottom:14px;
-  border-radius:14px;
-  background:linear-gradient(180deg,rgba(217,180,92,0.2),rgba(217,180,92,0.05));
-  font-size:16px;
-  animation:pulseGlow 2s infinite alternate;
-}
-@keyframes pulseGlow{from{box-shadow:0 0 10px rgba(217,180,92,0.2)}to{box-shadow:0 0 25px rgba(217,180,92,0.6)}}
-
-/* Floating Action Button (FAB) */
-.fab-container{
-  position:fixed;
-  inset-inline:0;
-  bottom:64px;
-  padding:0 16px 10px;
-  display:flex;
-  justify-content:center;
-  z-index:50;
-  pointer-events:none;
-}
-.fab{
-  pointer-events:auto;
-  width:100%;
-  max-width:492px;
-  min-height:52px;
-  border:none;
-  border-radius:14px;
-  background:linear-gradient(180deg,#ecc97a,#c9a24a);
-  color:var(--brass-ink);
-  font:inherit;
-  font-size:15px;
-  font-weight:900;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  cursor:pointer;
-  box-shadow:0 8px 24px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.5);
-  transition:transform 0.15s;
-}
-.fab:active{transform:scale(0.98)}
-.fab svg{width:18px;height:18px;stroke:currentColor;stroke-width:2.5;fill:none}
-
-/* Bottom Tab Bar */
-.tab-bar{
-  position:fixed;
-  bottom:0;
-  left:50%;
-  transform:translateX(-50%);
-  width:min(520px,100%);
-  margin:0;
-  z-index:60;
-  background:rgba(14,48,37,0.96);
-  backdrop-filter:blur(16px);
-  border-top:1px solid var(--line);
-  display:flex;
-  padding-bottom:env(safe-area-inset-bottom);
-}
-.tab{
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:2px;
-  min-height:58px;
-  background:none;
-  border:none;
-  color:var(--dim);
-  font:inherit;
-  font-size:11px;
-  font-weight:700;
-  cursor:pointer;
-  position:relative;
-}
-.tab svg{width:22px;height:22px;padding:3px;border-radius:10px;transition:all 0.2s}
+.tab-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(520px,100%);margin:0;z-index:60;background:rgba(14,48,37,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom);display:flex}
+.tab{flex:1;min-height:60px;background:none;border:none;color:var(--dim);font:inherit;font-size:11px;font-weight:600;cursor:pointer;position:relative;flex-direction:column;display:flex;align-items:center;justify-content:center;gap:3px}
+.tab svg{display:block;width:24px;height:24px;padding:3px;border-radius:10px;transition:background .2s}
 .tab.active{color:var(--brass)}
-.tab.active svg{background:rgba(217,180,92,0.18);stroke:var(--brass)}
-.tab.active::after{
-  content:'';
-  position:absolute;
-  inset-inline:25%;
-  top:0;
-  height:3px;
-  background:var(--brass);
-  border-radius:0 0 3px 3px;
-}
+.tab.active svg{background:rgba(217,180,92,.18)}
+
+.player-select-section{margin-bottom:16px}
+.sec-title{font-size:16px;font-weight:800;display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.sec-title::before{content:'♦';color:var(--heart);font-size:12px}
+.player-teams-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.player-team-col{padding:10px;border:1px solid var(--line);border-radius:12px}
+.player-team-label{font-size:12px;color:var(--dim);font-weight:600;margin-bottom:8px;text-align:center}
+.player-chip{display:flex;align-items:center;justify-content:space-between;background:var(--felt-2);border-radius:8px;padding:6px 10px;margin-bottom:6px;font-size:14px;font-weight:600}
+.player-chip button{background:none;border:none;color:var(--danger);font-size:20px;cursor:pointer;min-width:28px;min-height:28px}
+.add-player-btn{width:100%;min-height:40px;background:none;border:1px dashed var(--dim);border-radius:8px;color:var(--ivory);font:inherit;font-size:13px;cursor:pointer}
+
+.teams{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:18px;background:var(--felt-1);overflow:hidden;margin-bottom:12px}
+.team-card{position:relative;overflow:hidden;padding:20px 12px 18px;text-align:center;border-top:4px solid var(--suit)}
+#card-0{--suit:var(--heart)}#card-1{--suit:var(--ivory);border-inline-start:1px solid var(--line)}
+.team-card::before{content:'♥';position:absolute;left:-18px;bottom:-40px;font-size:150px;line-height:1;color:var(--suit);opacity:.1;pointer-events:none}
+#card-1::before{content:'♠'}
+.team-card.winner{background:rgba(217,180,92,.09);border-top-color:var(--brass)}
+.team-name-input{width:100%;background:var(--felt-0);border:1px solid var(--line);border-radius:999px;color:var(--ivory);font:inherit;font-size:15px;font-weight:700;text-align:center;padding:6px 12px;margin-bottom:10px}
+.team-name-input:focus{outline:none;border-color:var(--brass);box-shadow:0 0 0 3px rgba(217,180,92,.18)}
+.total{font-size:84px;font-weight:900;line-height:1.1;color:var(--suit);font-variant-numeric:tabular-nums;letter-spacing:-2px}
+#card-0 .total{filter:drop-shadow(0 0 16px rgba(240,96,93,.45))}
+#card-1 .total{filter:drop-shadow(0 0 16px rgba(241,236,224,.28))}
+.winner .total{color:var(--brass);filter:drop-shadow(0 0 20px rgba(217,180,92,.6))}
+.progress-bg{position:relative;height:10px;margin:26px 4px 14px;background:var(--felt-0);border-radius:999px;box-shadow:inset 0 2px 4px rgba(0,0,0,.5)}
+.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--suit),color-mix(in srgb,var(--suit) 55%,#fff));border-radius:999px;transition:width .6s ease}
+.progress-bg::before{content:'۸۰';position:absolute;top:-19px;right:calc(76.92% - 1em);width:2em;text-align:center;font-size:11px;color:var(--brass)}
+.progress-bg::after{content:'';position:absolute;top:-5px;bottom:-5px;right:76.92%;width:2px;margin-right:-1px;background:var(--brass);border-radius:1px}
+
+.inp-row{display:flex;align-items:center;justify-content:center;gap:6px;background:var(--felt-0);border:1px solid var(--line);border-radius:12px;padding:4px;box-shadow:inset 0 2px 6px rgba(0,0,0,.35)}
+.inp-row button{width:44px;height:44px;border:none;border-radius:10px;background:linear-gradient(180deg,#1f5c4b,#17493a);color:var(--ivory);font-size:22px;cursor:pointer;box-shadow:0 2px 0 rgba(0,0,0,.35)}
+.inp-row button:active{transform:translateY(1px);box-shadow:none}
+.set-inp{width:56px;text-align:center;font:inherit;font-size:24px;font-weight:800;border:none;background:none;color:var(--ivory);outline:none}
+
+.quick-row{display:flex;gap:6px;margin-top:8px;justify-content:center}
+.q-btn{flex:1;min-height:36px;background:var(--felt-2);border:1px solid var(--line);border-radius:8px;color:var(--ivory);font:inherit;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s}
+.q-btn:active{background:var(--line);transform:scale(.96)}
+.q-btn.sur{flex:1.5;background:linear-gradient(180deg,#246351,#18493a);border-color:var(--brass);color:var(--brass)}
+.q-btn.sur:active{background:var(--felt-2)}
+
+.rule-note{font-size:12px;color:var(--dim);text-align:center;margin-bottom:16px}
+.controls{display:flex;gap:10px;margin-bottom:24px}
+.ctrl-btn{flex:1;min-height:44px;border:1px solid var(--line);border-radius:10px;background:var(--felt-1);color:var(--ivory);font:inherit;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
+.ctrl-btn:active{background:var(--felt-2)}.ctrl-btn.danger{color:var(--danger)}
+.ctrl-btn svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+.sets-list{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.round-row{display:grid;grid-template-columns:64px 1fr 1fr;padding:12px 8px;border-bottom:1px solid var(--line);text-align:center;font-size:14px}
+.round-row:last-child{border-bottom:none}
+.round-row:nth-child(even){background:rgba(255,255,255,.025)}
+.rounds-header{background:rgba(0,0,0,.25);color:var(--dim);font-size:12px;font-weight:600}
+.rn{font-size:12px;color:var(--dim);display:flex;align-items:center;justify-content:center}
+.score-val{font-weight:700;font-size:18px}.running{display:block;font-size:11px;color:var(--dim)}
+.winner-msg{background:linear-gradient(180deg,rgba(217,180,92,.2),rgba(217,180,92,.06));font-size:16px;font-weight:800;text-align:center;padding:14px;border-color:var(--brass);color:var(--brass);margin-bottom:16px}
+
+.fab-container{position:fixed;bottom:calc(60px + env(safe-area-inset-bottom));left:0;right:0;pointer-events:none;padding:0 16px 12px;display:flex;justify-content:center;z-index:50}
+.fab{pointer-events:auto;width:100%;max-width:488px;min-height:56px;border:none;border-radius:16px;background:linear-gradient(180deg,#ecc97a,#c9a24a);box-shadow:0 10px 28px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.5);color:var(--brass-ink);font:inherit;font-size:17px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer}
+.fab:active{transform:scale(.98)}
+.fab svg{width:20px;height:20px;stroke:currentColor;stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+.overlay{position:fixed;inset:0;background:rgba(4,16,12,.78);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:999;display:none;align-items:center;justify-content:center;padding:16px}
+.confirm-box{width:100%;max-width:360px;padding:22px 20px;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.6)}
+.confirm-box p{font-size:15px;margin-bottom:20px;line-height:1.8;white-space:pre-line}
+.confirm-btns{display:flex;gap:10px}
+.confirm-btns button{flex:1;min-height:44px;border-radius:10px;font:inherit;font-size:14px;font-weight:700;cursor:pointer;border:none}
+.confirm-btns .yes{background:var(--brass);color:var(--brass-ink)}.confirm-btns .no{background:var(--felt-2);color:var(--ivory)}
+
+.player-picker{position:fixed;inset:0;background:rgba(4,16,12,.78);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:1000;display:none;align-items:flex-end;justify-content:center}
+.player-picker-box{width:100%;max-width:520px;background:var(--felt-1);border-top:1px solid var(--line);border-radius:18px 18px 0 0;padding:20px 16px calc(16px + env(safe-area-inset-bottom));max-height:70vh;overflow-y:auto;box-shadow:0 24px 60px rgba(0,0,0,.6)}
+.player-picker-title{font-size:16px;font-weight:700;margin-bottom:12px;text-align:center}
+.player-list-item{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px}
+.player-list-item span{font-size:15px;font-weight:600}
+.pick-btn{min-height:36px;background:var(--brass);color:var(--brass-ink);border:none;border-radius:8px;padding:0 16px;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+.picker-cancel{width:100%;min-height:44px;margin-top:6px;background:none;border:none;color:var(--dim);font:inherit;font-size:14px;cursor:pointer}
 
 /* History */
-.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
-.metric{background:linear-gradient(180deg,#17493b,#103729);border:1px solid var(--line);border-radius:12px;padding:10px 6px;text-align:center}
-.metric b{display:block;font-size:20px;font-weight:900}
-.metric span{font-size:10px;color:var(--dim)}
-.chart-container{padding:14px;margin-bottom:16px;display:flex;flex-direction:column;gap:8px}
-.chart-bar-wrap{display:flex;align-items:center;gap:8px;font-size:12px}
-.chart-label{width:96px;font-weight:700;display:flex;align-items:center;gap:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.rank{width:18px;height:18px;border-radius:50%;background:var(--felt-2);font-size:10px;display:inline-flex;align-items:center;justify-content:center;color:var(--brass);flex:none}
-.chart-track{flex:1;height:10px;background:rgba(0,0,0,0.4);border-radius:999px;overflow:hidden}
-.chart-fill{height:100%;background:linear-gradient(90deg,#b8923d,#ecc97a);border-radius:999px;transition:width 0.8s ease}
-.game-card{padding:12px;margin-bottom:10px;border-inline-start:4px solid var(--line)}
-.game-card.win-0{border-inline-start-color:var(--heart)}
-.game-card.win-1{border-inline-start-color:var(--ivory)}
-.game-card-header{display:flex;justify-content:space-between;align-items:center;gap:6px;font-size:11px;color:var(--dim);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.metric{border:1px solid var(--line);border-radius:12px;padding:12px 8px;text-align:center}
+.metric b{display:block;font-size:20px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.metric span{font-size:11px;color:var(--dim)}
+.chart-container{padding:16px;margin-bottom:20px;display:flex;flex-direction:column;gap:10px}
+.chart-bar-wrap{display:flex;align-items:center;gap:10px}
+.chart-label{width:104px;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:8px}
+.rank{width:20px;height:20px;border-radius:50%;background:var(--felt-2);font-size:11px;display:inline-flex;align-items:center;justify-content:center;color:var(--brass);flex:none}
+.chart-track{flex:1;height:12px;background:var(--felt-0);border-radius:999px;overflow:hidden;box-shadow:inset 0 2px 4px rgba(0,0,0,.5)}
+.chart-fill{height:100%;background:linear-gradient(90deg,#b8923d,#ecc97a);border-radius:999px;transition:width .8s ease}
+.game-card{padding:14px;margin-bottom:12px;border-inline-start:5px solid var(--line)}
+.game-card.win-0{border-inline-start-color:var(--heart)}.game-card.win-1{border-inline-start-color:var(--ivory)}
+.game-card-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;font-size:12px;color:var(--dim);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--line);font-weight:600}
 .game-score-row{display:flex;align-items:center;justify-content:space-between}
-.team-block{flex:1;text-align:center}
-.tname{font-size:12px;color:var(--dim);margin-bottom:2px;font-weight:700}
-.tscore{font-size:28px;font-weight:900;font-variant-numeric:tabular-nums}
-.gwinner .tscore{color:var(--brass)}
-.gwinner .tname{color:var(--ivory)}
-.vs-badge{width:26px;height:26px;border-radius:50%;background:var(--felt-0);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:var(--dim)}
-.win-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--brass);margin-inline-start:4px}
-.delete-game-btn{display:none;background:none;border:1px solid var(--danger);color:var(--danger);border-radius:6px;padding:2px 8px;font:inherit;font-size:10px;cursor:pointer}
+.team-block{flex:1;text-align:center}.tname{font-size:13px;color:var(--dim);margin-bottom:2px}
+.tscore{font-size:34px;font-weight:900;font-variant-numeric:tabular-nums}
+.gwinner .tscore{color:var(--brass)}.gwinner .tname{color:var(--ivory)}
+.vs-badge{width:30px;height:30px;border-radius:50%;background:var(--felt-0);display:flex;align-items:center;justify-content:center;padding:0;font-weight:700;font-size:11px;color:var(--dim)}
+.win-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--brass);margin-inline-start:6px}
+.delete-game-btn{display:none;min-height:32px;background:none;border:1px solid var(--danger);color:var(--danger);border-radius:8px;padding:0 12px;font:inherit;font-size:12px;cursor:pointer;margin-bottom:10px}
 .admin-mode .delete-game-btn{display:inline-block}
 
-/* Stats */
-.stats-player-card{padding:12px 14px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;transition:transform .1s}
-.stats-player-card:active{transform:scale(0.985)}
-.sp-info{flex:1;min-width:0;margin:0 10px}
-.stats-player-name{font-size:15px;font-weight:800}
-.stats-player-meta{font-size:11px;color:var(--dim);margin-top:2px}
-.avatar{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#276b57,#113a2d);color:var(--brass);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;flex:none}
-.ring{--s:42px;position:relative;width:var(--s);height:var(--s);border-radius:50%;background:conic-gradient(var(--brass) calc(var(--p)*1%),var(--danger) 0);display:flex;align-items:center;justify-content:center;flex:none}
-.ring::before{content:'';position:absolute;inset:4px;border-radius:50%;background:#113a2d}
-.ring b{position:relative;font-size:11px;font-weight:800}
+/* Stats & Loss Analysis */
+.stats-player-card{padding:14px 16px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:12px}
+.stats-player-card:active{transform:scale(.985)}
+.sp-info{flex:1;min-width:0}
+.avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#276b57,#113a2d);color:var(--brass);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:17px;flex:none;box-shadow:0 2px 8px rgba(0,0,0,.35)}
+.stats-player-name{font-size:16px;font-weight:700}
+.stats-player-meta{font-size:12px;color:var(--dim);margin-top:2px}
+.ring{--s:46px;position:relative;width:var(--s);height:var(--s);border-radius:50%;background:conic-gradient(var(--brass) calc(var(--p)*1%),var(--felt-0) 0);display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 0 14px rgba(217,180,92,.2)}
+.ring::before{content:'';position:absolute;inset:5px;border-radius:50%;background:#113a2d}
+.ring b{position:relative;font-size:12px;font-weight:700}
+.ring.big{--s:64px;margin-inline-start:auto}.ring.big b{font-size:15px}
+.stats-detail{padding:16px;margin-bottom:12px}
+.stats-detail-header{display:flex;align-items:center;gap:8px;margin-bottom:16px}
+.back-btn{min-width:44px;min-height:44px;background:none;border:none;color:var(--brass);font-size:22px;cursor:pointer}
+.stats-detail-name{font-size:18px;font-weight:800}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.stat-box{background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:10px;padding:12px 6px;text-align:center}
+.stat-box-val{font-size:32px;font-weight:900}
+.stat-box-lbl{font-size:11px;color:var(--dim)}
+.pbar{height:4px;background:var(--felt-0);border-radius:2px;margin-top:6px;width:120px}
+.pbar i{display:block;height:100%;background:var(--brass);border-radius:2px}
 
-/* Stats Detail & Loss Section */
-.stats-detail{padding:14px;margin-bottom:12px}
-.stats-detail-header{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:14px}
-.back-btn{background:none;border:none;color:var(--brass);font-size:20px;cursor:pointer;padding:4px 8px;font-weight:900}
-.stats-detail-name{font-size:18px;font-weight:900}
-.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
-.stat-box{background:rgba(0,0,0,0.3);border:1px solid var(--line);border-radius:12px;padding:8px 4px;text-align:center}
-.stat-box-val{font-size:24px;font-weight:900}
-.stat-box-lbl{font-size:10px;color:var(--dim)}
-.stat-box.win .stat-box-val{color:var(--brass)}
-.stat-box.loss .stat-box-val{color:var(--danger)}
+.sub-tab-btn{flex:1;min-height:36px;background:none;border:none;color:var(--dim);font:inherit;font-size:12px;font-weight:700;border-radius:8px;cursor:pointer;transition:all .15s}
+.sub-tab-btn.active.loss{background:rgba(255,107,107,0.2);color:#ff8a80}
+.sub-tab-btn.active.win{background:rgba(217,180,92,0.2);color:var(--brass)}
 
-/* Loss / Win Tab Switcher */
-.sub-tabs{display:flex;gap:6px;background:rgba(0,0,0,0.3);padding:4px;border-radius:12px;margin-bottom:12px;border:1px solid var(--line)}
-.sub-tab{flex:1;min-height:34px;background:none;border:none;border-radius:8px;color:var(--dim);font:inherit;font-size:11px;font-weight:800;cursor:pointer}
-.sub-tab.active.loss{background:var(--danger);color:#fff}
-.sub-tab.active.win{background:var(--brass);color:var(--brass-ink)}
-
-.loss-card{background:rgba(0,0,0,0.25);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px}
-.loss-card-header{display:flex;align-items:center;justify-content:space-between;cursor:pointer}
-.loss-name{font-size:13px;font-weight:800}
-.loss-badge{background:rgba(255,107,107,0.15);color:var(--danger);border:1px solid rgba(255,107,107,0.3);border-radius:6px;padding:1px 6px;font-size:10px;font-weight:800}
-.win-badge{background:rgba(217,180,92,0.15);color:var(--brass);border:1px solid rgba(217,180,92,0.3);border-radius:6px;padding:1px 6px;font-size:10px;font-weight:800}
-.pbar{height:5px;background:rgba(0,0,0,0.4);border-radius:3px;margin-top:6px;overflow:hidden}
-.pbar i{display:block;height:100%;border-radius:3px}
-.pbar i.loss{background:linear-gradient(90deg,#ff5252,#ff8a80)}
-.pbar i.win{background:linear-gradient(90deg,#b8923d,#ecc97a)}
-.loss-games-list{margin-top:8px;padding-top:8px;border-top:1px solid var(--line);font-size:11px;display:none}
-.loss-games-list.open{display:block}
-.loss-game-item{display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,0.3);border-radius:8px;padding:6px 8px;margin-bottom:4px}
-
-/* Admin & Login */
-.admin-panel{padding:14px}
-.admin-panel-title{font-size:15px;font-weight:800;margin-bottom:12px}
-.admin-input-row{display:flex;gap:6px;margin-bottom:12px}
-.admin-input,.login-input{background:rgba(0,0,0,0.4);border:1px solid var(--line);border-radius:10px;color:var(--ivory);font:inherit;outline:none;padding:0 12px;font-size:13px}
-.admin-input{flex:1;min-height:40px}
-.admin-input:focus,.login-input:focus{border-color:var(--brass)}
-.admin-add-btn,.login-btn{min-height:40px;background:var(--brass);color:var(--brass-ink);border:none;border-radius:10px;padding:0 16px;font:inherit;font-size:13px;font-weight:800;cursor:pointer}
-.admin-players-scroll{max-height:280px;overflow-y:auto}
-.admin-player-row{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:8px 0;border-bottom:1px solid var(--line)}
-.admin-player-name{flex:1;font-size:13px;font-weight:700}
-.admin-edit-input{flex:1;min-height:34px;background:rgba(0,0,0,0.4);border:1px solid var(--brass);border-radius:8px;padding:0 8px;color:var(--ivory);font:inherit;font-size:13px;outline:none}
-.admin-row-btns{display:flex;gap:4px}
-.admin-edit-btn,.admin-save-btn,.admin-del-btn{min-height:30px;background:none;border-radius:6px;padding:0 10px;font:inherit;font-size:11px;font-weight:700;cursor:pointer}
-.admin-edit-btn{border:1px solid var(--line);color:var(--ivory)}
-.admin-save-btn{border:1px solid var(--brass);color:var(--brass)}
-.admin-del-btn{border:1px solid var(--danger);color:var(--danger)}
-.admin-logout{width:100%;min-height:40px;margin-top:14px;background:none;border:1px solid var(--line);border-radius:10px;color:var(--dim);font:inherit;font-size:13px;cursor:pointer}
-.login-box{padding:24px 16px;text-align:center;max-width:300px;margin:20px auto 0}
-.login-title{font-size:16px;font-weight:800;margin-bottom:14px}
-.login-input{width:100%;min-height:44px;margin-bottom:10px;text-align:center}
-.login-btn{width:100%;min-height:44px}
-.login-err{color:var(--danger);font-size:12px;margin-top:6px;min-height:18px}
-
-/* Modals */
-.overlay{position:fixed;inset:0;background:rgba(4,16,12,0.85);z-index:999;display:none;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(4px)}
-.confirm-box{width:100%;max-width:340px;padding:20px;text-align:center}
-.confirm-box p{font-size:14px;margin-bottom:18px;line-height:1.7;white-space:pre-line}
-.confirm-btns{display:flex;gap:8px}
-.confirm-btns button{flex:1;min-height:40px;border-radius:10px;font:inherit;font-size:13px;font-weight:800;cursor:pointer;border:none}
-.confirm-btns .yes{background:var(--brass);color:var(--brass-ink)}
-.confirm-btns .no{background:var(--felt-2);color:var(--ivory)}
-
-/* Player Picker */
-.player-picker{position:fixed;inset:0;background:rgba(4,16,12,0.85);z-index:1000;display:none;align-items:flex-end;justify-content:center;backdrop-filter:blur(4px)}
-.player-picker-box{width:100%;max-width:520px;background:var(--felt-1);border-top:1px solid var(--line);border-radius:20px 20px 0 0;padding:18px 16px calc(16px + env(safe-area-inset-bottom));max-height:75vh;overflow-y:auto}
-.player-picker-title{font-size:15px;font-weight:800;margin-bottom:12px;text-align:center}
-.player-list-item{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border:1px solid var(--line);border-radius:10px;margin-bottom:6px;background:rgba(0,0,0,0.25)}
-.player-list-item span{font-size:14px;font-weight:700}
-.pick-btn{min-height:34px;background:var(--brass);color:var(--brass-ink);border:none;border-radius:8px;padding:0 14px;font:inherit;font-size:12px;font-weight:800;cursor:pointer}
-.picker-cancel{width:100%;min-height:40px;margin-top:6px;background:none;border:none;color:var(--dim);font:inherit;font-size:13px;cursor:pointer}
-
-/* Rules Modal */
-.rules-box{max-width:440px;max-height:85vh;overflow-y:auto;text-align:right;padding:20px 16px}
-.rules-title{font-size:17px;font-weight:900;margin-bottom:12px;text-align:center;color:var(--brass)}
-.rule-item{margin-bottom:12px;font-size:12px;line-height:1.8;color:var(--ivory)}
-.rule-item strong{color:var(--brass)}
-.rule-card-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:8px 0}
-.rc-box{background:rgba(0,0,0,0.3);padding:6px 10px;border-radius:8px;border:1px solid var(--line);font-size:11px}
-
-.empty{text-align:center;color:var(--dim);padding:28px 14px;font-size:13px}
-.loading{text-align:center;padding:24px;color:var(--dim);font-size:13px}
-.spinner{display:inline-block;width:16px;height:16px;border:2px solid var(--line);border-top-color:var(--brass);border-radius:50%;animation:spin 0.8s linear infinite;vertical-align:middle;margin-inline-end:6px}
+/* Admin */
+.admin-panel{padding:16px}.admin-panel-title{font-size:16px;font-weight:700;margin-bottom:14px}
+.admin-input-row{display:flex;gap:8px;margin-bottom:14px}
+.admin-input,.login-input{background:var(--felt-0);border:1px solid var(--line);border-radius:10px;color:var(--ivory);font:inherit;outline:none}
+.admin-input{flex:1;min-height:44px;padding:0 14px;font-size:14px}
+.admin-input:focus,.login-input:focus,.admin-edit-input:focus{border-color:var(--brass)}
+.admin-add-btn,.login-btn{min-height:44px;background:var(--brass);color:var(--brass-ink);border:none;border-radius:10px;padding:0 18px;font:inherit;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap}
+.admin-players-scroll{max-height:320px;overflow-y:auto}
+.admin-player-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid var(--line)}
+.admin-player-name{flex:1;font-size:14px;font-weight:600}
+.admin-edit-input{flex:1;min-height:36px;background:var(--felt-0);border:1px solid var(--brass);border-radius:8px;padding:0 10px;color:var(--ivory);font:inherit;font-size:14px;outline:none}
+.admin-row-btns{display:flex;gap:6px}
+.admin-edit-btn,.admin-save-btn,.admin-del-btn{min-height:34px;background:none;border-radius:8px;padding:0 12px;font:inherit;font-size:12px;cursor:pointer}
+.admin-edit-btn{border:1px solid var(--line);color:var(--ivory)}.admin-save-btn{border:1px solid var(--brass);color:var(--brass)}.admin-del-btn{border:1px solid var(--danger);color:var(--danger)}
+.admin-logout{width:100%;min-height:44px;margin-top:16px;background:none;border:1px solid var(--line);border-radius:10px;color:var(--dim);font:inherit;font-size:14px;cursor:pointer}
+.login-box{padding:28px 20px;text-align:center;max-width:320px;margin:24px auto 0}
+.login-title{font-size:18px;font-weight:700;margin-bottom:18px}
+.login-input{width:100%;min-height:48px;padding:0 14px;font-size:16px;margin-bottom:12px;text-align:center}
+.login-btn{width:100%;min-height:48px;font-size:15px}
+.login-err{color:var(--danger);font-size:13px;margin-top:8px;min-height:20px}
+.loading{text-align:center;padding:28px;color:var(--dim);font-size:14px}
+.spinner{display:inline-block;width:18px;height:18px;border:2px solid var(--line);border-top-color:var(--brass);border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-inline-end:8px}
 @keyframes spin{to{transform:rotate(360deg)}}
 input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+#view-current,#view-history,#view-stats,#view-admin{animation:fadein .25s ease}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.empty{text-align:center;color:var(--dim);padding:32px 16px;font-size:14px}
+
+/* Toast */
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-20px);background:var(--felt-1);border:1px solid var(--brass);color:var(--ivory);padding:10px 18px;border-radius:999px;font-size:13px;font-weight:700;box-shadow:0 8px 24px rgba(0,0,0,.5);pointer-events:none;opacity:0;transition:all .25s ease;z-index:2000;max-width:90%;text-align:center}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 </style>
 </head>
 <body>
 <div class="app-container">
   <header>
     <h1><span class="suits" aria-hidden="true"><i>♠</i><i class="r">♥</i><i class="r">♦</i><i>♣</i></span>چهار برگ</h1>
-    <div class="header-actions">
-      <div class="game-counter-badge" id="game-subtitle">بازی ۱</div>
-      <button class="icon-btn" onclick="toggleSound()" id="sound-btn" title="صدا">
-        <svg viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
-      </button>
-      <button class="icon-btn" onclick="openRules()" title="راهنمای قوانین">
-        <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-      </button>
+    <div class="header-left">
+      <button class="rules-btn" onclick="openRules()">قوانین 📖</button>
+      <div class="subtitle" id="game-subtitle">بازی اول</div>
     </div>
   </header>
 
-  <!-- TAB BAR -->
   <div class="tab-bar">
     <button class="tab active" id="tab-current" onclick="showTab('current')">
-      <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
       جاری
     </button>
     <button class="tab" id="tab-history" onclick="showTab('history')">
-      <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
       تاریخچه
     </button>
     <button class="tab" id="tab-stats" onclick="showTab('stats')">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-      آمار و باخت‌ها
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      آمار
     </button>
-    <button class="tab" id="tab-admin" onclick="showTab('admin')">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
-      مدیریت
-    </button>
+    <button class="tab" id="tab-admin" onclick="showTab('admin')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>مدیریت</button>
   </div>
 
-  <!-- TAB: CURRENT GAME -->
+  <!-- جاری -->
   <div id="view-current">
     <div id="winner-msg" style="display:none" class="winner-msg glass"></div>
-
-    <!-- Dealer Rotation -->
-    <div class="dealer-bar" id="dealer-container" style="display:none">
-      <div>نوبت دست‌دادن (حاکم): <b id="dealer-name">—</b></div>
-      <button class="rotate-btn" onclick="rotateDealer()">چرخش نوبت ⟲</button>
-    </div>
-
-    <!-- Player Selection -->
-    <div class="player-teams-grid">
-      <div class="player-team-col">
-        <div class="player-team-label"><span id="label-team0">تیم ما</span><span id="t0-count">۰/۲</span></div>
-        <div id="team0-players"></div>
-        <button class="add-player-btn" id="add-btn-0" onclick="openPicker(0)">+ افزودن بازیکن</button>
-      </div>
-      <div class="player-team-col">
-        <div class="player-team-label"><span id="label-team1">تیم حریف</span><span id="t1-count">۰/۲</span></div>
-        <div id="team1-players"></div>
-        <button class="add-player-btn" id="add-btn-1" onclick="openPicker(1)">+ افزودن بازیکن</button>
+    <div class="player-select-section">
+      <div class="sec-title">بازیکن‌های این بازی</div>
+      <div class="player-teams-grid">
+        <div class="player-team-col">
+          <div class="player-team-label" id="label-team0">تیم ما</div>
+          <div id="team0-players"></div>
+          <button class="add-player-btn" onclick="openPicker(0)">+ افزودن</button>
+        </div>
+        <div class="player-team-col">
+          <div class="player-team-label" id="label-team1">تیم حریف</div>
+          <div id="team1-players"></div>
+          <button class="add-player-btn" onclick="openPicker(1)">+ افزودن</button>
+        </div>
       </div>
     </div>
-
-    <!-- Teams Scoreboard -->
     <div class="teams">
-      <!-- Team 0 -->
       <div class="team-card glass" id="card-0">
         <input class="team-name-input" id="name-0" value="تیم ما" oninput="renderGame();document.getElementById('label-team0').textContent=this.value||'تیم ما'">
         <div class="total" id="total-0" data-val="0">۰</div>
         <div class="progress-bg"><div class="progress-fill" id="prog-0"></div></div>
-        <div id="lock-badge-0" class="lock80-tag" style="display:none">قانون ۸۰: بدون سور</div>
-        
-        <div class="card-set-input">
-          <div class="card-set-label">امتیاز این ست:</div>
-          <div class="inp-row">
-            <button onclick="adj(0,-5)">−</button>
-            <input class="set-inp" id="inp-0" type="number" value="0" step="5" onfocus="this.select()">
-            <button onclick="adj(0,5)">+</button>
-          </div>
-          <div class="quick-buttons">
-            <button class="quick-btn" onclick="adj(0,1)">+۱</button>
-            <button class="quick-btn" onclick="adj(0,-1)">-۱</button>
-            <button class="quick-btn sur" id="sur-btn-0" onclick="addSur(0)" title="سور ۱۰ امتیاز">+سور (۱۰)</button>
-          </div>
+        <div class="inp-row">
+          <button onclick="adj(0,-5)">−</button>
+          <input class="set-inp" id="inp-0" type="number" value="0" step="1" onfocus="this.select()">
+          <button onclick="adj(0,5)">+</button>
+        </div>
+        <div class="quick-row">
+          <button class="q-btn" onclick="adj(0,-1)">−۱</button>
+          <button class="q-btn" onclick="adj(0,1)">+۱</button>
+          <button class="q-btn sur" onclick="addSur(0)">+ سور (۱۰)</button>
         </div>
       </div>
-
-      <!-- Team 1 -->
       <div class="team-card glass" id="card-1">
         <input class="team-name-input" id="name-1" value="تیم حریف" oninput="renderGame();document.getElementById('label-team1').textContent=this.value||'تیم حریف'">
         <div class="total" id="total-1" data-val="0">۰</div>
         <div class="progress-bg"><div class="progress-fill" id="prog-1"></div></div>
-        <div id="lock-badge-1" class="lock80-tag" style="display:none">قانون ۸۰: بدون سور</div>
-        
-        <div class="card-set-input">
-          <div class="card-set-label">امتیاز این ست:</div>
-          <div class="inp-row">
-            <button onclick="adj(1,-5)">−</button>
-            <input class="set-inp" id="inp-1" type="number" value="0" step="5" onfocus="this.select()">
-            <button onclick="adj(1,5)">+</button>
-          </div>
-          <div class="quick-buttons">
-            <button class="quick-btn" onclick="adj(1,1)">+۱</button>
-            <button class="quick-btn" onclick="adj(1,-1)">-۱</button>
-            <button class="quick-btn sur" id="sur-btn-1" onclick="addSur(1)" title="سور ۱۰ امتیاز">+سور (۱۰)</button>
-          </div>
+        <div class="inp-row">
+          <button onclick="adj(1,-5)">−</button>
+          <input class="set-inp" id="inp-1" type="number" value="0" step="1" onfocus="this.select()">
+          <button onclick="adj(1,5)">+</button>
+        </div>
+        <div class="quick-row">
+          <button class="q-btn" onclick="adj(1,-1)">−۱</button>
+          <button class="q-btn" onclick="adj(1,1)">+۱</button>
+          <button class="q-btn sur" onclick="addSur(1)">+ سور (۱۰)</button>
         </div>
       </div>
     </div>
-
-    <div class="rule-note">خط ۸۰ روی نوار امتیاز: از ۸۰ به بعد سور (۱۰ امتیاز) حساب نمی‌شود. بازی تا ۱۰۴ ادامه دارد.</div>
-
-    <!-- Controls -->
+    <p class="rule-note">خط ۸۰ روی نوار امتیاز: از اینجا به بعد سور حساب نمی‌شود. بازی تا ۱۰۴ ادامه دارد.</p>
     <div class="controls">
       <button class="ctrl-btn" onclick="undoSet()">
         <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         برگشت ست
-      </button>
-      <button class="ctrl-btn" onclick="shareMatchRecap()">
-        <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-        کپی نتیجه
       </button>
       <button class="ctrl-btn danger" onclick="askReset()">
         <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
         ریست بازی
       </button>
     </div>
-
     <div class="sec-title">تاریخچه ست‌ها</div>
     <div class="sets-list" id="sets-list"></div>
   </div>
 
-  <!-- TAB: HISTORY -->
+  <!-- تاریخچه -->
   <div id="view-history" style="display:none">
     <div id="overall-section"></div>
-    <div class="sec-title" style="margin-top:1.2rem">ریز نتایج بازی‌ها</div>
+    <div class="sec-title" style="margin-top:1.5rem">ریز نتایج بازی‌ها</div>
     <div id="games-list"></div>
   </div>
 
-  <!-- TAB: STATS & LOSSES -->
+  <!-- آمار -->
   <div id="view-stats" style="display:none">
     <div id="stats-list-view">
-      <div class="sec-title">آمار و تحلیل بازیکن‌ها</div>
+      <div class="sec-title">آمار بازیکن‌ها</div>
       <div id="stats-players-container"><div class="loading"><span class="spinner"></span> در حال بارگذاری...</div></div>
     </div>
     <div id="stats-detail-view" style="display:none"></div>
   </div>
 
-  <!-- TAB: ADMIN -->
+  <!-- ادمین -->
   <div id="view-admin" style="display:none">
     <div id="admin-login-view">
       <div class="login-box glass">
@@ -672,7 +324,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   </div>
 </div>
 
-<!-- Floating Action Button -->
+<!-- FAB -->
 <div class="fab-container" id="fab-container">
   <button class="fab" id="fab-action" onclick="handleFabClick()">
     <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -691,7 +343,63 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   </div>
 </div>
 
-<!-- Player Picker Modal -->
+<!-- Rules Modal -->
+<div class="overlay" id="rules-modal">
+  <div class="confirm-box glass" style="max-width:440px;text-align:right;max-height:85vh;overflow-y:auto;padding:20px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;border-bottom:1px solid var(--line);padding-bottom:10px">
+      <div style="font-size:17px;font-weight:800;color:var(--brass)">قوانین بازی چهار برگ 🃏</div>
+      <button onclick="closeRules()" style="background:none;border:none;color:var(--dim);font-size:20px;cursor:pointer">✕</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;font-size:13px;line-height:1.7;color:var(--ivory)">
+      <div style="background:var(--felt-0);border:1px solid var(--line);border-radius:10px;padding:10px 12px">
+        <div style="font-weight:800;color:var(--brass);margin-bottom:3px">🎯 شرط برد</div>
+        <div style="color:var(--dim)">اولین تیمی که به امتیاز <strong style="color:var(--ivory)">۱۰۴</strong> برسد برنده بازی می‌شود.</div>
+      </div>
+
+      <div style="background:var(--felt-0);border:1px solid var(--line);border-radius:10px;padding:10px 12px">
+        <div style="font-weight:800;color:var(--brass);margin-bottom:3px">✨ امتیاز سور: ۱۰ امتیاز</div>
+        <div style="color:var(--dim)">
+          در این بازی هر سور دارای <strong style="color:var(--brass)">۱۰ امتیاز</strong> کامل است.<br>
+          <small style="color:var(--dim)">* با کارت سرباز نمی‌توان سور زد و در دست آخر (برگ‌های پایانی) سور شمرده نمی‌شود.</small>
+        </div>
+      </div>
+
+      <div style="background:rgba(255,107,107,0.1);border:1px solid rgba(255,107,107,0.3);border-radius:10px;padding:10px 12px">
+        <div style="font-weight:800;color:var(--danger);margin-bottom:3px">⛔ قانون ۸۰ (ممنوعیت سور)</div>
+        <div style="color:var(--dim)">
+          تیمی که به امتیاز <strong style="color:var(--ivory)">۸۰</strong> یا بالاتر برسد، دیگر نمی‌تواند سور بزند و امتیاز سور دریافت نمی‌کند. از ۸۰ تا ۱۰۴ رقابت فقط با شمارش کارت‌هاست.
+        </div>
+      </div>
+
+      <div style="background:var(--felt-0);border:1px solid var(--line);border-radius:10px;padding:10px 12px">
+        <div style="font-weight:800;color:var(--brass);margin-bottom:6px">🎴 ارزش کارت‌ها در هر دست (مجموع ۲۰ امتیاز)</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:12px">
+          <div style="background:var(--felt-2);padding:6px 8px;border-radius:6px;display:flex;justify-content:space-between">
+            <span>♣ هفت خاج (بزرگ):</span><b style="color:var(--brass)">۷</b>
+          </div>
+          <div style="background:var(--felt-2);padding:6px 8px;border-radius:6px;display:flex;justify-content:space-between">
+            <span>♦ ۱۰ خشت:</span><b style="color:var(--brass)">۳</b>
+          </div>
+          <div style="background:var(--felt-2);padding:6px 8px;border-radius:6px;display:flex;justify-content:space-between">
+            <span>♣ ۲ خاج:</span><b style="color:var(--brass)">۲</b>
+          </div>
+          <div style="background:var(--felt-2);padding:6px 8px;border-radius:6px;display:flex;justify-content:space-between">
+            <span>♥ ۴ آس (تک):</span><b style="color:var(--brass)">۴</b>
+          </div>
+          <div style="background:var(--felt-2);padding:6px 8px;border-radius:6px;display:flex;justify-content:space-between;grid-column:span 2">
+            <span>♠ ۴ سرباز:</span><b style="color:var(--brass)">۴</b>
+          </div>
+        </div>
+        <div style="font-size:11px;color:var(--dim);margin-top:6px">
+          * تیمی که حداقل ۷ برگ گشنیز جمع کند، ۷ امتیاز هفت خاج را می‌برد.
+        </div>
+      </div>
+    </div>
+    <button onclick="closeRules()" style="width:100%;min-height:44px;background:var(--brass);color:var(--brass-ink);border:none;border-radius:10px;font:inherit;font-size:14px;font-weight:800;margin-top:14px;cursor:pointer">متوجه شدم</button>
+  </div>
+</div>
+
+<!-- Player Picker -->
 <div class="player-picker" id="player-picker">
   <div class="player-picker-box">
     <div class="player-picker-title" id="picker-title">انتخاب بازیکن</div>
@@ -700,77 +408,20 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   </div>
 </div>
 
-<!-- Rules Modal -->
-<div class="overlay" id="rules-overlay">
-  <div class="glass rules-box">
-    <div class="rules-title">قوانین بازی چهار برگ (پاسور ۱۱)</div>
-    <div class="rule-item">
-      🎯 <strong>هدف بازی:</strong> هر تیمی که زودتر به امتیاز <strong>۱۰۴</strong> برسد برنده مسابقه است.
-    </div>
-    <div class="rule-item">
-      🃏 <strong>امتیاز کارت‌ها (مجموع پایه هر دست = ۲۰ امتیاز):</strong>
-      <div class="rule-card-grid">
-        <div class="rc-box">♣ هفت خاج: <strong>۷ امتیاز</strong></div>
-        <div class="rc-box">♦ ۱۰ خشت: <strong>۳ امتیاز</strong></div>
-        <div class="rc-box">♣ ۲ خاج: <strong>۲ امتیاز</strong></div>
-        <div class="rc-box">♥ ۴ تک (آس): <strong>۴ امتیاز</strong></div>
-        <div class="rc-box" style="grid-column:span 2">♠ ۴ سرباز: <strong>۴ امتیاز</strong></div>
-      </div>
-    </div>
-    <div class="rule-item">
-      ✨ <strong>قانون سور (Sur):</strong>
-      هر سور معادل <strong>۱۰ امتیاز</strong> است. کارت سرباز نمی‌تواند روی زمین سور بزند و در دست آخر نیز سور شمرده نمی‌شود.
-    </div>
-    <div class="rule-item" style="color:#ffb74d">
-      ⛔ <strong>قانون طلایی ۸۰:</strong>
-      به محض اینکه تیمی به امتیاز <strong>۸۰</strong> یا بالاتر برسد، دیگر هیچ سوری برای آن تیم شمرده نخواهد شد!
-    </div>
-    <button class="fab" style="margin-top:16px" onclick="closeRules()">متوجه شدم</button>
-  </div>
-</div>
-
 <script>
 const API = 'https://4bargh-api.zulair.workers.dev';
 const WIN = 104;
-const SUR_POINTS = 10; // Sur has 10 points
-let soundEnabled = true;
-
 const state = {
   scores:[0,0], sets:[], gameOver:false, gameNum:1,
   teamPlayers:[[],[]], adminPassword:localStorage.getItem('4bargh_admin_pass')||null,
-  isAdmin:false, dealerIdx:0
+  isAdmin:false
 };
 let allPlayers = [];
-let allGames = [];
+let allGamesCache = [];
 let pickerTeam = 0;
 
 function toFa(n){return String(n).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);}
 function name(i){return document.getElementById('name-'+i).value.trim()||'تیم '+(i+1);}
-
-// Web Audio sound effects
-let audioCtx = null;
-function playTone(freq, duration, type='sine'){
-  if(!soundEnabled)return;
-  try{
-    if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-    if(audioCtx.state==='suspended')audioCtx.resume();
-    const osc=audioCtx.createOscillator();
-    const gain=audioCtx.createGain();
-    osc.type=type;
-    osc.frequency.setValueAtTime(freq,audioCtx.currentTime);
-    gain.gain.setValueAtTime(0.12,audioCtx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001,audioCtx.currentTime+duration);
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-    osc.start();
-    osc.stop(audioCtx.currentTime+duration);
-  }catch(e){}
-}
-function toggleSound(){
-  soundEnabled=!soundEnabled;
-  document.getElementById('sound-btn').style.opacity=soundEnabled?'1':'0.4';
-  if(soundEnabled)playTone(520,0.1);
-}
 
 function animateValue(obj,start,end,dur){
   let t0=null;
@@ -778,7 +429,8 @@ function animateValue(obj,start,end,dur){
     if(!t0)t0=t;
     const p=Math.min((t-t0)/dur,1);
     const e=1-Math.pow(1-p,4);
-    obj.innerHTML=toFa(Math.floor(e*(end-start)+start));
+    const curr=Math.floor(e*(end-start)+start);
+    obj.innerHTML=toFa(curr);
     if(p<1)requestAnimationFrame(step);
     else{obj.innerHTML=toFa(end);obj.dataset.val=end;}
   };
@@ -786,15 +438,34 @@ function animateValue(obj,start,end,dur){
 }
 
 function adj(i,d){
-  playTone(350,0.05);
   const inp=document.getElementById('inp-'+i);
   inp.value=Math.max(0,(parseInt(inp.value)||0)+d);
 }
 
-function addSur(i){
-  if(state.scores[i]>=80)return; // Rule of 80
-  playTone(880,0.15,'triangle');
-  adj(i, SUR_POINTS);
+function addSur(team){
+  if(state.scores[team]>=80){
+    showToast('طبق قانون ۸۰، بعد از امتیاز ۸۰ سور حساب نمی‌شود!');
+    return;
+  }
+  adj(team,10);
+  showToast('۱۰ امتیاز سور به '+name(team)+' اضافه شد ✨');
+}
+
+function openRules(){document.getElementById('rules-modal').style.display='flex';}
+function closeRules(){document.getElementById('rules-modal').style.display='none';}
+
+function showToast(msg){
+  let t=document.getElementById('toast');
+  if(!t){
+    t=document.createElement('div');
+    t.id='toast';
+    t.className='toast';
+    document.body.appendChild(t);
+  }
+  t.textContent=msg;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer=setTimeout(()=>t.classList.remove('show'),2800);
 }
 
 // ── API ────────────────────────────────────────────
@@ -833,10 +504,7 @@ function renderTeamPlayers(){
     el.innerHTML=state.teamPlayers[t].map(p=>
       `<div class="player-chip"><span>${p.name}</span><button onclick="removePlayer(${t},${p.id})">×</button></div>`
     ).join('');
-    document.getElementById('t'+t+'-count').textContent=toFa(state.teamPlayers[t].length)+'/۲';
-    document.getElementById('add-btn-'+t).style.display=state.teamPlayers[t].length>=2?'none':'block';
   });
-  updateDealer();
 }
 
 function removePlayer(team,id){
@@ -868,28 +536,13 @@ function pickPlayer(id,pname){
 }
 function closePicker(){document.getElementById('player-picker').style.display='none';}
 
-// ── Dealer Rotation ────────────────────────────────
-function updateDealer(){
-  const all=[...state.teamPlayers[0],...state.teamPlayers[1]];
-  const bar=document.getElementById('dealer-container');
-  if(all.length===0){bar.style.display='none';return;}
-  bar.style.display='flex';
-  const dealer=all[state.dealerIdx % all.length];
-  document.getElementById('dealer-name').textContent=dealer?dealer.name:'—';
-}
-function rotateDealer(){
-  state.dealerIdx++;
-  playTone(440,0.06);
-  updateDealer();
-}
-
 // ── Game ───────────────────────────────────────────
 function handleFabClick(){
   if(state.gameOver){askSaveGame();}
   else{
     const v=[0,1].map(i=>Math.max(0,parseInt(document.getElementById('inp-'+i).value)||0));
     if(v[0]===0&&v[1]===0)return;
-    addSet();
+    showConfirm(`ثبت ست؟\n${name(0)}: ${toFa(v[0])} | ${name(1)}: ${toFa(v[1])}`,()=>{cancelConfirm();addSet();});
   }
 }
 
@@ -900,13 +553,7 @@ function addSet(){
   state.sets.push([...v]);
   state.scores[0]+=v[0];state.scores[1]+=v[1];
   document.getElementById('inp-0').value=0;document.getElementById('inp-1').value=0;
-  state.dealerIdx++;
-  updateDealer();
-  playTone(580,0.1);
-  if(state.scores[0]>=WIN||state.scores[1]>=WIN){
-    state.gameOver=true;
-    playTone(880,0.3,'triangle');
-  }
+  if(state.scores[0]>=WIN||state.scores[1]>=WIN)state.gameOver=true;
   renderGame(true);
 }
 
@@ -914,10 +561,7 @@ function undoSet(){
   if(!state.sets.length)return;
   const last=state.sets.pop();
   state.scores[0]-=last[0];state.scores[1]-=last[1];
-  state.gameOver=false;
-  state.dealerIdx=Math.max(0,state.dealerIdx-1);
-  updateDealer();
-  renderGame(true);
+  state.gameOver=false;renderGame(true);
 }
 
 function getWinIdx(){
@@ -928,9 +572,9 @@ function getWinIdx(){
 
 function askReset(){showConfirm('آیا مطمئن هستید؟\nبازی جاری ریست می‌شود.',doReset);}
 function doReset(){
-  state.scores=[0,0];state.sets=[];state.gameOver=false;
+  state.scores=[0,0];state.sets=[];state.gameOver=false;state.teamPlayers=[[],[]];
   document.getElementById('inp-0').value=0;document.getElementById('inp-1').value=0;
-  cancelConfirm();renderGame(true);
+  cancelConfirm();renderGame(true);renderTeamPlayers();
 }
 
 function askSaveGame(){showConfirm('نتیجه ذخیره شود و\nبازی جدید شروع شود؟',doSaveGame);}
@@ -944,9 +588,9 @@ async function doSaveGame(){
     catch(e){console.error(e);}
   }
   state.gameNum++;
-  state.scores=[0,0];state.sets=[];state.gameOver=false;
+  state.scores=[0,0];state.sets=[];state.gameOver=false;state.teamPlayers=[[],[]];
   document.getElementById('inp-0').value=0;document.getElementById('inp-1').value=0;
-  renderGame(true);
+  renderGame(true);renderTeamPlayers();
 }
 
 function renderGame(animate=false){
@@ -954,26 +598,16 @@ function renderGame(animate=false){
   [0,1].forEach(i=>{
     const el=document.getElementById('total-'+i);
     const old=parseInt(el.dataset.val)||0;
-    if(animate&&old!==state.scores[i])animateValue(el,old,state.scores[i],500);
+    if(animate&&old!==state.scores[i])animateValue(el,old,state.scores[i],600);
     else{el.textContent=toFa(state.scores[i]);el.dataset.val=state.scores[i];}
     document.getElementById('card-'+i).className='team-card glass'+(wi===i?' winner':'');
     document.getElementById('prog-'+i).style.width=Math.min(100,(state.scores[i]/WIN)*100)+'%';
-
-    // Lock Sur after 80
-    const isLocked = state.scores[i] >= 80;
-    document.getElementById('lock-badge-'+i).style.display = isLocked ? 'block' : 'none';
-    const sBtn = document.getElementById('sur-btn-'+i);
-    if(sBtn){
-      sBtn.disabled = isLocked;
-      sBtn.title = isLocked ? 'قانون ۸۰: سور حساب نمی‌شود' : 'ثبت سور (۱۰ امتیاز)';
-    }
   });
-
   const wm=document.getElementById('winner-msg');
   const fab=document.getElementById('fab-action');
   if(wi>=0){
     wm.style.display='block';
-    wm.innerHTML=`🏆 <strong>${name(wi)}</strong> برنده بازی ${toFa(state.gameNum)} شد!`;
+    wm.innerHTML=`<strong>${name(wi)}</strong> برنده بازی ${toFa(state.gameNum)} شد.`;
     document.getElementById('fab-text').textContent='ذخیره و بازی جدید';
     fab.querySelector('svg').innerHTML='<path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/>';
   } else {
@@ -982,11 +616,10 @@ function renderGame(animate=false){
     fab.querySelector('svg').innerHTML='<line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>';
   }
   document.getElementById('game-subtitle').textContent='بازی '+toFa(state.gameNum);
-
   const list=document.getElementById('sets-list');
   if(!state.sets.length){list.innerHTML='<div class="empty">هنوز ستی ثبت نشده است</div>';return;}
   let cum=[0,0];
-  list.innerHTML=`<div class="round-row rounds-header"><span>دست</span><span>${name(0)}</span><span>${name(1)}</span></div>`
+  list.innerHTML=`<div class="round-row rounds-header"><span></span><span>${name(0)}</span><span>${name(1)}</span></div>`
     +state.sets.map((s,i)=>{
       cum[0]+=s[0];cum[1]+=s[1];
       return `<div class="round-row"><span class="rn">ست ${toFa(i+1)}</span>
@@ -1000,11 +633,12 @@ async function renderHistory(){
   const glist=document.getElementById('games-list');
   const osec=document.getElementById('overall-section');
   glist.innerHTML='<div class="loading"><span class="spinner"></span> در حال بارگذاری...</div>';
-  try{allGames=await apiGet('/games');}catch(e){allGames=[];}
-  if(!allGames.length){glist.innerHTML='<div class="empty glass">تاریخچه‌ای موجود نیست</div>';osec.innerHTML='';return;}
+  let games=[];
+  try{games=await apiGet('/games');allGamesCache=games;}catch(e){}
+  if(!games.length){glist.innerHTML='<div class="empty glass">تاریخچه‌ای موجود نیست</div>';osec.innerHTML='';return;}
 
   const totals={};let maxWins=0;
-  allGames.forEach(g=>{
+  games.forEach(g=>{
     [1,2].forEach(t=>{
       (g.players||[]).filter(p=>p.team===t).forEach(p=>{
         if(!totals[p.name])totals[p.name]={wins:0};
@@ -1013,22 +647,17 @@ async function renderHistory(){
     });
   });
   const sorted=Object.entries(totals).sort((a,b)=>b[1].wins-a[1].wins);
-  osec.innerHTML=`<div class="metrics">
-    <div class="metric"><b>${toFa(allGames.length)}</b><span>بازی ثبت‌شده</span></div>
-    <div class="metric"><b>${toFa(sorted.length)}</b><span>بازیکن فعال</span></div>
-    <div class="metric"><b>${sorted[0]?sorted[0][0]:'—'}</b><span>بیشترین برد</span></div>
-  </div>
-  <div class="chart-container glass">
-    <div class="sec-title" style="margin-bottom:4px">جدول برترین‌ها</div>
+  osec.innerHTML=`<div class="metrics"><div class="metric"><b>${toFa(games.length)}</b><span>بازی ثبت‌شده</span></div><div class="metric"><b>${toFa(sorted.length)}</b><span>بازیکن</span></div><div class="metric"><b>${sorted[0]?sorted[0][0]:'—'}</b><span>بیشترین برد</span></div></div><div class="chart-container glass">
+    <div class="sec-title" style="margin-bottom:5px">نمودار بردها</div>
     ${sorted.map(([n,d],ix)=>`<div class="chart-bar-wrap">
       <div class="chart-label"><span class="rank">${toFa(ix+1)}</span>${n}</div>
       <div class="chart-track"><div class="chart-fill" style="width:${maxWins?(d.wins/maxWins*100):0}%"></div></div>
-      <div style="font-size:12px;font-weight:700;width:42px">${toFa(d.wins)} برد</div>
+      <div style="font-size:12px;font-weight:700;width:40px">${toFa(d.wins)} برد</div>
     </div>`).join('')}
   </div>`;
 
   const adminClass=state.isAdmin?'admin-mode':'';
-  glist.innerHTML=allGames.map(g=>{
+  glist.innerHTML=games.map(g=>{
     const t1=(g.players||[]).filter(p=>p.team===1).map(p=>p.name).join('، ')||'—';
     const t2=(g.players||[]).filter(p=>p.team===2).map(p=>p.name).join('، ')||'—';
     const winTeam=g.winner===1?t1:t2;
@@ -1036,7 +665,7 @@ async function renderHistory(){
     try{d=new Date(String(g.played_at).replace(' ','T')+'Z').toLocaleString('fa-IR',{timeZone:'Asia/Tehran',dateStyle:'medium',timeStyle:'short'});}catch(e){}
     return `<div class="game-card glass win-${g.winner-1} ${adminClass}">
       <button class="delete-game-btn" onclick="askDeleteGame(${g.id})">حذف</button>
-      <div class="game-card-header"><span>${d}</span><span style="color:var(--primary);font-weight:800">${winTeam} برد</span></div>
+      <div class="game-card-header"><span>${d}</span><span style="color:var(--primary)">${winTeam} برد</span></div>
       <div class="game-score-row">
         <div class="team-block ${g.winner===1?'gwinner':''}">
           <div class="tname">${t1} ${g.winner===1?'<span class="win-dot"></span>':''}</div>
@@ -1060,34 +689,37 @@ function askDeleteGame(id){
   });
 }
 
-// ── Stats & LOSS Analysis (داود با کیا بازی کرده باخته؟) ──
+// ── Stats & Loss Analysis (تحلیل باخت بازیکن‌ها) ─────
 async function renderStats(){
   const container=document.getElementById('stats-players-container');
   container.innerHTML='<div class="loading"><span class="spinner"></span> در حال بارگذاری...</div>';
   document.getElementById('stats-list-view').style.display='block';
   document.getElementById('stats-detail-view').style.display='none';
-  
-  if(!allPlayers.length){try{allPlayers=await apiGet('/players');}catch(e){}}
-  if(!allGames.length){try{allGames=await apiGet('/games');}catch(e){}}
+
+  try{
+    const [pList, gList] = await Promise.all([
+      allPlayers.length ? Promise.resolve(allPlayers) : apiGet('/players'),
+      apiGet('/games')
+    ]);
+    allPlayers = pList || [];
+    allGamesCache = gList || [];
+  }catch(e){}
 
   if(!allPlayers.length){
-    container.innerHTML='<div class="empty glass">هنوز بازیکنی ثبت نشده</div>';
+    container.innerHTML='<div class="empty glass">هنوز بازیکنی ثبت نشده<br><small>از پنل ادمین بازیکن اضافه کنید</small></div>';
     return;
   }
   const statsArr=await Promise.all(allPlayers.map(p=>apiGet('/stats/'+p.id).catch(()=>({total_games:0,wins:0,losses:0,partners:[]}))));
   container.innerHTML='';
-
   allPlayers.forEach((p,i)=>{
     const s=statsArr[i];
     const wr=s.total_games?Math.round((s.wins/s.total_games)*100):0;
     const div=document.createElement('div');
     div.className='stats-player-card glass';
-    div.innerHTML=`<div class="avatar">${p.name.trim().charAt(0)}</div>
-      <div class="sp-info">
-        <div class="stats-player-name">${p.name}</div>
-        <div class="stats-player-meta">${toFa(s.total_games||0)} بازی · <span style="color:var(--brass)">${toFa(s.wins||0)} برد</span> · <span style="color:var(--danger)">${toFa(s.losses||0)} باخت</span></div>
-      </div>
-      <div class="ring" style="--p:${wr}"><b>${toFa(wr)}٪</b></div>`;
+    div.innerHTML=`<div class="avatar">${p.name.trim().charAt(0)}</div><div class="sp-info">
+      <div class="stats-player-name">${p.name}</div>
+      <div class="stats-player-meta">${toFa(s.total_games||0)} بازی · <span style="color:var(--brass)">${toFa(s.wins||0)} برد</span> · <span style="color:var(--danger)">${toFa(s.losses||0)} باخت</span></div>
+    </div><div class="ring" style="--p:${wr}"><b>${toFa(wr)}٪</b></div>`;
     div.onclick=()=>showPlayerDetail(p,s);
     container.appendChild(div);
   });
@@ -1100,121 +732,166 @@ function showPlayerDetail(player,stats){
   const wr=stats.total_games?Math.round((stats.wins/stats.total_games)*100):0;
   const lr=stats.total_games?100-wr:0;
 
-  // محاسبه دقیق اینکه این بازیکن با کیا بازی کرده و باخته (Loss Analysis)
-  const partnerLossMap = {};
-  allGames.forEach(g => {
-    const myEntry = (g.players||[]).find(x => x.id === player.id || x.name === player.name);
-    if (!myEntry) return;
-    const myTeam = myEntry.team;
-    const lost = (g.winner !== myTeam);
+  // تحلیل بازی‌های انجام‌شده و محاسبه دقیق باخت با هر هم‌تیمی
+  const partnerMap = {};
+  allGamesCache.forEach(g => {
+    const me = (g.players||[]).find(x => x.id === player.id || x.name === player.name);
+    if (!me) return;
+    const myTeam = me.team;
+    const won = (g.winner === myTeam);
     const partner = (g.players||[]).find(x => x.team === myTeam && x.id !== player.id && x.name !== player.name);
     const pName = partner ? partner.name : 'تک‌نفره';
+    const opps = (g.players||[]).filter(x => x.team !== myTeam).map(x => x.name).join(' و ') || 'نامشخص';
+    const myScore = myTeam === 1 ? g.team1_score : g.team2_score;
+    const oppScore = myTeam === 1 ? g.team2_score : g.team1_score;
+    let d = '';
+    try {
+      d = new Date(String(g.played_at).replace(' ', 'T') + 'Z').toLocaleDateString('fa-IR', {month:'short', day:'numeric'});
+    } catch(e) {}
 
-    if(!partnerLossMap[pName]) {
-      partnerLossMap[pName] = { together: 0, wins: 0, losses: 0, lostGames: [] };
+    const matchInfo = {
+      id: g.id,
+      date: d,
+      won: won,
+      myScore: myScore,
+      oppScore: oppScore,
+      opponents: opps
+    };
+
+    if (!partnerMap[pName]) {
+      partnerMap[pName] = { name: pName, together: 0, wins: 0, losses: 0, lostGames: [], wonGames: [] };
     }
-    partnerLossMap[pName].together++;
-    if(lost) {
-      partnerLossMap[pName].losses++;
-      let d='';
-      try{d=new Date(String(g.played_at).replace(' ','T')+'Z').toLocaleDateString('fa-IR');}catch(e){}
-      partnerLossMap[pName].lostGames.push({
-        date: d,
-        score: (myTeam===1?toFa(g.team1_score):toFa(g.team2_score)) + ' - ' + (myTeam===1?toFa(g.team2_score):toFa(g.team1_score)),
-        opponents: (g.players||[]).filter(x => x.team !== myTeam).map(x => x.name).join(' و ')
-      });
+    partnerMap[pName].together++;
+    if (won) {
+      partnerMap[pName].wins++;
+      partnerMap[pName].wonGames.push(matchInfo);
     } else {
-      partnerLossMap[pName].wins++;
+      partnerMap[pName].losses++;
+      partnerMap[pName].lostGames.push(matchInfo);
     }
   });
 
-  const partnerLossList = Object.entries(partnerLossMap).sort((a,b)=>b[1].losses - a[1].losses || b[1].together - a[1].together);
-  const worstPartner = partnerLossList.find(([_, d]) => d.losses > 0);
+  const partnerList = Object.values(partnerMap);
+  const partnersByLoss = [...partnerList].sort((a,b) => b.losses - a.losses || b.together - a.together);
+  const worstPartner = partnersByLoss.find(p => p.losses > 0);
+  const partnersByWin = [...partnerList].filter(p => p.wins > 0).sort((a,b) => b.wins - a.wins || b.together - a.together);
 
   detail.innerHTML=`<div class="stats-detail glass">
     <div class="stats-detail-header">
-      <button class="back-btn" onclick="document.getElementById('stats-list-view').style.display='block';document.getElementById('stats-detail-view').style.display='none'">← بازگشت</button>
-      <div class="stats-detail-name">${player.name}</div>
-      <div class="ring" style="--p:${wr}"><b>${toFa(wr)}٪</b></div>
+      <button class="back-btn" onclick="document.getElementById('stats-list-view').style.display='block';document.getElementById('stats-detail-view').style.display='none'">←</button>
+      <div class="stats-detail-name">${player.name}</div><div class="ring big" style="--p:${wr}"><b>${toFa(wr)}٪</b></div>
     </div>
-
     <div class="stats-grid">
-      <div class="stat-box win"><div class="stat-box-val">${toFa(stats.wins||0)}</div><div class="stat-box-lbl">بردها (${toFa(wr)}٪)</div></div>
-      <div class="stat-box loss"><div class="stat-box-val">${toFa(stats.losses||0)}</div><div class="stat-box-lbl">باخت‌ها (${toFa(lr)}٪)</div></div>
+      <div class="stat-box"><div class="stat-box-val" style="color:var(--brass)">${toFa(stats.wins||0)}</div><div class="stat-box-lbl">بردها (${toFa(wr)}٪)</div></div>
+      <div class="stat-box"><div class="stat-box-val" style="color:var(--danger)">${toFa(stats.losses||0)}</div><div class="stat-box-lbl">باخت‌ها (${toFa(lr)}٪)</div></div>
       <div class="stat-box"><div class="stat-box-val">${toFa(stats.total_games||0)}</div><div class="stat-box-lbl">کل بازی‌ها</div></div>
     </div>
 
-    <!-- Sub Tabs: Losses vs Wins -->
-    <div class="sub-tabs">
-      <button class="sub-tab active loss" id="subtab-loss" onclick="switchSubTab('loss')">💔 با کیا بازی کرده باخته؟</button>
-      <button class="sub-tab win" id="subtab-win" onclick="switchSubTab('win')">🏆 با کیا بازی کرده برده؟</button>
+    ${worstPartner ? `<div style="background:rgba(255,107,107,0.12);border:1px solid rgba(255,107,107,0.3);border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:#ff8a80;line-height:1.6">
+      💔 بیشترین باخت تیمی <strong>${player.name}</strong> در کنار <strong>${worstPartner.name}</strong> بوده:<br>
+      <span style="font-weight:700">${toFa(worstPartner.losses)} باخت</span> از ${toFa(worstPartner.together)} بازی با هم (${toFa(Math.round(worstPartner.losses/worstPartner.together*100))}٪ باخت)
+    </div>` : ''}
+
+    <div style="display:flex;background:var(--felt-0);border:1px solid var(--line);border-radius:10px;padding:3px;margin-bottom:14px;gap:4px">
+      <button class="sub-tab-btn active loss" id="subtab-loss" onclick="switchPlayerSubTab('loss')">💔 با کیا بازی کرده باخته؟</button>
+      <button class="sub-tab-btn win" id="subtab-win" onclick="switchPlayerSubTab('win')">🏆 با کیا بازی کرده برده؟</button>
     </div>
 
-    <!-- LOSS VIEW -->
+    <!-- Loss View -->
     <div id="subview-loss">
-      ${worstPartner ? `<div style="background:rgba(255,107,107,0.12);border:1px solid rgba(255,107,107,0.3);border-radius:10px;padding:8px 12px;font-size:11px;margin-bottom:10px;color:#ff8a80">
-        بیشترین باخت تیمی <strong>${player.name}</strong> در کنار <strong>${worstPartner[0]}</strong> بوده: (${toFa(worstPartner[1].losses)} باخت از ${toFa(worstPartner[1].together)} بازی با هم)
-      </div>` : ''}
-
-      ${partnerLossList.length ? partnerLossList.map(([pName, d], idx)=>{
-        const lossPercent = d.together ? Math.round((d.losses / d.together) * 100) : 0;
-        return `<div class="loss-card">
-          <div class="loss-card-header" onclick="toggleLossGames(${idx})">
+      ${partnersByLoss.length ? partnersByLoss.map((p, idx) => {
+        const lp = p.together ? Math.round((p.losses / p.together) * 100) : 0;
+        return `<div style="background:var(--felt-0);border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:10px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
             <div>
-              <div class="loss-name">${pName}</div>
-              <div style="font-size:11px;color:var(--dim);margin-top:2px">
-                ${toFa(d.together)} بازی با هم · <span style="color:var(--danger);font-weight:700">${toFa(d.losses)} باخت</span> · ${toFa(d.wins)} برد
+              <div style="font-size:15px;font-weight:700;color:var(--ivory)">${p.name}</div>
+              <div style="font-size:12px;color:var(--dim);margin-top:2px">
+                ${toFa(p.together)} بازی با هم · <strong style="color:var(--danger)">${toFa(p.losses)} باخت</strong> · <span style="color:var(--brass)">${toFa(p.wins)} برد</span>
               </div>
             </div>
             <div style="text-align:left">
-              <span class="loss-badge">${toFa(lossPercent)}٪ باخت</span>
-              ${d.lostGames.length ? `<div style="font-size:10px;color:var(--brass);margin-top:4px">ریز نتایج ▼</div>` : ''}
+              <span style="background:rgba(255,107,107,0.2);border:1px solid rgba(255,107,107,0.4);color:var(--danger);font-size:12px;font-weight:800;padding:2px 8px;border-radius:6px">${toFa(lp)}٪ باخت</span>
             </div>
           </div>
-          <div class="pbar"><i class="loss" style="width:${lossPercent}%"></i></div>
-          
-          ${d.lostGames.length ? `<div class="loss-games-list" id="loss-games-${idx}">
-            <div style="font-size:10px;color:var(--dim);margin-bottom:4px">بازی‌هایی که با هم باختند:</div>
-            ${d.lostGames.map(m=>`<div class="loss-game-item">
-              <div>باخت به: <b style="color:var(--ivory)">${m.opponents}</b> <small style="color:var(--dim)">(${m.date})</small></div>
-              <div style="color:var(--danger);font-weight:800;direction:ltr">${m.score}</div>
-            </div>`).join('')}
-          </div>` : ''}
+          <div class="pbar" style="width:100%;margin-top:8px"><i style="background:linear-gradient(90deg,#ff6b6b,#ea4d4a);width:${lp}%"></i></div>
+          ${p.lostGames.length ? `
+            <button onclick="toggleLostGamesList(${idx})" style="width:100%;background:none;border:1px dashed var(--line);border-radius:6px;color:var(--dim);font:inherit;font-size:11px;padding:5px 8px;margin-top:8px;cursor:pointer">
+              مشاهده ${toFa(p.lostGames.length)} بازی باخته با ${p.name} ▼
+            </button>
+            <div id="lost-games-${idx}" style="display:none;margin-top:6px;gap:6px;flex-direction:column">
+              ${p.lostGames.map(m => `
+                <div style="background:rgba(255,107,107,0.08);border:1px solid rgba(255,107,107,0.2);border-radius:8px;padding:6px 10px;font-size:11px;display:flex;justify-content:space-between;align-items:center">
+                  <div>
+                    <span>باخت به: <strong style="color:var(--ivory)">${m.opponents}</strong></span>
+                    <span style="color:var(--dim);margin-inline-start:6px">(${m.date})</span>
+                  </div>
+                  <div style="color:var(--danger);font-weight:800;direction:ltr">${toFa(m.myScore)} - ${toFa(m.oppScore)}</div>
+                </div>
+              `).join('')}
+            </div>
+          ` : ''}
         </div>`;
       }).join('') : '<div class="empty">هنوز بازی ثبت‌شده‌ای نیست</div>'}
     </div>
 
-    <!-- WIN VIEW -->
+    <!-- Win View -->
     <div id="subview-win" style="display:none">
-      ${partnerLossList.filter(([_,d])=>d.wins>0).sort((a,b)=>b[1].wins - a[1].wins).map(([pName, d])=>{
-        const winPercent = d.together ? Math.round((d.wins / d.together) * 100) : 0;
-        return `<div class="loss-card">
-          <div class="loss-card-header">
+      ${partnersByWin.length ? partnersByWin.map((p, idx) => {
+        const wp = p.together ? Math.round((p.wins / p.together) * 100) : 0;
+        return `<div style="background:var(--felt-0);border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:10px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
             <div>
-              <div class="loss-name">${pName}</div>
-              <div style="font-size:11px;color:var(--dim);margin-top:2px">
-                ${toFa(d.together)} بازی با هم · <span style="color:var(--brass);font-weight:700">${toFa(d.wins)} برد</span>
+              <div style="font-size:15px;font-weight:700;color:var(--ivory)">${p.name}</div>
+              <div style="font-size:12px;color:var(--dim);margin-top:2px">
+                ${toFa(p.together)} بازی با هم · <strong style="color:var(--brass)">${toFa(p.wins)} برد</strong> · ${toFa(p.losses)} باخت
               </div>
             </div>
-            <div><span class="win-badge">${toFa(winPercent)}٪ برد</span></div>
+            <div style="text-align:left">
+              <span style="background:rgba(217,180,92,0.2);border:1px solid rgba(217,180,92,0.4);color:var(--brass);font-size:12px;font-weight:800;padding:2px 8px;border-radius:6px">${toFa(wp)}٪ برد</span>
+            </div>
           </div>
-          <div class="pbar"><i class="win" style="width:${winPercent}%"></i></div>
+          <div class="pbar" style="width:100%;margin-top:8px"><i style="background:linear-gradient(90deg,#ecc97a,#d9b45c);width:${wp}%"></i></div>
+          ${p.wonGames.length ? `
+            <button onclick="toggleWonGamesList(${idx})" style="width:100%;background:none;border:1px dashed var(--line);border-radius:6px;color:var(--dim);font:inherit;font-size:11px;padding:5px 8px;margin-top:8px;cursor:pointer">
+              مشاهده ${toFa(p.wonGames.length)} بازی برده با ${p.name} ▼
+            </button>
+            <div id="won-games-${idx}" style="display:none;margin-top:6px;gap:6px;flex-direction:column">
+              ${p.wonGames.map(m => `
+                <div style="background:rgba(217,180,92,0.08);border:1px solid rgba(217,180,92,0.2);border-radius:8px;padding:6px 10px;font-size:11px;display:flex;justify-content:space-between;align-items:center">
+                  <div>
+                    <span>برد مقابل: <strong style="color:var(--ivory)">${m.opponents}</strong></span>
+                    <span style="color:var(--dim);margin-inline-start:6px">(${m.date})</span>
+                  </div>
+                  <div style="color:var(--brass);font-weight:800;direction:ltr">${toFa(m.myScore)} - ${toFa(m.oppScore)}</div>
+                </div>
+              `).join('')}
+            </div>
+          ` : ''}
         </div>`;
-      }).join('') || '<div class="empty">هنوز بردی ثبت نشده است</div>'}
+      }).join('') : '<div class="empty">هنوز بردی ثبت نشده است</div>'}
     </div>
   </div>`;
 }
 
-function switchSubTab(type){
-  document.getElementById('subview-loss').style.display=type==='loss'?'block':'none';
-  document.getElementById('subview-win').style.display=type==='win'?'block':'none';
-  document.getElementById('subtab-loss').className='sub-tab'+(type==='loss'?' active loss':'');
-  document.getElementById('subtab-win').className='sub-tab'+(type==='win'?' active win':'');
+function switchPlayerSubTab(type){
+  document.getElementById('subview-loss').style.display = (type === 'loss' ? 'block' : 'none');
+  document.getElementById('subview-win').style.display = (type === 'win' ? 'block' : 'none');
+  document.getElementById('subtab-loss').className = 'sub-tab-btn' + (type === 'loss' ? ' active loss' : '');
+  document.getElementById('subtab-win').className = 'sub-tab-btn' + (type === 'win' ? ' active win' : '');
 }
 
-function toggleLossGames(idx){
-  const el=document.getElementById('loss-games-'+idx);
-  if(el)el.classList.toggle('open');
+function toggleLostGamesList(idx){
+  const el = document.getElementById('lost-games-' + idx);
+  if(el){
+    el.style.display = (el.style.display === 'none' ? 'flex' : 'none');
+  }
+}
+
+function toggleWonGamesList(idx){
+  const el = document.getElementById('won-games-' + idx);
+  if(el){
+    el.style.display = (el.style.display === 'none' ? 'flex' : 'none');
+  }
 }
 
 // ── Admin ──────────────────────────────────────────
@@ -1306,28 +983,6 @@ async function deletePlayer(id){
     allPlayers=await apiGet('/players');
   });
 }
-
-// ── Share Recap ────────────────────────────────────
-function shareMatchRecap(){
-  const wi=getWinIdx();
-  const winnerText = wi>=0 ? `🏆 برنده: ${name(wi)} 🎉\n` : '';
-  const text = `🃏 گزارش بازی چهار برگ - دست ${toFa(state.gameNum)}
-${winnerText}🔴 ${name(0)}: ${toFa(state.scores[0])} امتیاز
-⚪ ${name(1)}: ${toFa(state.scores[1])} امتیاز
-
-📊 ریز ست‌ها (${toFa(state.sets.length)} ست):
-${state.sets.map((s,i)=>`• ست ${toFa(i+1)}: [${toFa(s[0])}] - [${toFa(s[1])}]`).join('\n')}`;
-
-  if(navigator.clipboard){
-    navigator.clipboard.writeText(text).then(()=>{
-      showConfirm('متن گزارش بازی کپی شد!\nمی‌توانید در تلگرام یا واتساپ ارسال کنید.',()=>{cancelConfirm();});
-    }).catch(()=>{});
-  }
-}
-
-// ── Rules Modal ────────────────────────────────────
-function openRules(){document.getElementById('rules-overlay').style.display='flex';}
-function closeRules(){document.getElementById('rules-overlay').style.display='none';}
 
 // ── Tabs ───────────────────────────────────────────
 function showTab(t){
