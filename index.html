@@ -157,6 +157,24 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:-1;ba
 .sub-tab-btn{flex:1;min-height:36px;background:none;border:none;color:var(--dim);font:inherit;font-size:12px;font-weight:700;border-radius:8px;cursor:pointer;transition:all .15s}
 .sub-tab-btn.active.loss{background:rgba(255,107,107,0.2);color:#ff8a80}
 .sub-tab-btn.active.win{background:rgba(217,180,92,0.2);color:var(--brass)}
+.sub-tab-btn.active.h2h{background:rgba(90,160,250,0.2);color:#93c5fd}
+
+.set-validator{margin:6px 0 14px;padding:9px 12px;border-radius:10px;text-align:center;font-size:12px;color:var(--dim);border:1px solid var(--line);transition:all .2s;line-height:1.5}
+.set-validator.valid{background:rgba(43,95,77,.35);border-color:var(--brass);color:var(--brass);font-weight:700}
+.set-validator.valid.sur{background:rgba(217,180,92,.15);border-color:var(--brass);color:var(--brass)}
+.set-validator.warning{background:rgba(255,138,128,.12);border-color:var(--danger);color:#ff9e99;font-weight:600}
+
+.honors-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.honor-card{background:linear-gradient(180deg,#17493b,#103729);border:1px solid var(--line);border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:10px;box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+.honor-icon{font-size:22px;flex:none;line-height:1}
+.honor-info{min-width:0;flex:1}
+.honor-title{font-size:11px;color:var(--dim);font-weight:600}
+.honor-val{font-size:12px;font-weight:800;color:var(--ivory);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.badge-tag{font-size:10px;font-weight:700;padding:2px 7px;border-radius:6px;margin-inline-start:6px;display:inline-block;vertical-align:middle}
+.badge-tag.gold{background:rgba(217,180,92,.25);color:var(--brass);border:1px solid rgba(217,180,92,.4)}
+.badge-tag.brass{background:rgba(43,95,77,.4);color:#a8e6cf;border:1px solid #2b5f4d}
+.badge-tag.red{background:rgba(255,107,107,.2);color:#ff8a80;border:1px solid rgba(255,107,107,.4)}
+.badge-tag.flame{background:rgba(255,152,0,.2);color:#ffb74d;border:1px solid rgba(255,152,0,.4)}
 
 /* Admin */
 .admin-panel{padding:16px}.admin-panel-title{font-size:16px;font-weight:700;margin-bottom:14px}
@@ -243,7 +261,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
         <div class="progress-bg"><div class="progress-fill" id="prog-0"></div></div>
         <div class="inp-row">
           <button onclick="adj(0,-5)">−</button>
-          <input class="set-inp" id="inp-0" type="number" value="0" step="1" onfocus="this.select()">
+          <input class="set-inp" id="inp-0" type="number" value="0" step="1" oninput="updateSetValidator()" onfocus="this.select()">
           <button onclick="adj(0,5)">+</button>
         </div>
         <div class="quick-row">
@@ -258,7 +276,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
         <div class="progress-bg"><div class="progress-fill" id="prog-1"></div></div>
         <div class="inp-row">
           <button onclick="adj(1,-5)">−</button>
-          <input class="set-inp" id="inp-1" type="number" value="0" step="1" onfocus="this.select()">
+          <input class="set-inp" id="inp-1" type="number" value="0" step="1" oninput="updateSetValidator()" onfocus="this.select()">
           <button onclick="adj(1,5)">+</button>
         </div>
         <div class="quick-row">
@@ -268,6 +286,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
         </div>
       </div>
     </div>
+    <div class="set-validator glass" id="set-validator">مجموع امتیاز پایه هر دست <strong>۲۶</strong> است (مثلاً ۲۰ به ۶)</div>
     <p class="rule-note">خط ۸۰ روی نوار امتیاز: از اینجا به بعد سور حساب نمی‌شود. بازی تا ۱۰۴ ادامه دارد.</p>
     <div class="controls">
       <button class="ctrl-btn" onclick="undoSet()">
@@ -293,7 +312,11 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   <!-- آمار -->
   <div id="view-stats" style="display:none">
     <div id="stats-list-view">
-      <div class="sec-title">آمار بازیکن‌ها</div>
+      <div class="sec-title">ترین‌های بازی‌ها 🎖️</div>
+      <div class="honors-grid" id="honors-container">
+        <div class="loading" style="grid-column:span 2"><span class="spinner"></span> در حال بررسی رکوردها...</div>
+      </div>
+      <div class="sec-title" style="margin-top:1.2rem">آمار و عملکرد بازیکن‌ها</div>
       <div id="stats-players-container"><div class="loading"><span class="spinner"></span> در حال بارگذاری...</div></div>
     </div>
     <div id="stats-detail-view" style="display:none"></div>
@@ -373,7 +396,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
       </div>
 
       <div style="background:var(--felt-0);border:1px solid var(--line);border-radius:10px;padding:10px 12px">
-        <div style="font-weight:800;color:var(--brass);margin-bottom:6px">🎴 ارزش کارت‌ها در هر دست (مجموع ۲۰ امتیاز)</div>
+        <div style="font-weight:800;color:var(--brass);margin-bottom:6px">🎴 ارزش کارت‌ها در هر دست (مجموع پایه ۲۶ امتیاز)</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:12px">
           <div style="background:var(--felt-2);padding:6px 8px;border-radius:6px;display:flex;justify-content:space-between;grid-column:span 2">
             <span>♣ هفت خاج (۱۳ برگ گشنیز):</span><b style="color:var(--brass)">۷ امتیاز</b>
@@ -393,7 +416,7 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
         </div>
         <div style="font-size:11px;color:var(--dim);margin-top:6px;line-height:1.6">
           * کل برگ‌های گشنیز در بازی ۱۳ عدد است؛ هر تیمی که حداقل ۷ برگ گشنیز جمع کند، ۷ امتیاز هفت خاج را می‌برد.<br>
-          * هر سرباز ۱ امتیاز و هر آس ۱ امتیاز دارد (۴ سرباز = ۴ امتیاز، ۴ آس = ۴ امتیاز).
+          * مجموع امتیاز پایه کارت‌ها در هر دست دقیقاً <strong>۲۶ امتیاز</strong> است (مثلاً یک تیم ۲۰ و تیم دیگر ۶ می‌گیرد). امتیاز هر سور (۱۰ امتیاز) به صورت جداگانه اضافه می‌شود.
         </div>
       </div>
     </div>
@@ -442,6 +465,34 @@ function animateValue(obj,start,end,dur){
 function adj(i,d){
   const inp=document.getElementById('inp-'+i);
   inp.value=Math.max(0,(parseInt(inp.value)||0)+d);
+  updateSetValidator();
+}
+
+function updateSetValidator(){
+  const el=document.getElementById('set-validator');
+  if(!el)return;
+  const v0=Math.max(0,parseInt(document.getElementById('inp-0').value)||0);
+  const v1=Math.max(0,parseInt(document.getElementById('inp-1').value)||0);
+  const sum=v0+v1;
+  if(sum===0){
+    el.className='set-validator glass';
+    el.innerHTML='مجموع امتیاز پایه هر دست <strong>۲۶</strong> است (مثلاً ۲۰ به ۶)';
+  } else if(sum===26){
+    el.className='set-validator glass valid';
+    el.innerHTML='✓ مجموع دست ۲۶ است (تراز کامل بدون سور)';
+  } else if(sum===36){
+    el.className='set-validator glass valid sur';
+    el.innerHTML='✓ مجموع دست ۳۶ است (۲۶ پایه + ۱ سور ۱۰ امتیازی)';
+  } else if(sum===46){
+    el.className='set-validator glass valid sur';
+    el.innerHTML='✓ مجموع دست ۴۶ است (۲۶ پایه + ۲ سور ۱۰ امتیازی)';
+  } else if(sum===56){
+    el.className='set-validator glass valid sur';
+    el.innerHTML='✓ مجموع دست ۵۶ است (۲۶ پایه + ۳ سور ۱۰ امتیازی)';
+  } else {
+    el.className='set-validator glass warning';
+    el.innerHTML=`⚠️ مجموع این دست <strong>${toFa(sum)}</strong> است (مجموع پایه باید ۲۶ باشد، به جز سور)`;
+  }
 }
 
 function addSur(team){
@@ -556,6 +607,7 @@ function addSet(){
   state.scores[0]+=v[0];state.scores[1]+=v[1];
   document.getElementById('inp-0').value=0;document.getElementById('inp-1').value=0;
   if(state.scores[0]>=WIN||state.scores[1]>=WIN)state.gameOver=true;
+  updateSetValidator();
   renderGame(true);
 }
 
@@ -563,7 +615,9 @@ function undoSet(){
   if(!state.sets.length)return;
   const last=state.sets.pop();
   state.scores[0]-=last[0];state.scores[1]-=last[1];
-  state.gameOver=false;renderGame(true);
+  state.gameOver=false;
+  updateSetValidator();
+  renderGame(true);
 }
 
 function getWinIdx(){
@@ -576,7 +630,10 @@ function askReset(){showConfirm('آیا مطمئن هستید؟\nبازی جار
 function doReset(){
   state.scores=[0,0];state.sets=[];state.gameOver=false;state.teamPlayers=[[],[]];
   document.getElementById('inp-0').value=0;document.getElementById('inp-1').value=0;
-  cancelConfirm();renderGame(true);renderTeamPlayers();
+  cancelConfirm();
+  updateSetValidator();
+  renderGame(true);
+  renderTeamPlayers();
 }
 
 function askSaveGame(){showConfirm('نتیجه ذخیره شود و\nبازی جدید شروع شود؟',doSaveGame);}
@@ -592,7 +649,9 @@ async function doSaveGame(){
   state.gameNum++;
   state.scores=[0,0];state.sets=[];state.gameOver=false;state.teamPlayers=[[],[]];
   document.getElementById('inp-0').value=0;document.getElementById('inp-1').value=0;
-  renderGame(true);renderTeamPlayers();
+  updateSetValidator();
+  renderGame(true);
+  renderTeamPlayers();
 }
 
 function renderGame(animate=false){
@@ -691,7 +750,50 @@ function askDeleteGame(id){
   });
 }
 
-// ── Stats & Loss Analysis (تحلیل باخت بازیکن‌ها) ─────
+// ── Stats, Honors & Head-to-Head Analysis ─────────
+function computeHonorsAndBadges(games, players){
+  const winsMap = {};
+  const currStreak = {};
+  const pairStats = {};
+
+  const sortedGames = [...games].sort((a,b) => new Date(String(a.played_at).replace(' ','T')+'Z') - new Date(String(b.played_at).replace(' ','T')+'Z'));
+
+  sortedGames.forEach(g => {
+    [1, 2].forEach(teamNum => {
+      const teamPlayers = (g.players||[]).filter(p => p.team === teamNum);
+      const won = g.winner === teamNum;
+      
+      teamPlayers.forEach(p => {
+        if (!winsMap[p.name]) winsMap[p.name] = { name: p.name, wins: 0, total: 0 };
+        winsMap[p.name].total++;
+        if (won) {
+          winsMap[p.name].wins++;
+          currStreak[p.name] = (currStreak[p.name] || 0) + 1;
+        } else {
+          currStreak[p.name] = 0;
+        }
+      });
+
+      if (teamPlayers.length === 2) {
+        const names = [teamPlayers[0].name, teamPlayers[1].name].sort();
+        const key = names.join(' و ');
+        if (!pairStats[key]) pairStats[key] = { key, p1: names[0], p2: names[1], wins: 0, losses: 0, total: 0 };
+        pairStats[key].total++;
+        if (won) pairStats[key].wins++;
+        else pairStats[key].losses++;
+      }
+    });
+  });
+
+  const topWinner = Object.values(winsMap).sort((a,b) => b.wins - a.wins)[0] || null;
+  const topPairs = Object.values(pairStats);
+  const goldenPair = [...topPairs].sort((a,b) => b.wins - a.wins || (b.wins/b.total) - (a.wins/a.total))[0] || null;
+  const jinxPair = [...topPairs].sort((a,b) => b.losses - a.losses || (b.losses/b.total) - (a.losses/a.total))[0] || null;
+  const topStreakEntry = Object.entries(currStreak).filter(([_, s]) => s >= 2).sort((a,b) => b[1] - a[1])[0] || null;
+
+  return { topWinner, goldenPair, jinxPair, topStreakEntry, winsMap, currStreak };
+}
+
 async function renderStats(){
   const container=document.getElementById('stats-players-container');
   container.innerHTML='<div class="loading"><span class="spinner"></span> در حال بارگذاری...</div>';
@@ -711,15 +813,67 @@ async function renderStats(){
     container.innerHTML='<div class="empty glass">هنوز بازیکنی ثبت نشده<br><small>از پنل ادمین بازیکن اضافه کنید</small></div>';
     return;
   }
+
+  // نشان‌ها و ترین‌های بازی
+  const honors = computeHonorsAndBadges(allGamesCache, allPlayers);
+  const hContainer = document.getElementById('honors-container');
+  if(hContainer){
+    hContainer.innerHTML = `
+      <div class="honor-card">
+        <div class="honor-icon">👑</div>
+        <div class="honor-info">
+          <div class="honor-title">سلطان بردها</div>
+          <div class="honor-val">${honors.topWinner ? `${honors.topWinner.name} (${toFa(honors.topWinner.wins)} برد)` : '—'}</div>
+        </div>
+      </div>
+      <div class="honor-card">
+        <div class="honor-icon">🤝</div>
+        <div class="honor-info">
+          <div class="honor-title">زوج طلایی</div>
+          <div class="honor-val">${honors.goldenPair ? `${honors.goldenPair.key} (${toFa(honors.goldenPair.wins)} برد)` : '—'}</div>
+        </div>
+      </div>
+      <div class="honor-card">
+        <div class="honor-icon">💔</div>
+        <div class="honor-info">
+          <div class="honor-title">ترکیب نحس (طلسم)</div>
+          <div class="honor-val">${honors.jinxPair ? `${honors.jinxPair.key} (${toFa(honors.jinxPair.losses)} باخت)` : '—'}</div>
+        </div>
+      </div>
+      <div class="honor-card">
+        <div class="honor-icon">🔥</div>
+        <div class="honor-info">
+          <div class="honor-title">روی دور برد (استریک)</div>
+          <div class="honor-val">${honors.topStreakEntry ? `${honors.topStreakEntry[0]} (${toFa(honors.topStreakEntry[1])} برد پیاپی)` : '—'}</div>
+        </div>
+      </div>
+    `;
+  }
+
   const statsArr=await Promise.all(allPlayers.map(p=>apiGet('/stats/'+p.id).catch(()=>({total_games:0,wins:0,losses:0,partners:[]}))));
   container.innerHTML='';
   allPlayers.forEach((p,i)=>{
     const s=statsArr[i];
     const wr=s.total_games?Math.round((s.wins/s.total_games)*100):0;
+    
+    let badgeHtml = '';
+    if(honors.topWinner && p.name === honors.topWinner.name){
+      badgeHtml += '<span class="badge-tag gold">👑 قهرمان</span>';
+    }
+    if(honors.goldenPair && (p.name === honors.goldenPair.p1 || p.name === honors.goldenPair.p2)){
+      badgeHtml += '<span class="badge-tag brass">🤝 زوج طلایی</span>';
+    }
+    if(honors.jinxPair && (p.name === honors.jinxPair.p1 || p.name === honors.jinxPair.p2)){
+      badgeHtml += '<span class="badge-tag red">💔 طلسم باخت</span>';
+    }
+    if(honors.currStreak && honors.currStreak[p.name] >= 2){
+      badgeHtml += `<span class="badge-tag flame">🔥 ${toFa(honors.currStreak[p.name])} برد پیاپی</span>`;
+    }
+
     const div=document.createElement('div');
     div.className='stats-player-card glass';
     div.innerHTML=`<div class="avatar">${p.name.trim().charAt(0)}</div><div class="sp-info">
-      <div class="stats-player-name">${p.name}</div>
+      <div class="stats-player-name">${p.name} ${badgeHtml}</div>
       <div class="stats-player-meta">${toFa(s.total_games||0)} بازی · <span style="color:var(--brass)">${toFa(s.wins||0)} برد</span> · <span style="color:var(--danger)">${toFa(s.losses||0)} باخت</span></div>
     </div><div class="ring" style="--p:${wr}"><b>${toFa(wr)}٪</b></div>`;
     div.onclick=()=>showPlayerDetail(p,s);
@@ -734,8 +888,11 @@ function showPlayerDetail(player,stats){
   const wr=stats.total_games?Math.round((stats.wins/stats.total_games)*100):0;
   const lr=stats.total_games?100-wr:0;
 
-  // تحلیل بازی‌های انجام‌شده و محاسبه دقیق باخت با هر هم‌تیمی
+  // تحلیل هم‌تیمی‌ها (با کی باخته / برده)
   const partnerMap = {};
+  // تقابل رودررو با حریفان (Head-to-Head)
+  const oppMap = {};
+
   allGamesCache.forEach(g => {
     const me = (g.players||[]).find(x => x.id === player.id || x.name === player.name);
     if (!me) return;
@@ -743,7 +900,8 @@ function showPlayerDetail(player,stats){
     const won = (g.winner === myTeam);
     const partner = (g.players||[]).find(x => x.team === myTeam && x.id !== player.id && x.name !== player.name);
     const pName = partner ? partner.name : 'تک‌نفره';
-    const opps = (g.players||[]).filter(x => x.team !== myTeam).map(x => x.name).join(' و ') || 'نامشخص';
+    const opps = (g.players||[]).filter(x => x.team !== myTeam);
+    const oppNames = opps.map(x => x.name).join(' و ') || 'نامشخص';
     const myScore = myTeam === 1 ? g.team1_score : g.team2_score;
     const oppScore = myTeam === 1 ? g.team2_score : g.team1_score;
     let d = '';
@@ -757,9 +915,10 @@ function showPlayerDetail(player,stats){
       won: won,
       myScore: myScore,
       oppScore: oppScore,
-      opponents: opps
+      opponents: oppNames
     };
 
+    // محاسبات هم‌تیمی
     if (!partnerMap[pName]) {
       partnerMap[pName] = { name: pName, together: 0, wins: 0, losses: 0, lostGames: [], wonGames: [] };
     }
@@ -771,12 +930,31 @@ function showPlayerDetail(player,stats){
       partnerMap[pName].losses++;
       partnerMap[pName].lostGames.push(matchInfo);
     }
+
+    // محاسبات تقابل رودررو با حریفان
+    opps.forEach(o => {
+      if (!oppMap[o.name]) {
+        oppMap[o.name] = { name: o.name, against: 0, myWins: 0, myLosses: 0, games: [] };
+      }
+      oppMap[o.name].against++;
+      if (won) oppMap[o.name].myWins++;
+      else oppMap[o.name].myLosses++;
+      oppMap[o.name].games.push({
+        id: g.id,
+        date: d,
+        won,
+        myScore,
+        oppScore,
+        partner: pName
+      });
+    });
   });
 
   const partnerList = Object.values(partnerMap);
   const partnersByLoss = [...partnerList].sort((a,b) => b.losses - a.losses || b.together - a.together);
   const worstPartner = partnersByLoss.find(p => p.losses > 0);
   const partnersByWin = [...partnerList].filter(p => p.wins > 0).sort((a,b) => b.wins - a.wins || b.together - a.together);
+  const opponentsList = Object.values(oppMap).sort((a,b) => b.against - a.against || b.myWins - a.myWins);
 
   detail.innerHTML=`<div class="stats-detail glass">
     <div class="stats-detail-header">
@@ -795,8 +973,9 @@ function showPlayerDetail(player,stats){
     </div>` : ''}
 
     <div style="display:flex;background:var(--felt-0);border:1px solid var(--line);border-radius:10px;padding:3px;margin-bottom:14px;gap:4px">
-      <button class="sub-tab-btn active loss" id="subtab-loss" onclick="switchPlayerSubTab('loss')">💔 با کیا بازی کرده باخته؟</button>
-      <button class="sub-tab-btn win" id="subtab-win" onclick="switchPlayerSubTab('win')">🏆 با کیا بازی کرده برده؟</button>
+      <button class="sub-tab-btn active loss" id="subtab-loss" onclick="switchPlayerSubTab('loss')">💔 با کیا باخته؟ (یار)</button>
+      <button class="sub-tab-btn win" id="subtab-win" onclick="switchPlayerSubTab('win')">🏆 با کیا برده؟ (یار)</button>
+      <button class="sub-tab-btn h2h" id="subtab-h2h" onclick="switchPlayerSubTab('h2h')">⚔️ رودررو با حریفان</button>
     </div>
 
     <!-- Loss View -->
@@ -872,14 +1051,58 @@ function showPlayerDetail(player,stats){
         </div>`;
       }).join('') : '<div class="empty">هنوز بردی ثبت نشده است</div>'}
     </div>
+
+    <!-- Head-to-Head View (رودررو با حریفان) -->
+    <div id="subview-h2h" style="display:none">
+      ${opponentsList.length ? opponentsList.map((o, idx) => {
+        const wp = o.against ? Math.round((o.myWins / o.against) * 100) : 0;
+        const isWinning = o.myWins >= o.myLosses;
+        return `<div style="background:var(--felt-0);border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:10px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div style="font-size:15px;font-weight:700;color:var(--ivory)">مقابل ${o.name}</div>
+              <div style="font-size:12px;color:var(--dim);margin-top:2px">
+                ${toFa(o.against)} بازی روبرو · <strong style="color:var(--brass)">${toFa(o.myWins)} برد</strong> · <strong style="color:var(--danger)">${toFa(o.myLosses)} باخت</strong>
+              </div>
+            </div>
+            <div style="text-align:left">
+              <span style="background:${isWinning?'rgba(217,180,92,0.2)':'rgba(255,107,107,0.2)'};border:1px solid ${isWinning?'rgba(217,180,92,0.4)':'rgba(255,107,107,0.4)'};color:${isWinning?'var(--brass)':'var(--danger)'};font-size:12px;font-weight:800;padding:2px 8px;border-radius:6px">
+                ${toFa(wp)}٪ برد
+              </span>
+            </div>
+          </div>
+          <div class="pbar" style="width:100%;margin-top:8px">
+            <i style="background:${isWinning?'linear-gradient(90deg,#ecc97a,#d9b45c)':'linear-gradient(90deg,#ff6b6b,#ea4d4a)'};width:${wp}%"></i>
+          </div>
+          ${o.games.length ? `
+            <button onclick="toggleH2hGamesList(${idx})" style="width:100%;background:none;border:1px dashed var(--line);border-radius:6px;color:var(--dim);font:inherit;font-size:11px;padding:5px 8px;margin-top:8px;cursor:pointer">
+              مشاهده ${toFa(o.games.length)} بازی رودررو با ${o.name} ▼
+            </button>
+            <div id="h2h-games-${idx}" style="display:none;margin-top:6px;gap:6px;flex-direction:column">
+              ${o.games.map(m => `
+                <div style="background:${m.won?'rgba(217,180,92,0.08)':'rgba(255,107,107,0.08)'};border:1px solid ${m.won?'rgba(217,180,92,0.2)':'rgba(255,107,107,0.2)'};border-radius:8px;padding:6px 10px;font-size:11px;display:flex;justify-content:space-between;align-items:center">
+                  <div>
+                    <span style="color:${m.won?'var(--brass)':'var(--danger)'};font-weight:700">${m.won?'✓ پیروزی':'✗ شکست'}</span>
+                    <span style="color:var(--dim);margin-inline-start:6px">(${m.date} - در کنار ${m.partner})</span>
+                  </div>
+                  <div style="color:${m.won?'var(--brass)':'var(--danger)'};font-weight:800;direction:ltr">${toFa(m.myScore)} - ${toFa(m.oppScore)}</div>
+                </div>
+              `).join('')}
+            </div>
+          ` : ''}
+        </div>`;
+      }).join('') : '<div class="empty">هنوز تقابل مستقیمی ثبت نشده است</div>'}
+    </div>
   </div>`;
 }
 
 function switchPlayerSubTab(type){
   document.getElementById('subview-loss').style.display = (type === 'loss' ? 'block' : 'none');
   document.getElementById('subview-win').style.display = (type === 'win' ? 'block' : 'none');
+  document.getElementById('subview-h2h').style.display = (type === 'h2h' ? 'block' : 'none');
   document.getElementById('subtab-loss').className = 'sub-tab-btn' + (type === 'loss' ? ' active loss' : '');
   document.getElementById('subtab-win').className = 'sub-tab-btn' + (type === 'win' ? ' active win' : '');
+  document.getElementById('subtab-h2h').className = 'sub-tab-btn' + (type === 'h2h' ? ' active h2h' : '');
 }
 
 function toggleLostGamesList(idx){
@@ -891,6 +1114,13 @@ function toggleLostGamesList(idx){
 
 function toggleWonGamesList(idx){
   const el = document.getElementById('won-games-' + idx);
+  if(el){
+    el.style.display = (el.style.display === 'none' ? 'flex' : 'none');
+  }
+}
+
+function toggleH2hGamesList(idx){
+  const el = document.getElementById('h2h-games-' + idx);
   if(el){
     el.style.display = (el.style.display === 'none' ? 'flex' : 'none');
   }
