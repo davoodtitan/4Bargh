@@ -201,6 +201,31 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:-1;ba
 .badge-tag.brass{background:rgba(43,95,77,.4);color:#a8e6cf;border:1px solid #2b5f4d}
 .badge-tag.red{background:rgba(255,107,107,.2);color:#ff8a80;border:1px solid rgba(255,107,107,.4)}
 .badge-tag.flame{background:rgba(255,152,0,.2);color:#ffb74d;border:1px solid rgba(255,152,0,.4)}
+.form-dots{display:inline-flex;align-items:center;gap:4px;vertical-align:middle}
+.form-dot{width:17px;height:17px;border-radius:5px;font-size:10px;font-weight:900;display:inline-flex;align-items:center;justify-content:center;line-height:1}
+.form-dot.w{background:rgba(46,204,113,.2);color:#6ee7b7;border:1px solid rgba(46,204,113,.45)}
+.form-dot.l{background:rgba(255,107,107,.18);color:#ff8a80;border:1px solid rgba(255,107,107,.4)}
+.stats-controls{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+.stats-search-input{width:100%;min-height:40px;background:rgba(0,0,0,.28);border:1px solid var(--line);border-radius:10px;padding:0 12px;color:var(--ivory);font:inherit;font-size:13px;outline:none}
+.stats-search-input:focus{border-color:var(--brass)}
+.stats-sort-bar{display:flex;gap:5px;background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:10px;padding:4px;overflow-x:auto}
+.sort-pill{flex:1;min-height:32px;background:none;border:none;color:var(--dim);font:inherit;font-size:11px;font-weight:700;border-radius:7px;padding:0 8px;cursor:pointer;white-space:nowrap;transition:all .15s}
+.sort-pill.active{background:var(--brass);color:var(--brass-ink)}
+.sort-pill.active.loss{background:var(--danger);color:#fff}
+.pairs-board{padding:12px;margin-bottom:16px;display:flex;flex-direction:column;gap:8px}
+.pair-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px;background:rgba(0,0,0,.22);border:1px solid rgba(43,95,77,.65);border-radius:10px}
+.pair-row-main{display:flex;align-items:center;gap:8px;min-width:0;flex:1}
+.pair-avatars{display:inline-flex;align-items:center;flex:none}
+.pair-avatars .avatar-sm{width:24px;height:24px;font-size:11px;margin-inline-start:-6px;border:1.5px solid var(--felt-1)}
+.pair-avatars .avatar-sm:first-child{margin-inline-start:0}
+.pair-names{font-size:13px;font-weight:700;color:var(--ivory);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pair-sub{font-size:11px;color:var(--dim)}
+.pair-rate{font-size:13px;font-weight:800;color:var(--brass);text-align:left;flex:none}
+.score-records-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.score-rec-box{background:rgba(0,0,0,.22);border:1px solid var(--line);border-radius:10px;padding:9px 6px;text-align:center}
+.score-rec-val{font-size:15px;font-weight:900;color:var(--ivory);direction:ltr;font-variant-numeric:tabular-nums}
+.score-rec-lbl{font-size:10px;color:var(--dim);margin-top:2px}
+.detail-form-bar{display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,.22);border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin-bottom:14px;font-size:12px}
 
 /* Admin */
 .admin-panel{padding:16px}.admin-panel-title{font-size:16px;font-weight:700;margin-bottom:14px}
@@ -348,7 +373,20 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
       <div class="honors-grid" id="honors-container">
         <div class="loading" style="grid-column:span 2"><span class="spinner"></span> در حال بررسی رکوردها...</div>
       </div>
+      <div id="stats-pairs-section" style="display:none">
+        <div class="sec-title" style="margin-top:1.1rem">رده‌بندی زوج‌های برتر 🤝</div>
+        <div class="pairs-board glass" id="stats-pairs-container"></div>
+      </div>
       <div class="sec-title" style="margin-top:1.2rem">آمار و عملکرد بازیکن‌ها</div>
+      <div class="stats-controls" id="stats-controls" style="display:none">
+        <input class="stats-search-input" id="stats-search-input" type="text" placeholder="🔍 جستجوی بازیکن..." oninput="renderStatsPlayersList()">
+        <div class="stats-sort-bar" id="stats-sort-bar">
+          <button class="sort-pill active" data-sort="wins" onclick="setStatsSort('wins')">بیشترین برد</button>
+          <button class="sort-pill" data-sort="rate" onclick="setStatsSort('rate')">درصد پیروزی</button>
+          <button class="sort-pill" data-sort="losses" onclick="setStatsSort('losses')">بیشترین باخت</button>
+          <button class="sort-pill" data-sort="games" onclick="setStatsSort('games')">تعداد بازی</button>
+        </div>
+      </div>
       <div id="stats-players-container"><div class="loading"><span class="spinner"></span> در حال بارگذاری...</div></div>
     </div>
     <div id="stats-detail-view" style="display:none"></div>
@@ -497,6 +535,9 @@ const state = {
 };
 let allPlayers = [];
 let allGamesCache = [];
+let statsCacheById = {};
+let statsHonorsCache = null;
+let statsSortKey = 'wins';
 let historyVisibleCount = 10;
 const expandedGameIds = new Set();
 let pickerTeam = 0;
@@ -940,6 +981,7 @@ function askDeleteGame(id){
 function computeHonorsAndBadges(games, players){
   const winsMap = {};
   const currStreak = {};
+  const recentFormMap = {};
   const pairStats = {};
 
   const sortedGames = [...games].sort((a,b) => new Date(String(a.played_at).replace(' ','T')+'Z') - new Date(String(b.played_at).replace(' ','T')+'Z'));
@@ -952,6 +994,8 @@ function computeHonorsAndBadges(games, players){
       teamPlayers.forEach(p => {
         if (!winsMap[p.name]) winsMap[p.name] = { name: p.name, wins: 0, total: 0 };
         winsMap[p.name].total++;
+        if (!recentFormMap[p.name]) recentFormMap[p.name] = [];
+        recentFormMap[p.name].push(won);
         if (won) {
           winsMap[p.name].wins++;
           currStreak[p.name] = (currStreak[p.name] || 0) + 1;
@@ -971,13 +1015,88 @@ function computeHonorsAndBadges(games, players){
     });
   });
 
-  const topWinner = Object.values(winsMap).sort((a,b) => b.wins - a.wins)[0] || null;
-  const topPairs = Object.values(pairStats);
-  const goldenPair = [...topPairs].sort((a,b) => b.wins - a.wins || (b.wins/b.total) - (a.wins/a.total))[0] || null;
-  const jinxPair = [...topPairs].sort((a,b) => b.losses - a.losses || (b.losses/b.total) - (a.losses/a.total))[0] || null;
+  Object.keys(recentFormMap).forEach(name => {
+    recentFormMap[name] = recentFormMap[name].slice(-5);
+  });
+
+  const topWinner = Object.values(winsMap).sort((a,b) => b.wins - a.wins || (b.wins/b.total) - (a.wins/a.total))[0] || null;
+  const allPairs = Object.values(pairStats);
+  const eligiblePairs = allPairs.filter(p => p.total >= 2);
+  const pairPool = eligiblePairs.length ? eligiblePairs : allPairs;
+  const topPairsSorted = [...pairPool].sort((a,b) => (b.wins/b.total) - (a.wins/a.total) || b.wins - a.wins || b.total - a.total);
+  const goldenPair = topPairsSorted[0] || null;
+  const jinxPair = [...pairPool].sort((a,b) => (b.losses/b.total) - (a.losses/a.total) || b.losses - a.losses || b.total - a.total)[0] || null;
   const topStreakEntry = Object.entries(currStreak).filter(([_, s]) => s >= 2).sort((a,b) => b[1] - a[1])[0] || null;
 
-  return { topWinner, goldenPair, jinxPair, topStreakEntry, winsMap, currStreak };
+  return { topWinner, goldenPair, jinxPair, topStreakEntry, winsMap, currStreak, recentFormMap, topPairsSorted, hasMinPairThreshold: eligiblePairs.length > 0 };
+}
+
+function renderFormDotsHtml(formArr){
+  if(!formArr || !formArr.length) return '';
+  return `<span class="form-dots" title="فرم ${toFa(formArr.length)} بازی اخیر (از چپ به راست: جدیدترین)">${formArr.map(w => `<span class="form-dot ${w?'w':'l'}">${w?'✓':'✕'}</span>`).join('')}</span>`;
+}
+
+function setStatsSort(key){
+  statsSortKey = key;
+  document.querySelectorAll('#stats-sort-bar .sort-pill').forEach(btn => {
+    const active = btn.dataset.sort === key;
+    btn.className = 'sort-pill' + (active ? (' active' + (key === 'losses' ? ' loss' : '')) : '');
+  });
+  renderStatsPlayersList();
+}
+
+function renderStatsPlayersList(){
+  const container = document.getElementById('stats-players-container');
+  if(!container) return;
+  const q = (document.getElementById('stats-search-input')?.value || '').trim().toLowerCase();
+  const honors = statsHonorsCache || { recentFormMap: {}, currStreak: {} };
+
+  const list = allPlayers
+    .filter(p => !q || p.name.toLowerCase().includes(q))
+    .map(p => {
+      const s = statsCacheById[p.id] || { total_games: 0, wins: 0, losses: 0, partners: [] };
+      const wr = s.total_games ? Math.round((s.wins / s.total_games) * 100) : 0;
+      return { p, s, wr };
+    })
+    .sort((a, b) => {
+      if (statsSortKey === 'losses') return (b.s.losses||0) - (a.s.losses||0) || (b.s.total_games||0) - (a.s.total_games||0);
+      if (statsSortKey === 'rate') return b.wr - a.wr || (b.s.wins||0) - (a.s.wins||0);
+      if (statsSortKey === 'games') return (b.s.total_games||0) - (a.s.total_games||0) || (b.s.wins||0) - (a.s.wins||0);
+      return (b.s.wins||0) - (a.s.wins||0) || b.wr - a.wr;
+    });
+
+  container.innerHTML = '';
+  if(!list.length){
+    container.innerHTML = '<div class="empty glass">بازیکنی با این نام یافت نشد</div>';
+    return;
+  }
+
+  list.forEach(({ p, s, wr }) => {
+    let badgeHtml = '';
+    if(honors.topWinner && p.name === honors.topWinner.name){
+      badgeHtml += '<span class="badge-tag gold">👑 قهرمان</span>';
+    }
+    if(honors.goldenPair && (p.name === honors.goldenPair.p1 || p.name === honors.goldenPair.p2)){
+      badgeHtml += '<span class="badge-tag brass">🤝 زوج طلایی</span>';
+    }
+    if(honors.jinxPair && (p.name === honors.jinxPair.p1 || p.name === honors.jinxPair.p2)){
+      badgeHtml += '<span class="badge-tag red">💔 طلسم باخت</span>';
+    }
+    if(honors.currStreak && honors.currStreak[p.name] >= 2){
+      badgeHtml += `<span class="badge-tag flame">🔥 ${toFa(honors.currStreak[p.name])} برد پیاپی</span>`;
+    }
+    const formHtml = renderFormDotsHtml(honors.recentFormMap[p.name]);
+
+    const div=document.createElement('div');
+    div.className='stats-player-card glass';
+    div.innerHTML=`<div class="avatar">${avatarInner(p)}</div><div class="sp-info">
+      <div class="stats-player-name">${p.name} ${badgeHtml}</div>
+      <div class="stats-player-meta">${toFa(s.total_games||0)} بازی · <span style="color:var(--brass)">${toFa(s.wins||0)} برد</span> · <span style="color:var(--danger)">${toFa(s.losses||0)} باخت</span></div>
+      ${formHtml ? `<div style="margin-top:6px;display:flex;align-items:center;gap:6px"><span style="font-size:10px;color:var(--dim)">۵ بازی اخیر:</span>${formHtml}</div>` : ''}
+    </div><div class="ring" style="--p:${wr}"><b>${toFa(wr)}٪</b></div>`;
+    div.onclick=()=>showPlayerDetail(p,s);
+    container.appendChild(div);
+  });
 }
 
 async function renderStats(){
@@ -996,12 +1115,15 @@ async function renderStats(){
   }catch(e){}
 
   if(!allPlayers.length){
+    document.getElementById('stats-controls').style.display='none';
+    document.getElementById('stats-pairs-section').style.display='none';
     container.innerHTML='<div class="empty glass">هنوز بازیکنی ثبت نشده<br><small>از پنل ادمین بازیکن اضافه کنید</small></div>';
     return;
   }
 
   // نشان‌ها و ترین‌های بازی
   const honors = computeHonorsAndBadges(allGamesCache, allPlayers);
+  statsHonorsCache = honors;
   const hContainer = document.getElementById('honors-container');
   if(hContainer){
     hContainer.innerHTML = `
@@ -1015,15 +1137,15 @@ async function renderStats(){
       <div class="honor-card">
         <div class="honor-icon">🤝</div>
         <div class="honor-info">
-          <div class="honor-title">زوج طلایی</div>
-          <div class="honor-val">${honors.goldenPair ? `${honors.goldenPair.key} (${toFa(honors.goldenPair.wins)} برد)` : '—'}</div>
+          <div class="honor-title">زوج طلایی${honors.hasMinPairThreshold ? '' : ' *'}</div>
+          <div class="honor-val">${honors.goldenPair ? `${honors.goldenPair.key} (${toFa(Math.round((honors.goldenPair.wins/honors.goldenPair.total)*100))}٪)` : '—'}</div>
         </div>
       </div>
       <div class="honor-card">
         <div class="honor-icon">💔</div>
         <div class="honor-info">
           <div class="honor-title">ترکیب نحس (طلسم)</div>
-          <div class="honor-val">${honors.jinxPair ? `${honors.jinxPair.key} (${toFa(honors.jinxPair.losses)} باخت)` : '—'}</div>
+          <div class="honor-val">${honors.jinxPair ? `${honors.jinxPair.key} (${toFa(honors.jinxPair.losses)} از ${toFa(honors.jinxPair.total)})` : '—'}</div>
         </div>
       </div>
       <div class="honor-card">
@@ -1036,35 +1158,43 @@ async function renderStats(){
     `;
   }
 
-  const statsArr=await Promise.all(allPlayers.map(p=>apiGet('/stats/'+p.id).catch(()=>({total_games:0,wins:0,losses:0,partners:[]}))));
-  container.innerHTML='';
-  allPlayers.forEach((p,i)=>{
-    const s=statsArr[i];
-    const wr=s.total_games?Math.round((s.wins/s.total_games)*100):0;
-    
-    let badgeHtml = '';
-    if(honors.topWinner && p.name === honors.topWinner.name){
-      badgeHtml += '<span class="badge-tag gold">👑 قهرمان</span>';
+  // رده‌بندی زوج‌های برتر
+  const pairsSec = document.getElementById('stats-pairs-section');
+  const pairsBox = document.getElementById('stats-pairs-container');
+  if(pairsSec && pairsBox){
+    const topPairs = (honors.topPairsSorted || []).slice(0, 5);
+    if(topPairs.length){
+      pairsSec.style.display='block';
+      pairsBox.innerHTML = topPairs.map((pair, idx) => {
+        const rate = Math.round((pair.wins / pair.total) * 100);
+        const p1Obj = allPlayers.find(x => x.name === pair.p1) || { name: pair.p1 };
+        const p2Obj = allPlayers.find(x => x.name === pair.p2) || { name: pair.p2 };
+        return `<div class="pair-row">
+          <div class="pair-row-main">
+            <span class="rank">${toFa(idx+1)}</span>
+            <span class="pair-avatars">
+              <span class="avatar-sm">${avatarInner(p1Obj)}</span>
+              <span class="avatar-sm">${avatarInner(p2Obj)}</span>
+            </span>
+            <div style="min-width:0">
+              <div class="pair-names">${pair.key}</div>
+              <div class="pair-sub">${toFa(pair.wins)} برد از ${toFa(pair.total)} بازی مشترک</div>
+            </div>
+          </div>
+          <div class="pair-rate">${toFa(rate)}٪</div>
+        </div>`;
+      }).join('');
+    } else {
+      pairsSec.style.display='none';
     }
-    if(honors.goldenPair && (p.name === honors.goldenPair.p1 || p.name === honors.goldenPair.p2)){
-      badgeHtml += '<span class="badge-tag brass">🤝 زوج طلایی</span>';
-    }
-    if(honors.jinxPair && (p.name === honors.jinxPair.p1 || p.name === honors.jinxPair.p2)){
-      badgeHtml += '<span class="badge-tag red">💔 طلسم باخت</span>';
-    }
-    if(honors.currStreak && honors.currStreak[p.name] >= 2){
-      badgeHtml += `<span class="badge-tag flame">🔥 ${toFa(honors.currStreak[p.name])} برد پیاپی</span>`;
-    }
+  }
 
-    const div=document.createElement('div');
-    div.className='stats-player-card glass';
-    div.innerHTML=`<div class="avatar">${avatarInner(p)}</div><div class="sp-info">
-      <div class="stats-player-name">${p.name} ${badgeHtml}</div>
-      <div class="stats-player-meta">${toFa(s.total_games||0)} بازی · <span style="color:var(--brass)">${toFa(s.wins||0)} برد</span> · <span style="color:var(--danger)">${toFa(s.losses||0)} باخت</span></div>
-    </div><div class="ring" style="--p:${wr}"><b>${toFa(wr)}٪</b></div>`;
-    div.onclick=()=>showPlayerDetail(p,s);
-    container.appendChild(div);
-  });
+  const statsArr=await Promise.all(allPlayers.map(p=>apiGet('/stats/'+p.id).catch(()=>({total_games:0,wins:0,losses:0,partners:[]}))));
+  statsCacheById = {};
+  allPlayers.forEach((p, i) => { statsCacheById[p.id] = statsArr[i]; });
+
+  document.getElementById('stats-controls').style.display='flex';
+  renderStatsPlayersList();
 }
 
 function showPlayerDetail(player,stats){
@@ -1074,10 +1204,13 @@ function showPlayerDetail(player,stats){
   const wr=stats.total_games?Math.round((stats.wins/stats.total_games)*100):0;
   const lr=stats.total_games?100-wr:0;
 
-  // تحلیل هم‌تیمی‌ها (با کی باخته / برده)
+  // تحلیل هم‌تیمی‌ها (با کی باخته / برده) + رکوردهای امتیازی
   const partnerMap = {};
-  // تقابل رودررو با حریفان (Head-to-Head)
   const oppMap = {};
+  let scoreSum = 0;
+  let scoreGamesCount = 0;
+  let biggestWin = null;
+  let closestLoss = null;
 
   allGamesCache.forEach(g => {
     const me = (g.players||[]).find(x => x.id === player.id || x.name === player.name);
@@ -1088,8 +1221,23 @@ function showPlayerDetail(player,stats){
     const pName = partner ? partner.name : 'تک‌نفره';
     const opps = (g.players||[]).filter(x => x.team !== myTeam);
     const oppNames = opps.map(x => x.name).join(' و ') || 'نامشخص';
-    const myScore = myTeam === 1 ? g.team1_score : g.team2_score;
-    const oppScore = myTeam === 1 ? g.team2_score : g.team1_score;
+    const myScore = Number(myTeam === 1 ? g.team1_score : g.team2_score) || 0;
+    const oppScore = Number(myTeam === 1 ? g.team2_score : g.team1_score) || 0;
+
+    scoreSum += myScore;
+    scoreGamesCount++;
+    if (won) {
+      const margin = myScore - oppScore;
+      if (!biggestWin || margin > biggestWin.margin || (margin === biggestWin.margin && myScore > biggestWin.myScore)) {
+        biggestWin = { myScore, oppScore, margin, oppNames };
+      }
+    } else {
+      const margin = oppScore - myScore;
+      if (!closestLoss || margin < closestLoss.margin || (margin === closestLoss.margin && myScore > closestLoss.myScore)) {
+        closestLoss = { myScore, oppScore, margin, oppNames };
+      }
+    }
+
     let d = '';
     try {
       d = new Date(String(g.played_at).replace(' ', 'T') + 'Z').toLocaleDateString('fa-IR', {month:'short', day:'numeric'});
@@ -1136,6 +1284,9 @@ function showPlayerDetail(player,stats){
     });
   });
 
+  const avgScore = scoreGamesCount ? Math.round(scoreSum / scoreGamesCount) : 0;
+  const recentForm = (statsHonorsCache && statsHonorsCache.recentFormMap && statsHonorsCache.recentFormMap[player.name]) || [];
+
   const partnerList = Object.values(partnerMap);
   const partnersByLoss = [...partnerList].sort((a,b) => b.losses - a.losses || b.together - a.together);
   const worstPartner = partnersByLoss.find(p => p.losses > 0);
@@ -1153,6 +1304,26 @@ function showPlayerDetail(player,stats){
       <div class="stat-box"><div class="stat-box-val" style="color:var(--danger)">${toFa(stats.losses||0)}</div><div class="stat-box-lbl">باخت‌ها (${toFa(lr)}٪)</div></div>
       <div class="stat-box"><div class="stat-box-val">${toFa(stats.total_games||0)}</div><div class="stat-box-lbl">کل بازی‌ها</div></div>
     </div>
+
+    ${scoreGamesCount ? `<div class="score-records-grid">
+      <div class="score-rec-box">
+        <div class="score-rec-val" style="color:var(--brass)">${toFa(avgScore)}</div>
+        <div class="score-rec-lbl">میانگین امتیاز</div>
+      </div>
+      <div class="score-rec-box" title="${biggestWin ? 'مقابل ' + biggestWin.oppNames : ''}">
+        <div class="score-rec-val" style="color:#6ee7b7">${biggestWin ? `${toFa(biggestWin.myScore)} - ${toFa(biggestWin.oppScore)}` : '—'}</div>
+        <div class="score-rec-lbl">مقتدرانه‌ترین برد</div>
+      </div>
+      <div class="score-rec-box" title="${closestLoss ? 'مقابل ' + closestLoss.oppNames : ''}">
+        <div class="score-rec-val" style="color:#ff8a80">${closestLoss ? `${toFa(closestLoss.myScore)} - ${toFa(closestLoss.oppScore)}` : '—'}</div>
+        <div class="score-rec-lbl">نزدیک‌ترین باخت</div>
+      </div>
+    </div>` : ''}
+
+    ${recentForm.length ? `<div class="detail-form-bar">
+      <span style="color:var(--dim)">فرم ${toFa(recentForm.length)} بازی اخیر (قدیمی ← جدید):</span>
+      ${renderFormDotsHtml(recentForm)}
+    </div>` : ''}
 
     ${worstPartner ? `<div style="background:rgba(255,107,107,0.12);border:1px solid rgba(255,107,107,0.3);border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:#ff8a80;line-height:1.6">
       💔 بیشترین باخت تیمی <strong>${player.name}</strong> در کنار <strong>${worstPartner.name}</strong> بوده:<br>
