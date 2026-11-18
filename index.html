@@ -282,14 +282,9 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
         <div class="total" id="total-0" data-val="0">۰</div>
         <div class="progress-bg"><div class="progress-fill" id="prog-0"></div></div>
         <div class="inp-row">
-          <button onclick="adj(0,-5)">−</button>
+          <button onclick="adj(0,-1)">−</button>
           <input class="set-inp" id="inp-0" type="number" value="0" step="1" oninput="updateSetValidator()" onfocus="this.select()">
-          <button onclick="adj(0,5)">+</button>
-        </div>
-        <div class="quick-row">
-          <button class="q-btn" onclick="adj(0,-1)">−۱</button>
-          <button class="q-btn" onclick="adj(0,1)">+۱</button>
-          <button class="q-btn sur" onclick="addSur(0)">+ سور (۱۰)</button>
+          <button onclick="adj(0,1)">+</button>
         </div>
       </div>
       <div class="team-card glass" id="card-1">
@@ -297,14 +292,9 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
         <div class="total" id="total-1" data-val="0">۰</div>
         <div class="progress-bg"><div class="progress-fill" id="prog-1"></div></div>
         <div class="inp-row">
-          <button onclick="adj(1,-5)">−</button>
+          <button onclick="adj(1,-1)">−</button>
           <input class="set-inp" id="inp-1" type="number" value="0" step="1" oninput="updateSetValidator()" onfocus="this.select()">
-          <button onclick="adj(1,5)">+</button>
-        </div>
-        <div class="quick-row">
-          <button class="q-btn" onclick="adj(1,-1)">−۱</button>
-          <button class="q-btn" onclick="adj(1,1)">+۱</button>
-          <button class="q-btn sur" onclick="addSur(1)">+ سور (۱۰)</button>
+          <button onclick="adj(1,1)">+</button>
         </div>
       </div>
     </div>
@@ -499,12 +489,12 @@ function saveAvatarMap(map){
 function getAvatar(playerOrId){
   if(!playerOrId)return null;
   if(typeof playerOrId==='object'){
-    if(playerOrId.avatar)return playerOrId.avatar;
+    if('avatar' in playerOrId)return playerOrId.avatar||null;
     const m=loadAvatarMap();
     return m[playerOrId.id]||null;
   }
   const p=allPlayers.find(x=>x.id===playerOrId);
-  if(p&&p.avatar)return p.avatar;
+  if(p&&('avatar' in p))return p.avatar||null;
   const m=loadAvatarMap();
   return m[playerOrId]||null;
 }
@@ -1333,16 +1323,28 @@ async function setPlayerAvatar(id,avatarVal){
   saveAvatarMap(map);
 
   const p=allPlayers.find(x=>x.id===id);
+  let syncedOnline=false;
   if(p){
     p.avatar=avatarVal;
-    try{await apiPut('/players/'+id,{name:p.name,avatar:avatarVal});}catch(e){}
+    try{
+      await apiPut('/players/'+id,{name:p.name,avatar:avatarVal});
+    }catch(e){}
   }
 
-  document.getElementById('avatar-modal-preview').innerHTML=p?avatarInner(p):'';
+  await loadAdminPlayers();
+  const refreshed=allPlayers.find(x=>x.id===id);
+  if(refreshed && ('avatar' in refreshed) && ((refreshed.avatar||null)===(avatarVal||null))){
+    syncedOnline=true;
+  }
+
+  document.getElementById('avatar-modal-preview').innerHTML=refreshed?avatarInner(refreshed):(p?avatarInner(p):'');
   document.getElementById('avatar-remove-btn').style.display=avatarVal?'block':'none';
   renderTeamPlayers();
-  await loadAdminPlayers();
-  showToast(avatarVal?'عکس پروفایل ذخیره شد ✓':'عکس پروفایل حذف شد');
+  if(syncedOnline){
+    showToast(avatarVal?'عکس پروفایل به‌صورت آنلاین ذخیره شد ✓':'عکس پروفایل حذف شد ✓');
+  } else {
+    showToast(avatarVal?'فعلاً فقط روی این دستگاه ذخیره شد (سرور ستون avatar ندارد)':'عکس محلی حذف شد (سرور ستون avatar ندارد)');
+  }
   closeAvatarModal();
 }
 
