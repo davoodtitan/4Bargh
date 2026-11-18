@@ -136,7 +136,16 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:-1;ba
 .stats-player-card{padding:14px 16px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:12px}
 .stats-player-card:active{transform:scale(.985)}
 .sp-info{flex:1;min-width:0}
-.avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#276b57,#113a2d);color:var(--brass);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:17px;flex:none;box-shadow:0 2px 8px rgba(0,0,0,.35)}
+.avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#276b57,#113a2d);color:var(--brass);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:17px;flex:none;box-shadow:0 2px 8px rgba(0,0,0,.35);overflow:hidden}
+.avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.avatar-sm{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#276b57,#113a2d);color:var(--brass);border:1px solid rgba(217,180,92,.4);display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:11px;flex:none;overflow:hidden}
+.avatar-sm img{width:100%;height:100%;object-fit:cover;display:block}
+.avatar-md{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#276b57,#113a2d);color:var(--brass);border:1px solid rgba(217,180,92,.45);display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex:none;overflow:hidden}
+.avatar-md img{width:100%;height:100%;object-fit:cover;display:block}
+.avatar-lg{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#276b57,#113a2d);color:var(--brass);border:2px solid var(--brass);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20px;flex:none;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.4)}
+.avatar-lg img{width:100%;height:100%;object-fit:cover;display:block}
+.player-chip-info{display:flex;align-items:center;gap:6px;min-width:0}
+.player-chip-info span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .stats-player-name{font-size:16px;font-weight:700}
 .stats-player-meta{font-size:12px;color:var(--dim);margin-top:2px}
 .ring{--s:46px;position:relative;width:var(--s);height:var(--s);border-radius:50%;background:conic-gradient(var(--brass) calc(var(--p)*1%),var(--felt-0) 0);display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 0 14px rgba(217,180,92,.2)}
@@ -144,7 +153,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:-1;ba
 .ring b{position:relative;font-size:12px;font-weight:700}
 .ring.big{--s:64px;margin-inline-start:auto}.ring.big b{font-size:15px}
 .stats-detail{padding:16px;margin-bottom:12px}
-.stats-detail-header{display:flex;align-items:center;gap:8px;margin-bottom:16px}
+.stats-detail-header{display:flex;align-items:center;gap:10px;margin-bottom:16px}
 .back-btn{min-width:44px;min-height:44px;background:none;border:none;color:var(--brass);font-size:22px;cursor:pointer}
 .stats-detail-name{font-size:18px;font-weight:800}
 .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
@@ -183,13 +192,26 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:-1;ba
 .admin-input{flex:1;min-height:44px;padding:0 14px;font-size:14px}
 .admin-input:focus,.login-input:focus,.admin-edit-input:focus{border-color:var(--brass)}
 .admin-add-btn,.login-btn{min-height:44px;background:var(--brass);color:var(--brass-ink);border:none;border-radius:10px;padding:0 18px;font:inherit;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap}
-.admin-players-scroll{max-height:320px;overflow-y:auto}
+.admin-players-scroll{max-height:380px;overflow-y:auto}
 .admin-player-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid var(--line)}
-.admin-player-name{flex:1;font-size:14px;font-weight:600}
-.admin-edit-input{flex:1;min-height:36px;background:var(--felt-0);border:1px solid var(--brass);border-radius:8px;padding:0 10px;color:var(--ivory);font:inherit;font-size:14px;outline:none}
-.admin-row-btns{display:flex;gap:6px}
-.admin-edit-btn,.admin-save-btn,.admin-del-btn{min-height:34px;background:none;border-radius:8px;padding:0 12px;font:inherit;font-size:12px;cursor:pointer}
+.admin-player-main{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+.admin-avatar-wrap{position:relative;width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#276b57,#113a2d);color:var(--brass);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;flex:none;cursor:pointer;overflow:hidden;padding:0}
+.admin-avatar-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+.admin-avatar-badge{position:absolute;bottom:-1px;left:-1px;width:16px;height:16px;border-radius:50%;background:var(--brass);color:var(--brass-ink);font-size:9px;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--felt-1)}
+.admin-player-name{flex:1;font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.admin-edit-input{flex:1;min-height:36px;background:var(--felt-0);border:1px solid var(--brass);border-radius:8px;padding:0 10px;color:var(--ivory);font:inherit;font-size:14px;outline:none;min-width:0}
+.admin-row-btns{display:flex;gap:5px;flex:none}
+.admin-photo-btn,.admin-edit-btn,.admin-save-btn,.admin-del-btn{min-height:34px;background:none;border-radius:8px;padding:0 10px;font:inherit;font-size:12px;cursor:pointer;white-space:nowrap}
+.admin-photo-btn{border:1px solid rgba(217,180,92,.45);color:var(--brass);background:rgba(217,180,92,.08)}
 .admin-edit-btn{border:1px solid var(--line);color:var(--ivory)}.admin-save-btn{border:1px solid var(--brass);color:var(--brass)}.admin-del-btn{border:1px solid var(--danger);color:var(--danger)}
+.avatar-preview-lg{width:96px;height:96px;border-radius:50%;margin:0 auto 14px;background:linear-gradient(135deg,#276b57,#113a2d);border:2px solid var(--brass);color:var(--brass);font-size:36px;font-weight:900;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.45)}
+.avatar-preview-lg img{width:100%;height:100%;object-fit:cover;display:block}
+.avatar-upload-btn{width:100%;min-height:44px;background:var(--brass);color:var(--brass-ink);border:none;border-radius:10px;font:inherit;font-size:14px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:10px}
+.avatar-url-row{display:flex;gap:6px;margin-bottom:10px}
+.avatar-url-row input{flex:1;min-height:40px;background:var(--felt-0);border:1px solid var(--line);border-radius:10px;padding:0 12px;color:var(--ivory);font:inherit;font-size:12px;outline:none;direction:ltr}
+.avatar-url-row input:focus{border-color:var(--brass)}
+.avatar-url-row button{min-height:40px;background:var(--felt-2);border:1px solid var(--line);border-radius:10px;color:var(--ivory);padding:0 12px;font:inherit;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
+.avatar-remove-btn{width:100%;min-height:40px;background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.45);border-radius:10px;color:var(--danger);font:inherit;font-size:13px;font-weight:700;cursor:pointer;margin-bottom:8px}
 .admin-logout{width:100%;min-height:44px;margin-top:16px;background:none;border:1px solid var(--line);border-radius:10px;color:var(--dim);font:inherit;font-size:14px;cursor:pointer}
 .login-box{padding:28px 20px;text-align:center;max-width:320px;margin:24px auto 0}
 .login-title{font-size:18px;font-weight:700;margin-bottom:18px}
@@ -433,6 +455,28 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
   </div>
 </div>
 
+<!-- Avatar Modal -->
+<div class="overlay" id="avatar-modal" onclick="if(event.target===this)closeAvatarModal()">
+  <div class="confirm-box glass" style="max-width:380px;padding:22px 20px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+      <div style="font-size:16px;font-weight:800;color:var(--brass)" id="avatar-modal-title">عکس پروفایل</div>
+      <button onclick="closeAvatarModal()" style="background:none;border:none;color:var(--dim);font-size:20px;cursor:pointer">✕</button>
+    </div>
+    <div class="avatar-preview-lg" id="avatar-modal-preview"></div>
+    <input type="file" id="avatar-file-input" accept="image/*" style="display:none" onchange="handleAvatarFileChange(event)">
+    <button type="button" class="avatar-upload-btn" onclick="document.getElementById('avatar-file-input').click()">
+      <span>📷</span>
+      <span>انتخاب عکس از گالری / فایل</span>
+    </button>
+    <div class="avatar-url-row">
+      <input type="url" id="avatar-url-input" placeholder="https://... (اختیاری: لینک عکس)">
+      <button type="button" onclick="applyAvatarUrl()">ثبت لینک</button>
+    </div>
+    <button type="button" class="avatar-remove-btn" id="avatar-remove-btn" onclick="removeCurrentAvatar()" style="display:none">🗑️ حذف عکس پروفایل</button>
+    <div style="font-size:11px;color:var(--dim);line-height:1.6;margin-top:4px">عکس به‌صورت خودکار فشرده و بهینه می‌شود.</div>
+  </div>
+</div>
+
 <script>
 const API = 'https://4bargh-api.zulair.workers.dev';
 const WIN = 104;
@@ -444,6 +488,32 @@ const state = {
 let allPlayers = [];
 let allGamesCache = [];
 let pickerTeam = 0;
+let avatarEditPlayerId = null;
+
+function loadAvatarMap(){
+  try{return JSON.parse(localStorage.getItem('4bargh_player_avatars')||'{}')||{};}catch(e){return {};}
+}
+function saveAvatarMap(map){
+  try{localStorage.setItem('4bargh_player_avatars',JSON.stringify(map));}catch(e){showToast('حافظه مرورگر پر است؛ عکس کوچکتری انتخاب کنید');}
+}
+function getAvatar(playerOrId){
+  if(!playerOrId)return null;
+  if(typeof playerOrId==='object'){
+    if(playerOrId.avatar)return playerOrId.avatar;
+    const m=loadAvatarMap();
+    return m[playerOrId.id]||null;
+  }
+  const p=allPlayers.find(x=>x.id===playerOrId);
+  if(p&&p.avatar)return p.avatar;
+  const m=loadAvatarMap();
+  return m[playerOrId]||null;
+}
+function escAttr(s){return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function avatarInner(p){
+  const av=getAvatar(p);
+  if(av)return `<img src="${escAttr(av)}" alt="${escAttr(p.name||'')}">`;
+  return escAttr((p.name||'?').trim().charAt(0));
+}
 
 function toFa(n){return String(n).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);}
 function name(i){return document.getElementById('name-'+i).value.trim()||'تیم '+(i+1);}
@@ -555,7 +625,7 @@ function renderTeamPlayers(){
   [0,1].forEach(t=>{
     const el=document.getElementById('team'+t+'-players');
     el.innerHTML=state.teamPlayers[t].map(p=>
-      `<div class="player-chip"><span>${p.name}</span><button onclick="removePlayer(${t},${p.id})">×</button></div>`
+      `<div class="player-chip"><div class="player-chip-info"><span class="avatar-sm">${avatarInner(p)}</span><span>${p.name}</span></div><button onclick="removePlayer(${t},${p.id})">×</button></div>`
     ).join('');
   });
 }
@@ -576,14 +646,15 @@ function openPicker(team){
     list.innerHTML='<div class="empty">بازیکنی باقی نمانده<br><small>از پنل ادمین بازیکن اضافه کنید</small></div>';
   } else {
     list.innerHTML=available.map(p=>
-      `<div class="player-list-item"><span>${p.name}</span><button class="pick-btn" onclick="pickPlayer(${p.id},'${p.name.replace(/'/g,"\\'").replace(/"/g,"&quot;")}')">انتخاب</button></div>`
+      `<div class="player-list-item"><div style="display:flex;align-items:center;gap:10px"><span class="avatar-md">${avatarInner(p)}</span><span>${p.name}</span></div><button class="pick-btn" onclick="pickPlayer(${p.id},'${p.name.replace(/'/g,"\\'").replace(/"/g,"&quot;")}')">انتخاب</button></div>`
     ).join('');
   }
   document.getElementById('player-picker').style.display='flex';
 }
 
 function pickPlayer(id,pname){
-  state.teamPlayers[pickerTeam].push({id,name:pname});
+  const found=allPlayers.find(p=>p.id===id);
+  state.teamPlayers[pickerTeam].push(found||{id,name:pname});
   renderTeamPlayers();
   closePicker();
 }
@@ -872,7 +943,7 @@ async function renderStats(){
 
     const div=document.createElement('div');
     div.className='stats-player-card glass';
-    div.innerHTML=`<div class="avatar">${p.name.trim().charAt(0)}</div><div class="sp-info">
+    div.innerHTML=`<div class="avatar">${avatarInner(p)}</div><div class="sp-info">
       <div class="stats-player-name">${p.name} ${badgeHtml}</div>
       <div class="stats-player-meta">${toFa(s.total_games||0)} بازی · <span style="color:var(--brass)">${toFa(s.wins||0)} برد</span> · <span style="color:var(--danger)">${toFa(s.losses||0)} باخت</span></div>
     </div><div class="ring" style="--p:${wr}"><b>${toFa(wr)}٪</b></div>`;
@@ -959,6 +1030,7 @@ function showPlayerDetail(player,stats){
   detail.innerHTML=`<div class="stats-detail glass">
     <div class="stats-detail-header">
       <button class="back-btn" onclick="document.getElementById('stats-list-view').style.display='block';document.getElementById('stats-detail-view').style.display='none'">←</button>
+      <div class="avatar-lg">${avatarInner(player)}</div>
       <div class="stats-detail-name">${player.name}</div><div class="ring big" style="--p:${wr}"><b>${toFa(wr)}٪</b></div>
     </div>
     <div class="stats-grid">
@@ -1170,15 +1242,108 @@ async function loadAdminPlayers(){
   if(!allPlayers.length){list.innerHTML='<div class="empty">هنوز بازیکنی ثبت نشده</div>';return;}
   list.innerHTML=allPlayers.map(p=>
     `<div class="admin-player-row" id="row-${p.id}">
-      <span class="admin-player-name" id="name-label-${p.id}">${p.name}</span>
-      <input class="admin-edit-input" id="edit-inp-${p.id}" value="${p.name}" style="display:none" onkeydown="if(event.key==='Enter')savePlayer(${p.id})">
+      <div class="admin-player-main">
+        <button type="button" class="admin-avatar-wrap" onclick="openAvatarModal(${p.id})" title="تغییر عکس پروفایل">
+          ${avatarInner(p)}
+          <span class="admin-avatar-badge">📷</span>
+        </button>
+        <span class="admin-player-name" id="name-label-${p.id}">${p.name}</span>
+        <input class="admin-edit-input" id="edit-inp-${p.id}" value="${escAttr(p.name)}" style="display:none" onkeydown="if(event.key==='Enter')savePlayer(${p.id})">
+      </div>
       <div class="admin-row-btns">
+        <button class="admin-photo-btn" onclick="openAvatarModal(${p.id})">📷 عکس</button>
         <button class="admin-edit-btn" id="edit-btn-${p.id}" onclick="startEdit(${p.id})">ویرایش</button>
         <button class="admin-save-btn" id="save-btn-${p.id}" style="display:none" onclick="savePlayer(${p.id})">✓ ذخیره</button>
         <button class="admin-del-btn" onclick="deletePlayer(${p.id})">حذف</button>
       </div>
     </div>`
   ).join('');
+}
+
+function openAvatarModal(id){
+  const p=allPlayers.find(x=>x.id===id);
+  if(!p)return;
+  avatarEditPlayerId=id;
+  document.getElementById('avatar-modal-title').textContent='عکس پروفایل «'+p.name+'»';
+  const cur=getAvatar(p);
+  document.getElementById('avatar-modal-preview').innerHTML=avatarInner(p);
+  const urlInp=document.getElementById('avatar-url-input');
+  urlInp.value=(cur&&!cur.startsWith('data:'))?cur:'';
+  document.getElementById('avatar-remove-btn').style.display=cur?'block':'none';
+  document.getElementById('avatar-file-input').value='';
+  document.getElementById('avatar-modal').style.display='flex';
+}
+
+function closeAvatarModal(){
+  document.getElementById('avatar-modal').style.display='none';
+  avatarEditPlayerId=null;
+}
+
+function compressAvatarFile(file){
+  return new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onload=ev=>{
+      const img=new Image();
+      img.onload=()=>{
+        const size=160;
+        const canvas=document.createElement('canvas');
+        canvas.width=size;canvas.height=size;
+        const ctx=canvas.getContext('2d');
+        const minSide=Math.min(img.width,img.height);
+        const sx=(img.width-minSide)/2;
+        const sy=(img.height-minSide)/2;
+        ctx.drawImage(img,sx,sy,minSide,minSide,0,0,size,size);
+        resolve(canvas.toDataURL('image/jpeg',0.82));
+      };
+      img.onerror=reject;
+      img.src=ev.target.result;
+    };
+    reader.onerror=reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+async function handleAvatarFileChange(e){
+  const file=e.target.files&&e.target.files[0];
+  if(!file||!avatarEditPlayerId)return;
+  try{
+    const dataUrl=await compressAvatarFile(file);
+    await setPlayerAvatar(avatarEditPlayerId,dataUrl);
+  }catch(err){
+    showToast('خطا در پردازش تصویر');
+  }
+}
+
+async function applyAvatarUrl(){
+  if(!avatarEditPlayerId)return;
+  const val=document.getElementById('avatar-url-input').value.trim();
+  if(!val){showToast('لطفاً لینک تصویر را وارد کنید');return;}
+  await setPlayerAvatar(avatarEditPlayerId,val);
+}
+
+async function removeCurrentAvatar(){
+  if(!avatarEditPlayerId)return;
+  await setPlayerAvatar(avatarEditPlayerId,null);
+}
+
+async function setPlayerAvatar(id,avatarVal){
+  const map=loadAvatarMap();
+  if(avatarVal)map[id]=avatarVal;
+  else delete map[id];
+  saveAvatarMap(map);
+
+  const p=allPlayers.find(x=>x.id===id);
+  if(p){
+    p.avatar=avatarVal;
+    try{await apiPut('/players/'+id,{name:p.name,avatar:avatarVal});}catch(e){}
+  }
+
+  document.getElementById('avatar-modal-preview').innerHTML=p?avatarInner(p):'';
+  document.getElementById('avatar-remove-btn').style.display=avatarVal?'block':'none';
+  renderTeamPlayers();
+  await loadAdminPlayers();
+  showToast(avatarVal?'عکس پروفایل ذخیره شد ✓':'عکس پروفایل حذف شد');
+  closeAvatarModal();
 }
 
 function startEdit(id){
@@ -1192,7 +1357,8 @@ function startEdit(id){
 async function savePlayer(id){
   const newName=document.getElementById('edit-inp-'+id).value.trim();
   if(!newName)return;
-  await apiPut('/players/'+id,{name:newName});
+  const av=getAvatar(id);
+  await apiPut('/players/'+id,av?{name:newName,avatar:av}:{name:newName});
   loadAdminPlayers();
   loadPlayers();
 }
@@ -1211,6 +1377,8 @@ async function deletePlayer(id){
   showConfirm('آیا از حذف این بازیکن\nمطمئن هستید؟',async()=>{
     cancelConfirm();
     await apiDelete('/players/'+id);
+    const map=loadAvatarMap();
+    if(map[id]){delete map[id];saveAvatarMap(map);}
     loadAdminPlayers();
     allPlayers=await apiGet('/players');
   });
@@ -1219,7 +1387,8 @@ async function deletePlayer(id){
 // ── Tabs ───────────────────────────────────────────
 function showTab(t){
   ['current','history','stats','admin'].forEach(tab=>{
-    document.getElementById('view-'+tab).style.display=tab===t?'block':'none';
+    const el=document.getElementById('view-'+tab);
+    if(el)el.style.display=tab===t?'block':'none';
     const btn=document.getElementById('tab-'+tab);
     if(btn)btn.className='tab'+(tab===t?' active':'');
   });
